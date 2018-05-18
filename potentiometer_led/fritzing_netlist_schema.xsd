@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<!-- definition of attributes -->
+<xs:attribute name="sketch" type="xs:string"/>
+<xs:attribute name="date" type="xs:string"/>
+<xs:attribute name="name" type="xs:string"/>
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="xs:string"/>
+<xs:attribute name="title" type="xs:string"/>
+
+<!-- definition of complex elements -->
+<xs:element name="netlist">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element ref="net"/>
+    </xs:sequence>
+    <xs:attribute ref="sketch" use="required"/>
+    <xs:attribute ref="date" use="required"/>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="net">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element ref="connector"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="connector">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element ref="part"/>
+    </xs:sequence>
+    <xs:attribute ref="name" use="required"/>
+    <xs:attribute ref="id" use="required"/>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="part">
+  <xs:complexType>
+    <xs:attribute ref="label" use="required"/>
+    <xs:attribute ref="title" use="required"/>
+    <xs:attribute ref="id" use="required"/>
+  </xs:complexType>
+</xs:element>
+
+</xs:schema>

@@ -1,0 +1,16 @@
+@namespace(uri="fritzing_connections", prefix="")
+package fritzing;
+
+class Circuit {
+	val Part[*] parts;
+	val Connection[*] connections;
+}
+
+class Connection {
+	attr String[*] partIds;
+}
+
+class Part {
+	attr String partId;
+	attr String title;
+}
