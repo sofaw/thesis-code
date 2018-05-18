@@ -4,31 +4,14 @@
   <parts partId="58210" title="Arduino Uno (Rev3)"/>
   <parts partId="58610" title="Red (633nm) LED"/>
   <parts partId="58670" title="220&#x3a9; Resistor"/>
-  <connections>
-    <partIds>58300</partIds>
-    <partIds>58210</partIds>
-  </connections>
-  <connections>
-    <partIds>58210</partIds>
-    <partIds>58300</partIds>
-  </connections>
-  <connections>
-    <partIds>58610</partIds>
-    <partIds>58670</partIds>
-  </connections>
-  <connections>
-    <partIds>58210</partIds>
-    <partIds>58610</partIds>
-    <partIds>58300</partIds>
-  </connections>
-  <connections>
-    <partIds>58210</partIds>
-    <partIds>58670</partIds>
-  </connections>
-  <connections>
-    <partIds>58210</partIds>
-  </connections>
-  <connections>
-    <partIds>58210</partIds>
-  </connections>
+  <connections outName="leg2" outPartId="58300" inName="5V" inPartId="58210"/>
+  <connections outName="A0" outPartId="58210" inName="wiper" inPartId="58300"/>
+  <connections outName="anode" outPartId="58610" inName="Pin 1" inPartId="58670"/>
+  <connections outName="GND" outPartId="58210" inName="cathode" inPartId="58610"/>
+  <connections outName="D13/SCK" outPartId="58210" inName="Pin 0" inPartId="58670"/>
+  <connections outName="A5/SCL" outPartId="58210" inName="A5/SCL" inPartId="58210"/>
+  <connections outName="A4/SDA" outPartId="58210" inName="A4/SDA" inPartId="58210"/>
+  <connections outName="cathode" outPartId="58610" inName="GND" inPartId="58210"/>
+  <connections outName="GND" outPartId="58210" inName="GND" inPartId="58210"/>
+  <connections outName="GND" outPartId="58210" inName="leg1" inPartId="58300"/>
 </Circuit>

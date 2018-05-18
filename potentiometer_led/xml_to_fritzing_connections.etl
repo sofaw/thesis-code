@@ -22,13 +22,26 @@ rule net2Connection
   
   guard : n.children.children.flatten.size > 1 // Ignore empty pins
   
-  var parts = n.children.children.flatten;  
-    for (p in parts) {
-      if (not c.partIds.exists(i | i == p.id)) { // Ignore duplicates
-        c.partIds.add(p.id);
-      }
+  var connectors = n.children;
+  
+  var i = 0;
+  while (i < (connectors.size - 1)) {
+    var outCon = connectors.get(i);
+    var inCon = connectors.get(i+1);
+    var con; 
+    if(i == 0) {
+      con = c; // Populate already initialised Connection
+    } else {
+      con = new FritzModel!Connection; // Create new connection
     }
+    con.outName = outCon.a_name;
+    con.outPartId = outCon.children.first.a_id;
+    con.inName = inCon.a_name;
+    con.inPartId = inCon.children.first.a_id;
+    
+    i = i+1;
   }
+}
 
 post {
   // Put parts under a root Circuit element
