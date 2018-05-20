@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="ASCII"?>
 <Circuit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="fritzing_connections">
-  <parts partId="58300" title="Rotary Potentiometer (Small)"/>
-  <parts partId="58210" title="Arduino Uno (Rev3)"/>
-  <parts partId="58610" title="Red (633nm) LED"/>
-  <parts partId="58670" title="220&#x3a9; Resistor"/>
+  <parts partId="58300" title="Rotary Potentiometer (Small)" connections="//@connections.0 //@connections.1 //@connections.9"/>
+  <parts partId="58210" title="Arduino Uno (Rev3)" connections="//@connections.0 //@connections.1 //@connections.3 //@connections.7 //@connections.8 //@connections.9 //@connections.4 //@connections.5 //@connections.6"/>
+  <parts partId="58610" title="Red (633nm) LED" connections="//@connections.2 //@connections.3 //@connections.7"/>
+  <parts partId="58670" title="220&#x3a9; Resistor" connections="//@connections.2 //@connections.4"/>
   <connections srcName="leg2" srcPart="//@parts.0" targetName="5V" targetPart="//@parts.1"/>
   <connections srcName="A0" srcPart="//@parts.1" targetName="wiper" targetPart="//@parts.0"/>
   <connections srcName="anode" srcPart="//@parts.2" targetName="Pin 1" targetPart="//@parts.3"/>

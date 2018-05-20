@@ -16,4 +16,5 @@ class Connection {
 class Part {
 	attr String partId;
 	attr String title;
+	ref Connection[*] connections;
 }
