@@ -7,10 +7,10 @@ class Circuit {
 }
 
 class Connection {
-    attr String outName;
-    attr String outPart;
-    attr String inName;
-    attr String inPartId;
+    attr String srcName;
+    ref Part srcPart;
+    attr String targetName;
+    ref Part targetPart;
 }
 
 class Part {
