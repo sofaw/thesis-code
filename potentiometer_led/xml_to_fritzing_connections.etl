@@ -34,13 +34,25 @@ rule net2Connection
     } else {
       con = new FritzModel!Connection; // Create new connection
     }
+    
+    var srcPart = getPartById(srcCon.children.first.a_id);
+    var targetPart = getPartById(targetCon.children.first.a_id);
+    
+    // Populate Connection
     con.srcName = srcCon.a_name;
-    con.srcPart = getPartById(srcCon.children.first.a_id);
+    con.srcPart = srcPart;
     con.targetName = targetCon.a_name;
-    con.targetPart = getPartById(targetCon.children.first.a_id);
+    con.targetPart = targetPart;
+    
+    // Add connections to Part
+    srcPart.connections.add(con);
+    targetPart.connections.add(con);
     
     i = i+1;
   }
+  
+
+  
 }
 
 operation getPartById(id : String) : FritzModel!Part {
