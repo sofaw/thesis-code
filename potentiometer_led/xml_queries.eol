@@ -1,0 +1,15 @@
+// Collect unique ids
+var ids = t_part.all.a_id.println();
+var unique_ids = ids.asSet();
+
+// Collect unique parts
+var unique_parts : Set;
+
+for(i in unique_ids) {
+  var unique_part = t_part.all.selectOne(p | p.a_id == i);
+  unique_parts.add(unique_part);
+}
+
+for(p in unique_parts) {
+  p.a_title.println();
+}
