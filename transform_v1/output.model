@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ASCII"?>
+<Circuit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="fritzing_connections">
+  <parts partId="58300" title="Rotary Potentiometer (Small)" connections="//@connections.0 //@connections.1 //@connections.9"/>
+  <parts partId="58210" title="Arduino Uno (Rev3)" connections="//@connections.0 //@connections.1 //@connections.3 //@connections.7 //@connections.8 //@connections.9 //@connections.4 //@connections.5 //@connections.6"/>
+  <parts partId="58610" title="Red (633nm) LED" connections="//@connections.2 //@connections.3 //@connections.7"/>
+  <parts partId="58670" title="220&#x3a9; Resistor" connections="//@connections.2 //@connections.4"/>
+  <connections srcName="leg2" srcPart="//@parts.0" targetName="5V" targetPart="//@parts.1"/>
+  <connections srcName="A0" srcPart="//@parts.1" targetName="wiper" targetPart="//@parts.0"/>
+  <connections srcName="anode" srcPart="//@parts.2" targetName="Pin 1" targetPart="//@parts.3"/>
+  <connections srcName="GND" srcPart="//@parts.1" targetName="cathode" targetPart="//@parts.2"/>
+  <connections srcName="D13/SCK" srcPart="//@parts.1" targetName="Pin 0" targetPart="//@parts.3"/>
+  <connections srcName="A5/SCL" srcPart="//@parts.1" targetName="A5/SCL" targetPart="//@parts.1"/>
+  <connections srcName="A4/SDA" srcPart="//@parts.1" targetName="A4/SDA" targetPart="//@parts.1"/>
+  <connections srcName="cathode" srcPart="//@parts.2" targetName="GND" targetPart="//@parts.1"/>
+  <connections srcName="GND" srcPart="//@parts.1" targetName="GND" targetPart="//@parts.1"/>
+  <connections srcName="GND" srcPart="//@parts.1" targetName="leg1" targetPart="//@parts.0"/>
+</Circuit>
