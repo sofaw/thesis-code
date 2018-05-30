@@ -2,14 +2,22 @@ var arduinoTitle = "Arduino Uno (Rev3)";
 
 var board = Part.all.selectOne(p | p.title == arduinoTitle).println();
 
+var connections : Map<Connector, Connector>;
+
 for (connector in board.connectors) {
-  if(connector.name == "D13/SCK") {
-    connector.parent.println();
-    bfsConnector(connector).println();
+  var sensor = bfsSensors(connector);
+  if(sensor <> null) {
+   connections.put(connector, sensor);
   }
 }
 
-operation bfsConnector(start : Connector) : Connector {
+for(k in connections.keySet()) {
+  k.print();
+  " -> ".print();
+  connections.get(k).parent.println();
+}
+
+operation bfsSensors(start : Connector) : Connector {
   var queue = new Native("java.util.LinkedList");
   queue.add(start);
   var visited : Set<Connector>;
@@ -18,9 +26,8 @@ operation bfsConnector(start : Connector) : Connector {
     var con = queue.removeFirst();
     if(not visited.includes(con)) {
       visited.add(con);
-      con.name.println();
       
-      if(con.parent.title == "Red (633nm) LED") {  // TODO: change this to check type of part (e.g. sensor))
+      if(con.parent.type == Type#Sensor) {
         return con;
       }
       queue.add(con.connectedTo);
