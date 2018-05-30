@@ -1,0 +1,37 @@
+var arduinoTitle = "Arduino Uno (Rev3)";
+
+var board = Part.all.selectOne(p | p.title == arduinoTitle).println();
+
+for (connector in board.connectors) {
+  if(connector.name == "D13/SCK") {
+    connector.parent.println();
+    bfsConnector(connector).println();
+  }
+}
+
+operation bfsConnector(start : Connector) : Connector {
+  var queue = new Native("java.util.LinkedList");
+  queue.add(start);
+  var visited : Set<Connector>;
+  
+  while(not queue.isEmpty()) {
+    var con = queue.removeFirst();
+    if(not visited.includes(con)) {
+      visited.add(con);
+      con.name.println();
+      
+      if(con.parent.title == "Red (633nm) LED") {  // TODO: change this to check type of part (e.g. sensor))
+        return con;
+      }
+      queue.add(con.connectedTo);
+      
+      if(not (con.parent.title == arduinoTitle)) {
+        for(c in con.parent.connectors) {
+          queue.add(c);
+        }
+      }
+    }
+  }
+  
+  return null;
+}

@@ -1,0 +1,25 @@
+@namespace(uri="sew569_v2", prefix="")
+package sew569_v2;
+
+class Circuit {
+	val Part[*] parts;
+}
+
+class Part {
+    attr String partId;
+    attr String title;
+    attr Type type;
+	val Connector[*]#parent connectors;
+}
+
+enum Type {
+	Board = 1;
+	Sensor = 2;
+	Other = 3;
+}
+
+class Connector {
+    attr String name;
+	ref Connector connectedTo;
+	ref Part#connectors parent;
+}

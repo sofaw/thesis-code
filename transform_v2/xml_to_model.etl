@@ -1,0 +1,88 @@
+pre {
+  "Starting Transformation".println();
+  var constructedPartIds : Sequence;
+  var arduinoTitle = "Arduino Uno (Rev3)";
+  var ledTitle = "Red (633nm) LED";
+  var potentiometerTitle = "Rotary Potentiometer (Small)";
+}
+
+rule xmlPart2Board
+  transform x : XML!t_part
+  to p : OUT!Part {
+  
+  guard { 
+    if(not constructedPartIds.exists(id | id == x.a_id)) { // Prevent duplicates
+      constructedPartIds.add(x.a_id);
+      return true;
+    }
+    return false;
+  } 
+
+  switch(x.a_title) {
+    case arduinoTitle : p.type = OUT!Type#Board;
+    case ledTitle : p.type = OUT!Type#Sensor;
+    case potentiometerTitle : p.type = OUT!Type#Sensor;
+    default : p.type = OUT!Type#Other;
+  }
+
+  p.partId = x.a_id;
+  p.title = x.a_title;
+}
+  
+rule xmlNet2ModelConnectors
+  transform x : XML!t_net
+  to c : OUT!Connector {
+  
+  guard : x.children.flatten.size > 1 // Ignore empty pins
+  
+  var connectors = x.children;
+  
+  var i = 0;
+  while (i < (connectors.size - 1)) {
+    if(connectors.size == 2 or 
+    (connectors.get(i).children.first.a_title == arduinoTitle xor 
+    connectors.get(i+1).children.first.a_title == arduinoTitle)) {
+      createConnectors(i, c, connectors);
+      i = i + 2;
+    } else {
+      i = i + 1;
+    }    
+  }
+  
+}
+
+operation createConnectors(i : Integer, c : OUT!Connector, connectors : Sequence<XML!Connector>) {
+  var con1 = connectors.get(i);
+  var con2 = connectors.get(i+1);
+    
+  var conOut1;
+  if(i == 0) {
+    conOut1 = c;
+  } else {
+    conOut1 = new OUT!Connector;
+  }
+  var conOut2 = new OUT!Connector;
+  
+  conOut1.name = con1.a_name;
+  conOut2.name = con2.a_name;
+  conOut1.connectedTo = conOut2;
+  conOut2.connectedTo = conOut1;
+  
+  var part1 = getPartById(con1.children.first.a_id);
+  part1.connectors.add(conOut1);
+  var part2 = getPartById(con2.children.first.a_id);
+  part2.connectors.add(conOut2);
+}
+
+operation getPartById(id : String) : OUT!Part {
+  var allParts = OUT!Part.all;
+  return allParts.selectOne(p | p.partId == id);
+}
+
+post {
+  // Put parts under a root Circuit element
+  var circuit : new OUT!Circuit;  
+  circuit.parts.addAll(OUT!Part.all);
+  
+  "Transformation Finished".println();
+}
