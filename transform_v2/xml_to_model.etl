@@ -18,12 +18,14 @@ rule xmlPart2Board
     return false;
   } 
 
-  switch(x.a_title) {
+  /*switch(x.a_title) {
     case arduinoTitle : p.type = OUT!Type#Board;
     case ledTitle : p.type = OUT!Type#Sensor;
     case potentiometerTitle : p.type = OUT!Type#Sensor;
     default : p.type = OUT!Type#Other;
-  }
+  }*/
+  
+  p.type = x.a_title.getPartType();
 
   p.partId = x.a_id;
   p.title = x.a_title;
@@ -77,6 +79,17 @@ operation createConnectors(i : Integer, c : OUT!Connector, connectors : Sequence
 operation getPartById(id : String) : OUT!Part {
   var allParts = OUT!Part.all;
   return allParts.selectOne(p | p.partId == id);
+}
+
+operation String getPartType() : Any { // Use Any because of https://bugs.eclipse.org/bugs/show_bug.cgi?id=286412
+    var type;
+    switch(self) {
+    case arduinoTitle : type = OUT!Type#Board;
+    case ledTitle : type = OUT!Type#Sensor;
+    case potentiometerTitle : type = OUT!Type#Sensor;
+    default : type = OUT!Type#Other;
+  }
+  return type;
 }
 
 post {
