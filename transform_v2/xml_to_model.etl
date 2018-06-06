@@ -2,8 +2,42 @@ pre {
   "Starting Transformation".println();
   var constructedPartIds : Sequence;
   var arduinoTitle = "Arduino Uno (Rev3)";
-  var ledTitle = "Red (633nm) LED";
-  var potentiometerTitle = "Rotary Potentiometer (Small)";
+  
+  var outputParts : Set<String>;
+  outputParts.add("led"); // Regular LED; RGB LED; Superflux LED;
+  // TODO: handle IC LED_Driver and intel edison
+  outputParts.add("prolight rgb 3 watt star");
+  outputParts.add("7 segment display");
+  outputParts.add("dot matrix");
+  outputParts.add("lcd"); // Graphic LCD; LCD screen;
+  outputParts.add("speaker"); // Piezo speaker; Loudspeaker;
+  outputParts.add("microphone");
+  outputParts.add("motor"); // DC Motor; Stepper Motor; EDGY Motor; Motor driver;
+  outputParts.add("servo");
+  outputParts.add("solenoid");
+  outputParts.add("relay"); // Relay; DIP Relay;
+  outputParts.add("peltier element");
+  
+  var inputParts : Set<String>;
+  inputParts.add("potentiometer"); // Digital potentiometer; Slide potentiometer; Rotary potentiometer; Trimmer potentiometer;
+  inputParts.add("sensor"); // Humidity and temp sensor; Barometric pressure sensor; Temp. sensor; Infrared proximity sensor;
+  inputParts.add("rfid reader");
+  inputParts.add("antenna");
+  inputParts.add("switch"); // Reed switch; Tilt switch; Mini toggle switch; Toggle switch;
+  inputParts.add("lsm303c");
+  inputParts.add("accelerometer");
+  inputParts.add("photocell");
+  inputParts.add("basic flex resistor"); // Need to differentiate between regular resistor
+  inputParts.add("basic force sensing resistor"); // ""
+  inputParts.add("pushbutton"); // (There are two pushbuttons)
+  inputParts.add("rotary encoder"); // Hexa rotary encoder; Rotary encoder;
+  inputParts.add("variable capacitor");
+  
+  var boards : Set<String>;
+  boards.add("arduino");
+  
+  // TODO: need to check these do not appear in any other part names;
+  // TODO: add logic (check title.tolowercase.contains(string from outputparts)
 }
 
 rule xmlPart2Board
@@ -17,13 +51,6 @@ rule xmlPart2Board
     }
     return false;
   } 
-
-  /*switch(x.a_title) {
-    case arduinoTitle : p.type = OUT!Type#Board;
-    case ledTitle : p.type = OUT!Type#Sensor;
-    case potentiometerTitle : p.type = OUT!Type#Sensor;
-    default : p.type = OUT!Type#Other;
-  }*/
   
   p.type = x.a_title.getPartType();
 
@@ -81,15 +108,29 @@ operation getPartById(id : String) : OUT!Part {
   return allParts.selectOne(p | p.partId == id);
 }
 
-operation String getPartType() : Any { // Use Any because of https://bugs.eclipse.org/bugs/show_bug.cgi?id=286412
-    var type;
-    switch(self) {
-    case arduinoTitle : type = OUT!Type#Board;
-    case ledTitle : type = OUT!Type#Sensor;
-    case potentiometerTitle : type = OUT!Type#Sensor;
-    default : type = OUT!Type#Other;
+operation String getPartType() : Any { // Use Any because of https://bugs.eclipse.org/bugs/show_bug.cgi?id=286412  
+  if(self.checkContainsOneOfSet(boards)) {
+    return OUT!Type#Board;
   }
-  return type;
+  
+  if(self.checkContainsOneOfSet(inputParts)) {
+   return OUT!Type#Input;
+  }
+  
+  if(self.checkContainsOneOfSet(outputParts)) {
+   return OUT!Type#Output;
+  }
+  
+  return OUT!Type#Other;
+}
+
+operation String checkContainsOneOfSet(strings : Set<String>) : Boolean {
+  for(str in strings) {
+    if(str.isSubstringOf(self.toLowerCase())) {
+      return true; 
+    }
+  }
+  return false;
 }
 
 post {

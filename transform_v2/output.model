@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <Circuit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="sew569_v2">
-  <parts partId="58300" title="Rotary Potentiometer (Small)" type="Sensor">
+  <parts partId="58300" title="Rotary Potentiometer (Small)" type="Input">
     <connectors name="leg2" connectedTo="//@parts.1/@connectors.0"/>
     <connectors name="wiper" connectedTo="//@parts.1/@connectors.1"/>
     <connectors name="leg1" connectedTo="//@parts.1/@connectors.3"/>
@@ -16,7 +16,7 @@
     <connectors name="A4/SDA" connectedTo="//@parts.1/@connectors.8"/>
     <connectors name="A4/SDA" connectedTo="//@parts.1/@connectors.7"/>
   </parts>
-  <parts partId="58610" title="Red (633nm) LED" type="Sensor">
+  <parts partId="58610" title="Red (633nm) LED" type="Output">
     <connectors name="anode" connectedTo="//@parts.3/@connectors.0"/>
     <connectors name="cathode" connectedTo="//@parts.1/@connectors.2"/>
   </parts>

@@ -13,8 +13,9 @@
         eType="#//Connector" containment="true" eOpposite="#//Connector/parent"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Type">
-    <eLiterals name="Board" value="1"/>
-    <eLiterals name="Sensor" value="2"/>
+    <eLiterals name="Board"/>
+    <eLiterals name="Input" value="1"/>
+    <eLiterals name="Output" value="2"/>
     <eLiterals name="Other" value="3"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Connector">

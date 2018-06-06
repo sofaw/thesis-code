@@ -27,7 +27,7 @@ operation bfsSensors(start : Connector) : Connector {
     if(not visited.includes(con)) {
       visited.add(con);
       
-      if(con.parent.type == Type#Sensor) {
+      if(con.parent.type == Type#Input or con.parent.type == Type#Output) {
         return con;
       }
       queue.add(con.connectedTo);
