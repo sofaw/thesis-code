@@ -1,0 +1,5 @@
+@test
+operation transformationWorksAsExpected() {
+  runTarget("xml2model");
+  assertEqualModels("touchswitch_model_expected", "OUT");
+}

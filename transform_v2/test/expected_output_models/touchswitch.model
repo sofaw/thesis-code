@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="sew569_v2">
+  <Connector/>
+  <Connector/>
+  <Circuit>
+    <parts partId="18635860" title="Arduino Nano (Rev3.0)">
+      <connectors name="RESET" connectedTo="/2/@parts.0/@connectors.1"/>
+      <connectors name="RESET" connectedTo="/2/@parts.0/@connectors.0"/>
+    </parts>
+    <parts partId="17627030" title="NPN-Transistor" type="Other">
+      <connectors name="E" connectedTo="/2/@parts.3/@connectors.0"/>
+      <connectors name="B" connectedTo="/2/@parts.7/@connectors.1"/>
+    </parts>
+    <parts partId="17324010" title="1k&#x3a9; Resistor" type="Other">
+      <connectors name="Pin 0" connectedTo="/2/@parts.6/@connectors.2"/>
+    </parts>
+    <parts partId="17324020" title="10k&#x3a9; Resistor" type="Other">
+      <connectors name="Pin 0" connectedTo="/2/@parts.1/@connectors.0"/>
+    </parts>
+    <parts partId="17328080" title="Generic female header - 1 pins" type="Other"/>
+    <parts partId="17328020" title="Generic female header - 1 pins" type="Other">
+      <connectors name="pin1" connectedTo="/2/@parts.6/@connectors.0"/>
+    </parts>
+    <parts partId="17627050" title="NPN-Transistor" type="Other">
+      <connectors name="B" connectedTo="/2/@parts.5/@connectors.0"/>
+      <connectors name="C" connectedTo="/2/@parts.7/@connectors.0"/>
+      <connectors name="E" connectedTo="/2/@parts.2/@connectors.0"/>
+    </parts>
+    <parts partId="17324000" title="10k&#x3a9; Resistor" type="Other">
+      <connectors name="Pin 0" connectedTo="/2/@parts.6/@connectors.1"/>
+      <connectors name="Pin 1" connectedTo="/2/@parts.1/@connectors.1"/>
+    </parts>
+  </Circuit>
+</xmi:XMI>
