@@ -12,7 +12,8 @@ pre {
   outputParts.add("lcd"); // Graphic LCD; LCD screen;
   outputParts.add("speaker"); // Piezo speaker; Loudspeaker;
   outputParts.add("microphone");
-  outputParts.add("motor"); // DC Motor; Stepper Motor; EDGY Motor; Motor driver;
+  outputParts.add("motor"); // DC Motor; Stepper Motor; Motor driver;
+  outputParts.add("edgy");
   outputParts.add("servo");
   outputParts.add("solenoid");
   outputParts.add("relay"); // Relay; DIP Relay;

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ASCII"?>
+<Circuit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="sew569_v2" xsi:schemaLocation="sew569_v2 ../../metamodel_v2.ecore">
+  <parts partId="18636790" title="Peltier Element" type="Output"/>
+  <parts partId="18636760" title="DIP-Relay-D31A" type="Output"/>
+  <parts partId="18636730" title="Relay" type="Output">
+    <connectors name="C2" connectedTo="//@parts.2/@connectors.1"/>
+    <connectors name="C1" connectedTo="//@parts.2/@connectors.0"/>
+  </parts>
+  <parts partId="18636700" title="Dual VNH2SP30 Motor Driver" type="Output"/>
+  <parts partId="18636670" title="Solenoid" type="Output"/>
+  <parts partId="18636640" title="Stepper Motor - Bipolar" type="Output"/>
+  <parts partId="18636610" title="Basic Servo" type="Output"/>
+  <parts partId="18636580" title="EDGY" type="Output">
+    <connectors name="5V+" connectedTo="//@parts.7/@connectors.1"/>
+    <connectors name="5V+" connectedTo="//@parts.7/@connectors.0"/>
+    <connectors name="GND" connectedTo="//@parts.7/@connectors.3"/>
+    <connectors name="GND" connectedTo="//@parts.7/@connectors.2"/>
+  </parts>
+  <parts partId="18636550" title="DC Motor" type="Output"/>
+  <parts partId="18636520" title="Microphone" type="Output"/>
+  <parts partId="18636490" title="Loudspeaker" type="Output"/>
+  <parts partId="18636460" title="Piezo Speaker" type="Output"/>
+  <parts partId="18636430" title="128 x 64 Graphic LCD" type="Output"/>
+  <parts partId="18636400" title="LCD screen" type="Output"/>
+  <parts partId="18636370" title="LED Dot Matrix 18mm (0.7 INCH)" type="Output"/>
+  <parts partId="18636340" title="7 Segment Display" type="Output">
+    <connectors name="common anode" connectedTo="//@parts.15/@connectors.1"/>
+    <connectors name="common anode" connectedTo="//@parts.15/@connectors.0"/>
+  </parts>
+  <parts partId="18636310" title="Prolight RGB 3 Watt Star" type="Output"/>
+  <parts partId="18636280" title="Blue LED" type="Output">
+    <connectors name="anode" connectedTo="//@parts.17/@connectors.1"/>
+    <connectors name="anode" connectedTo="//@parts.17/@connectors.0"/>
+    <connectors name="cathode" connectedTo="//@parts.17/@connectors.3"/>
+    <connectors name="cathode" connectedTo="//@parts.17/@connectors.2"/>
+  </parts>
+  <parts partId="18636250" title="RGB LED (com. cathode, rgb)" type="Output"/>
+  <parts partId="18636220" title="Red (633nm) LED" type="Output"/>
+</Circuit>

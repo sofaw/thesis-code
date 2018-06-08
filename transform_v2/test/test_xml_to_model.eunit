@@ -1,7 +1,13 @@
 import "test_queries.eol";
 
-$onlyWith Map {"" = "ALL_INPUTS_OUT"}
+$onlyWith Map {"" = "ALL_INPUTS_RESULT"}
 @test
 operation allInputPartsClassifiedCorrectly() {
   assertTrue(allPartsHaveLabel(Type#Input));
+}
+
+$onlyWith Map {"" = "ALL_OUTPUTS_RESULT"}
+@test
+operation allOutputPartsClassifiedCorrectly() {
+  assertTrue(allPartsHaveLabel(Type#Output));
 }

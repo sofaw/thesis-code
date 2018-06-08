@@ -1,8 +1,6 @@
 <project>
-    <target name="cleanup">
-    	<delete file="transformation_output/all_inputs.model"/>
-    </target>
-	<target name="run-tests" depends="cleanup">
+	<target name="run-tests">
+	<!-- Transformation applied to netlist containing only input components -->
 	    <epsilon.xml.loadModel name="ALL_INPUTS_XML"
 			file="input_xml/All_Core_Input_Parts_netlist.xml" read="true" store="false" />
 		<epsilon.emf.loadModel name="ALL_INPUTS_OUT_FOR_TRANSFORM"
@@ -12,11 +10,26 @@
 			<model ref="ALL_INPUTS_XML" as="XML"/>
 			<model ref="ALL_INPUTS_OUT_FOR_TRANSFORM" as="OUT"/>
 		</epsilon.etl>
-		<epsilon.emf.loadModel name="ALL_INPUTS_OUT"
+	<!-- Transformation applied to netlist containing only output components -->
+		<epsilon.xml.loadModel name="ALL_OUTPUTS_XML"
+			file="input_xml/All_Core_Output_Parts_netlist.xml" read="true" store="false" />
+		<epsilon.emf.loadModel name="ALL_OUTPUTS_OUT_FOR_TRANSFORM"
+			modelfile="transformation_output/all_outputs.model" metamodelfile="../metamodel_v2.ecore"
+			read="false" store="true" />
+		<epsilon.etl src="../xml_to_model.etl">
+			<model ref="ALL_OUTPUTS_XML" as="XML"/>
+			<model ref="ALL_OUTPUTS_OUT_FOR_TRANSFORM" as="OUT"/>
+		</epsilon.etl>
+	<!-- Load results of transformations for validation -->
+		<epsilon.emf.loadModel name="ALL_INPUTS_RESULT"
 			modelfile="transformation_output/all_inputs.model" metamodelfile="../metamodel_v2.ecore"
 			read="true" store="false" />
+		<epsilon.emf.loadModel name="ALL_OUTPUTS_RESULT"
+			modelfile="transformation_output/all_outputs.model" metamodelfile="../metamodel_v2.ecore"
+			read="true" store="false" />
 		<epsilon.eunit src="test_xml_to_model.eunit">
-			<model ref="ALL_INPUTS_OUT"/>
+			<model ref="ALL_INPUTS_RESULT"/>
+			<model ref="ALL_OUTPUTS_RESULT"/>
 		</epsilon.eunit>
 	</target>
 </project>
