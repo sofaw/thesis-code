@@ -1,0 +1,558 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Fritzing (http://www.fritzing.org/) -->
+<netlist sketch="All_Core_Input_Parts.fzz" date="Wed Jun 6 17:16:55 2018">
+ <net>
+  <connector name="Data-signal" id="connector9">
+   <part label="RHT1" title="Humidity and Temperature Sensor RHT03" id="18641260"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Vcc" id="connector8">
+   <part label="RHT1" title="Humidity and Temperature Sensor RHT03" id="18641260"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="GND 2" id="connector11">
+   <part label="RHT1" title="Humidity and Temperature Sensor RHT03" id="18641260"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="GND 1" id="connector10">
+   <part label="RHT1" title="Humidity and Temperature Sensor RHT03" id="18641260"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="LED" id="connector2pin_9">
+   <part label="RFID1" title="RFID Reader" id="18641230"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="D0" id="connector2pin_8">
+   <part label="RFID1" title="RFID Reader" id="18641230"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="GND" id="connector2">
+   <part label="RFID1" title="RFID Reader" id="18641230"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="D1" id="connector2pin_7">
+   <part label="RFID1" title="RFID Reader" id="18641230"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="+/-" id="connector2pin_6">
+   <part label="RFID1" title="RFID Reader" id="18641230"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Future" id="connector2pin_5">
+   <part label="RFID1" title="RFID Reader" id="18641230"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="CP" id="connector2pin_4">
+   <part label="RFID1" title="RFID Reader" id="18641230"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="ANT1" id="connector2pin_3">
+   <part label="RFID1" title="RFID Reader" id="18641230"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="ANT0" id="connector2pin_2">
+   <part label="RFID1" title="RFID Reader" id="18641230"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="RES" id="connector2pin_1">
+   <part label="RFID1" title="RFID Reader" id="18641230"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="+5V" id="connector2pin_10">
+   <part label="RFID1" title="RFID Reader" id="18641230"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="antenna lead" id="connector0">
+   <part label="ANT1" title="Antenna" id="18641200"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="pin 2" id="connector1">
+   <part label="S6" title="Reed switch" id="18641170"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="pin 1" id="connector0">
+   <part label="S6" title="Reed switch" id="18641170"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="MOSI" id="connector3">
+   <part label="U2" title="Barometric Pressure Sensor" id="18641140"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="MISO" id="connector2">
+   <part label="U2" title="Barometric Pressure Sensor" id="18641140"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="CSB" id="connector1">
+   <part label="U2" title="Barometric Pressure Sensor" id="18641140"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="DRDY" id="connector0">
+   <part label="U2" title="Barometric Pressure Sensor" id="18641140"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="GND" id="connector6">
+   <part label="U2" title="Barometric Pressure Sensor" id="18641140"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="3.3V" id="connector5">
+   <part label="U2" title="Barometric Pressure Sensor" id="18641140"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="SCK" id="connector4">
+   <part label="U2" title="Barometric Pressure Sensor" id="18641140"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="GND" id="connector2">
+   <part label="T1" title="LM35 Temperature Sensor" id="18641110"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Vout" id="connector1">
+   <part label="T1" title="LM35 Temperature Sensor" id="18641110"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="+Vs" id="connector0">
+   <part label="T1" title="LM35 Temperature Sensor" id="18641110"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="INT_MAG" id="connector19">
+   <part label="Part3" title="LSM303C (6 DOF)" id="18641080"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="!CS_MAG" id="connector18">
+   <part label="Part3" title="LSM303C (6 DOF)" id="18641080"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="VCC" id="connector17">
+   <part label="Part3" title="LSM303C (6 DOF)" id="18641080"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="!CS_XL" id="connector16">
+   <part label="Part3" title="LSM303C (6 DOF)" id="18641080"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="DRDY_MAG" id="connector15">
+   <part label="Part3" title="LSM303C (6 DOF)" id="18641080"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="INT_XL" id="connector14">
+   <part label="Part3" title="LSM303C (6 DOF)" id="18641080"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="SCL/SCLK" id="connector13">
+   <part label="Part3" title="LSM303C (6 DOF)" id="18641080"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="SDA/SDI/SDO" id="connector12">
+   <part label="Part3" title="LSM303C (6 DOF)" id="18641080"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="VDD_IO" id="connector11">
+   <part label="Part3" title="LSM303C (6 DOF)" id="18641080"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="GND" id="connector10">
+   <part label="Part3" title="LSM303C (6 DOF)" id="18641080"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="VCC" id="connector13">
+   <part label="Part2" title="Triple Axis Accelerometer Breakout - ADXL335" id="18641050"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="ZOUT" id="connector9">
+   <part label="Part2" title="Triple Axis Accelerometer Breakout - ADXL335" id="18641050"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="GND" id="connector12">
+   <part label="Part2" title="Triple Axis Accelerometer Breakout - ADXL335" id="18641050"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="ST" id="connector8">
+   <part label="Part2" title="Triple Axis Accelerometer Breakout - ADXL335" id="18641050"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="XOUT" id="connector11">
+   <part label="Part2" title="Triple Axis Accelerometer Breakout - ADXL335" id="18641050"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="YOUT" id="connector10">
+   <part label="Part2" title="Triple Axis Accelerometer Breakout - ADXL335" id="18641050"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Vcc" id="connector2">
+   <part label="J2" title="Infrared Proximity Sensor" id="18641020"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="GND" id="connector1">
+   <part label="J2" title="Infrared Proximity Sensor" id="18641020"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Vout" id="connector0">
+   <part label="J2" title="Infrared Proximity Sensor" id="18641020"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="pin 1" id="connector1">
+   <part label="R5" title="Photocell (LDR)" id="18640990"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="pin 0" id="connector0">
+   <part label="R5" title="Photocell (LDR)" id="18640990"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="pin 1" id="connector1">
+   <part label="R4" title="Basic Flex Resistor" id="18640960"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Pin 2" id="connector0">
+   <part label="R4" title="Basic Flex Resistor" id="18640960"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="pin 1" id="connector1">
+   <part label="J1" title="Basic Force Sensing Resistor (FSR)" id="18640930"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="pin 0" id="connector0">
+   <part label="J1" title="Basic Force Sensing Resistor (FSR)" id="18640930"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Pin 2" id="connector1">
+   <part label="S5" title="Tilt Switch" id="18640900"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Pin 1" id="connector0">
+   <part label="S5" title="Tilt Switch" id="18640900"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="L2" id="connector2">
+   <part label="S4" title="Taiway 100-SP-X-T1 SPDT Miniature Toggle Switch" id="18640870"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="L1" id="connector1">
+   <part label="S4" title="Taiway 100-SP-X-T1 SPDT Miniature Toggle Switch" id="18640870"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="COM" id="connector0">
+   <part label="S4" title="Taiway 100-SP-X-T1 SPDT Miniature Toggle Switch" id="18640870"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="L2" id="connector2">
+   <part label="S3" title="Toggle Switch" id="18640840"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="COM" id="connector1">
+   <part label="S3" title="Toggle Switch" id="18640840"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="L1" id="connector0">
+   <part label="S3" title="Toggle Switch" id="18640840"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Pin 4" id="connector3">
+   <part label="S2" title="Pushbutton" id="18640810"/>
+  </connector>
+  <connector name="Pin 3" id="connector2">
+   <part label="S2" title="Pushbutton" id="18640810"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Pin 2" id="connector1">
+   <part label="S2" title="Pushbutton" id="18640810"/>
+  </connector>
+  <connector name="Pin 1" id="connector0">
+   <part label="S2" title="Pushbutton" id="18640810"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="leg1" id="connector1">
+   <part label="S1" title="Pushbutton" id="18640780"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="leg0" id="connector0">
+   <part label="S1" title="Pushbutton" id="18640780"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Output8pin" id="connector3">
+   <part label="RE2" title="Hexadecimal Rotary Encoder" id="18640750"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Output4Pin" id="connector2">
+   <part label="RE2" title="Hexadecimal Rotary Encoder" id="18640750"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Output2Pin" id="connector1">
+   <part label="RE2" title="Hexadecimal Rotary Encoder" id="18640750"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Output1Pin" id="connector0">
+   <part label="RE2" title="Hexadecimal Rotary Encoder" id="18640750"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="InputCommon2" id="connector5">
+   <part label="RE2" title="Hexadecimal Rotary Encoder" id="18640750"/>
+  </connector>
+  <connector name="InputCommon" id="connector4">
+   <part label="RE2" title="Hexadecimal Rotary Encoder" id="18640750"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="EncoderPinB" id="connector2">
+   <part label="RE1" title="Rotary Encoder" id="18640720"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="EncoderPinC" id="connector1">
+   <part label="RE1" title="Rotary Encoder" id="18640720"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="EncoderPinA" id="connector0">
+   <part label="RE1" title="Rotary Encoder" id="18640720"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="2" id="connector2">
+   <part label="Part1" title="Variable Capacitor" id="18640690"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="1" id="connector1">
+   <part label="Part1" title="Variable Capacitor" id="18640690"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="0" id="connector0">
+   <part label="Part1" title="Variable Capacitor" id="18640690"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="A4" id="connector21">
+   <part label="U1" title="AD5206 Digital Potentiometer" id="18640660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="B2" id="connector20">
+   <part label="U1" title="AD5206 Digital Potentiometer" id="18640660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="B5" id="connector9">
+   <part label="U1" title="AD5206 Digital Potentiometer" id="18640660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Vss" id="connector8">
+   <part label="U1" title="AD5206 Digital Potentiometer" id="18640660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="CLK" id="connector7">
+   <part label="U1" title="AD5206 Digital Potentiometer" id="18640660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="SDI" id="connector6">
+   <part label="U1" title="AD5206 Digital Potentiometer" id="18640660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Vdd" id="connector5">
+   <part label="U1" title="AD5206 Digital Potentiometer" id="18640660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="CS" id="connector4">
+   <part label="U1" title="AD5206 Digital Potentiometer" id="18640660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Gnd" id="connector3">
+   <part label="U1" title="AD5206 Digital Potentiometer" id="18640660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="B6" id="connector2">
+   <part label="U1" title="AD5206 Digital Potentiometer" id="18640660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="W6" id="connector1">
+   <part label="U1" title="AD5206 Digital Potentiometer" id="18640660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="A6" id="connector0">
+   <part label="U1" title="AD5206 Digital Potentiometer" id="18640660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="W2" id="connector19">
+   <part label="U1" title="AD5206 Digital Potentiometer" id="18640660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="A2" id="connector18">
+   <part label="U1" title="AD5206 Digital Potentiometer" id="18640660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="A1" id="connector17">
+   <part label="U1" title="AD5206 Digital Potentiometer" id="18640660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="W1" id="connector16">
+   <part label="U1" title="AD5206 Digital Potentiometer" id="18640660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="B1" id="connector15">
+   <part label="U1" title="AD5206 Digital Potentiometer" id="18640660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="A3" id="connector14">
+   <part label="U1" title="AD5206 Digital Potentiometer" id="18640660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="W3" id="connector13">
+   <part label="U1" title="AD5206 Digital Potentiometer" id="18640660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="B3" id="connector12">
+   <part label="U1" title="AD5206 Digital Potentiometer" id="18640660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="A5" id="connector11">
+   <part label="U1" title="AD5206 Digital Potentiometer" id="18640660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="W5" id="connector10">
+   <part label="U1" title="AD5206 Digital Potentiometer" id="18640660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="B4" id="connector23">
+   <part label="U1" title="AD5206 Digital Potentiometer" id="18640660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="W4" id="connector22">
+   <part label="U1" title="AD5206 Digital Potentiometer" id="18640660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="leg2" id="connector2">
+   <part label="R3" title="Slide Potentiometer" id="18640630"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="wiper" id="connector1">
+   <part label="R3" title="Slide Potentiometer" id="18640630"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="leg1" id="connector0">
+   <part label="R3" title="Slide Potentiometer" id="18640630"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="leg2" id="connector2">
+   <part label="R2" title="Rotary Potentiometer (Small)" id="18640600"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="wiper" id="connector1">
+   <part label="R2" title="Rotary Potentiometer (Small)" id="18640600"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="leg1" id="connector0">
+   <part label="R2" title="Rotary Potentiometer (Small)" id="18640600"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="leg2" id="connector2">
+   <part label="R1" title="Trimmer Potentiometer" id="18640570"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="wiper" id="connector1">
+   <part label="R1" title="Trimmer Potentiometer" id="18640570"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="leg1" id="connector0">
+   <part label="R1" title="Trimmer Potentiometer" id="18640570"/>
+  </connector>
+ </net>
+</netlist>

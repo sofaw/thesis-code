@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ASCII"?>
+<Circuit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="sew569_v2" xsi:schemaLocation="sew569_v2 ../../metamodel_v2.ecore">
+  <parts partId="18641260" title="Humidity and Temperature Sensor RHT03" type="Input"/>
+  <parts partId="18641230" title="RFID Reader" type="Input"/>
+  <parts partId="18641200" title="Antenna" type="Input"/>
+  <parts partId="18641170" title="Reed switch" type="Input"/>
+  <parts partId="18641140" title="Barometric Pressure Sensor" type="Input"/>
+  <parts partId="18641110" title="LM35 Temperature Sensor" type="Input"/>
+  <parts partId="18641080" title="LSM303C (6 DOF)" type="Input"/>
+  <parts partId="18641050" title="Triple Axis Accelerometer Breakout - ADXL335" type="Input"/>
+  <parts partId="18641020" title="Infrared Proximity Sensor" type="Input"/>
+  <parts partId="18640990" title="Photocell (LDR)" type="Input"/>
+  <parts partId="18640960" title="Basic Flex Resistor" type="Input"/>
+  <parts partId="18640930" title="Basic Force Sensing Resistor (FSR)" type="Input"/>
+  <parts partId="18640900" title="Tilt Switch" type="Input"/>
+  <parts partId="18640870" title="Taiway 100-SP-X-T1 SPDT Miniature Toggle Switch" type="Input"/>
+  <parts partId="18640840" title="Toggle Switch" type="Input"/>
+  <parts partId="18640810" title="Pushbutton" type="Input">
+    <connectors name="Pin 4" connectedTo="//@parts.15/@connectors.1"/>
+    <connectors name="Pin 3" connectedTo="//@parts.15/@connectors.0"/>
+    <connectors name="Pin 2" connectedTo="//@parts.15/@connectors.3"/>
+    <connectors name="Pin 1" connectedTo="//@parts.15/@connectors.2"/>
+  </parts>
+  <parts partId="18640780" title="Pushbutton" type="Input"/>
+  <parts partId="18640750" title="Hexadecimal Rotary Encoder" type="Input">
+    <connectors name="InputCommon2" connectedTo="//@parts.17/@connectors.1"/>
+    <connectors name="InputCommon" connectedTo="//@parts.17/@connectors.0"/>
+  </parts>
+  <parts partId="18640720" title="Rotary Encoder" type="Input"/>
+  <parts partId="18640690" title="Variable Capacitor" type="Input"/>
+  <parts partId="18640660" title="AD5206 Digital Potentiometer" type="Input"/>
+  <parts partId="18640630" title="Slide Potentiometer" type="Input"/>
+  <parts partId="18640600" title="Rotary Potentiometer (Small)" type="Input"/>
+  <parts partId="18640570" title="Trimmer Potentiometer" type="Input"/>
+</Circuit>

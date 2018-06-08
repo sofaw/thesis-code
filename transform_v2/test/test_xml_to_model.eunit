@@ -1,5 +1,7 @@
+import "test_queries.eol";
+
+$onlyWith Map {"" = "ALL_INPUTS_OUT"}
 @test
-operation transformationWorksAsExpected() {
-  runTarget("xml2model");
-  assertEqualModels("touchswitch_model_expected", "OUT");
+operation allInputPartsClassifiedCorrectly() {
+  assertTrue(allPartsHaveLabel(Type#Input));
 }

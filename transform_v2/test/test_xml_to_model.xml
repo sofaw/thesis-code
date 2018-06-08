@@ -1,27 +1,22 @@
 <project>
-  <target name="run-tests">
-    <epsilon.eunit src="test_xml_to_model.eunit"/>
-  </target>
-  <target name="loadModels">
-      <epsilon.xml.loadModel 
-      name="XML"
-      file="input_xml/TouchSwitch_netlist.xml"
-      read="true" store="false"/>
-      <epsilon.emf.loadModel 
-      name="touchswitch_model_expected"
-      modelfile="expected_output_models/touchswitch.model"
-      metamodelfile="../metamodel_v2.ecore"
-      read="true" store="false"/>
-      <epsilon.emf.loadModel 
-      name="OUT"
-      modelfile="transformed.model"
-      metamodelfile="../metamodel_v2.ecore"
-      read="false" store="false"/>
-  </target>
-  <target name="xml2model" depends="loadModels">
-  <epsilon.etl src="../xml_to_model.etl">
-  <model ref="XML"/>
-  <model ref="OUT"/>
-  </epsilon.etl>
-  </target>
+    <target name="cleanup">
+    	<delete file="transformation_output/all_inputs.model"/>
+    </target>
+	<target name="run-tests" depends="cleanup">
+	    <epsilon.xml.loadModel name="ALL_INPUTS_XML"
+			file="input_xml/All_Core_Input_Parts_netlist.xml" read="true" store="false" />
+		<epsilon.emf.loadModel name="ALL_INPUTS_OUT_FOR_TRANSFORM"
+			modelfile="transformation_output/all_inputs.model" metamodelfile="../metamodel_v2.ecore"
+			read="false" store="true" />
+		<epsilon.etl src="../xml_to_model.etl">
+			<model ref="ALL_INPUTS_XML" as="XML"/>
+			<model ref="ALL_INPUTS_OUT_FOR_TRANSFORM" as="OUT"/>
+		</epsilon.etl>
+		<epsilon.emf.loadModel name="ALL_INPUTS_OUT"
+			modelfile="transformation_output/all_inputs.model" metamodelfile="../metamodel_v2.ecore"
+			read="true" store="false" />
+		<epsilon.eunit src="test_xml_to_model.eunit">
+			<model ref="ALL_INPUTS_OUT"/>
+		</epsilon.eunit>
+	</target>
 </project>

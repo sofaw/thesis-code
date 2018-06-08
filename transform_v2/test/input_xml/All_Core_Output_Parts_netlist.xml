@@ -1,0 +1,707 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Fritzing (http://www.fritzing.org/) -->
+<netlist sketch="All_Output_Parts.fzz" date="Wed Jun 6 13:42:26 2018">
+ <net>
+  <connector name="pin2" id="connector1">
+   <part label="J3" title="Peltier Element" id="18636790"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="pin1" id="connector0">
+   <part label="J3" title="Peltier Element" id="18636790"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="COIL1 +" id="connector1">
+   <part label="DIP-Relay1" title="DIP-Relay-D31A" id="18636760"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="A1 Switch Terminal A" id="connector0">
+   <part label="DIP-Relay1" title="DIP-Relay-D31A" id="18636760"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="A2 Switch Terminal A" id="connector13">
+   <part label="DIP-Relay1" title="DIP-Relay-D31A" id="18636760"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="n.c." id="connector12">
+   <part label="DIP-Relay1" title="DIP-Relay-D31A" id="18636760"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Coil Sheeld" id="connector8">
+   <part label="DIP-Relay1" title="DIP-Relay-D31A" id="18636760"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="B2 Switch Terminal B" id="connector7">
+   <part label="DIP-Relay1" title="DIP-Relay-D31A" id="18636760"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="B1 Switch Terminal B" id="connector6">
+   <part label="DIP-Relay1" title="DIP-Relay-D31A" id="18636760"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Coil2 -" id="connector5">
+   <part label="DIP-Relay1" title="DIP-Relay-D31A" id="18636760"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="C2" id="connector3">
+   <part label="K1" title="Relay" id="18636730"/>
+  </connector>
+  <connector name="C1" id="connector2">
+   <part label="K1" title="Relay" id="18636730"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="COIL1" id="connector1">
+   <part label="K1" title="Relay" id="18636730"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="A" id="connector0">
+   <part label="K1" title="Relay" id="18636730"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="B" id="connector5">
+   <part label="K1" title="Relay" id="18636730"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="COIL2" id="connector4">
+   <part label="K1" title="Relay" id="18636730"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="VIN" id="connector139">
+   <part label="MD03A1" title="Dual VNH2SP30 Motor Driver" id="18636700"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="GND" id="connector138">
+   <part label="MD03A1" title="Dual VNH2SP30 Motor Driver" id="18636700"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="+5V (IN)" id="connector137">
+   <part label="MD03A1" title="Dual VNH2SP30 Motor Driver" id="18636700"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="GND" id="connector136">
+   <part label="MD03A1" title="Dual VNH2SP30 Motor Driver" id="18636700"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="VIN" id="connector134">
+   <part label="MD03A1" title="Dual VNH2SP30 Motor Driver" id="18636700"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="1CS" id="connector133">
+   <part label="MD03A1" title="Dual VNH2SP30 Motor Driver" id="18636700"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="OUT 2B" id="connector149">
+   <part label="MD03A1" title="Dual VNH2SP30 Motor Driver" id="18636700"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="PWM" id="connector132">
+   <part label="MD03A1" title="Dual VNH2SP30 Motor Driver" id="18636700"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="OUT 2A" id="connector148">
+   <part label="MD03A1" title="Dual VNH2SP30 Motor Driver" id="18636700"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="1INb" id="connector131">
+   <part label="MD03A1" title="Dual VNH2SP30 Motor Driver" id="18636700"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="OUT 1B" id="connector147">
+   <part label="MD03A1" title="Dual VNH2SP30 Motor Driver" id="18636700"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="OUT 1A" id="connector146">
+   <part label="MD03A1" title="Dual VNH2SP30 Motor Driver" id="18636700"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="1INa" id="connector130">
+   <part label="MD03A1" title="Dual VNH2SP30 Motor Driver" id="18636700"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="2DIAG/EN" id="connector144">
+   <part label="MD03A1" title="Dual VNH2SP30 Motor Driver" id="18636700"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="2INb" id="connector143">
+   <part label="MD03A1" title="Dual VNH2SP30 Motor Driver" id="18636700"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="2INb" id="connector142">
+   <part label="MD03A1" title="Dual VNH2SP30 Motor Driver" id="18636700"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="2PWM" id="connector141">
+   <part label="MD03A1" title="Dual VNH2SP30 Motor Driver" id="18636700"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="2CS" id="connector140">
+   <part label="MD03A1" title="Dual VNH2SP30 Motor Driver" id="18636700"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="GND" id="connector151">
+   <part label="MD03A1" title="Dual VNH2SP30 Motor Driver" id="18636700"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="VIN" id="connector150">
+   <part label="MD03A1" title="Dual VNH2SP30 Motor Driver" id="18636700"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="1DIAG/EN" id="connector129">
+   <part label="MD03A1" title="Dual VNH2SP30 Motor Driver" id="18636700"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="pin2" id="connector1">
+   <part label="L1" title="Solenoid" id="18636670"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="pin1" id="connector0">
+   <part label="L1" title="Solenoid" id="18636670"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="D" id="connector3">
+   <part label="M2" title="Stepper Motor - Bipolar" id="18636640"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="B" id="connector2">
+   <part label="M2" title="Stepper Motor - Bipolar" id="18636640"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="C" id="connector1">
+   <part label="M2" title="Stepper Motor - Bipolar" id="18636640"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="A" id="connector0">
+   <part label="M2" title="Stepper Motor - Bipolar" id="18636640"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="pulse" id="connector2">
+   <part label="J2" title="Basic Servo" id="18636610"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="vcc" id="connector1">
+   <part label="J2" title="Basic Servo" id="18636610"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="gnd" id="connector0">
+   <part label="J2" title="Basic Servo" id="18636610"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Vin" id="connector3">
+   <part label="EDGY motor control1" title="EDGY" id="18636580"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Speed1" id="connector2">
+   <part label="EDGY motor control1" title="EDGY" id="18636580"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="B1" id="connector1">
+   <part label="EDGY motor control1" title="EDGY" id="18636580"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="A1" id="connector0">
+   <part label="EDGY motor control1" title="EDGY" id="18636580"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="5V+" id="connector14">
+   <part label="EDGY motor control1" title="EDGY" id="18636580"/>
+  </connector>
+  <connector name="5V+" id="connector7">
+   <part label="EDGY motor control1" title="EDGY" id="18636580"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="GND" id="connector13">
+   <part label="EDGY motor control1" title="EDGY" id="18636580"/>
+  </connector>
+  <connector name="GND" id="connector8">
+   <part label="EDGY motor control1" title="EDGY" id="18636580"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="B2out" id="connector9">
+   <part label="EDGY motor control1" title="EDGY" id="18636580"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="A1out" id="connector12">
+   <part label="EDGY motor control1" title="EDGY" id="18636580"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="B1out" id="connector11">
+   <part label="EDGY motor control1" title="EDGY" id="18636580"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Speed2" id="connector6">
+   <part label="EDGY motor control1" title="EDGY" id="18636580"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="A2out" id="connector10">
+   <part label="EDGY motor control1" title="EDGY" id="18636580"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="B2" id="connector5">
+   <part label="EDGY motor control1" title="EDGY" id="18636580"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="A2" id="connector4">
+   <part label="EDGY motor control1" title="EDGY" id="18636580"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="pin 2" id="connector1">
+   <part label="M1" title="DC Motor" id="18636550"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="pin 1" id="connector0">
+   <part label="M1" title="DC Motor" id="18636550"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="pin2" id="connector1">
+   <part label="MIC1" title="Microphone" id="18636520"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="pin1" id="connector0">
+   <part label="MIC1" title="Microphone" id="18636520"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="pin2" id="connector1">
+   <part label="SPKR1" title="Loudspeaker" id="18636490"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="pin1" id="connector0">
+   <part label="SPKR1" title="Loudspeaker" id="18636490"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="pin2" id="connector1">
+   <part label="J1" title="Piezo Speaker" id="18636460"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="pin1" id="connector0">
+   <part label="J1" title="Piezo Speaker" id="18636460"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="10 DB3" id="connector9">
+   <part label="GLCD 128x1" title="128 x 64 Graphic LCD" id="18636430"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="9 BD2" id="connector8">
+   <part label="GLCD 128x1" title="128 x 64 Graphic LCD" id="18636430"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="8 DB1" id="connector7">
+   <part label="GLCD 128x1" title="128 x 64 Graphic LCD" id="18636430"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="7 DB0" id="connector6">
+   <part label="GLCD 128x1" title="128 x 64 Graphic LCD" id="18636430"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="6 Enable" id="connector5">
+   <part label="GLCD 128x1" title="128 x 64 Graphic LCD" id="18636430"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="5 R/W" id="connector4">
+   <part label="GLCD 128x1" title="128 x 64 Graphic LCD" id="18636430"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="4 D/I" id="connector3">
+   <part label="GLCD 128x1" title="128 x 64 Graphic LCD" id="18636430"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="3 Vo" id="connector2">
+   <part label="GLCD 128x1" title="128 x 64 Graphic LCD" id="18636430"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="2 Vdd" id="connector1">
+   <part label="GLCD 128x1" title="128 x 64 Graphic LCD" id="18636430"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="1 Vss" id="connector0">
+   <part label="GLCD 128x1" title="128 x 64 Graphic LCD" id="18636430"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="20 K(-)" id="connector19">
+   <part label="GLCD 128x1" title="128 x 64 Graphic LCD" id="18636430"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="19 A(+)" id="connector18">
+   <part label="GLCD 128x1" title="128 x 64 Graphic LCD" id="18636430"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="18 Vout" id="connector17">
+   <part label="GLCD 128x1" title="128 x 64 Graphic LCD" id="18636430"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="17 RST" id="connector16">
+   <part label="GLCD 128x1" title="128 x 64 Graphic LCD" id="18636430"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="16 CS2" id="connector15">
+   <part label="GLCD 128x1" title="128 x 64 Graphic LCD" id="18636430"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="15 CS1" id="connector14">
+   <part label="GLCD 128x1" title="128 x 64 Graphic LCD" id="18636430"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="14 DB7" id="connector13">
+   <part label="GLCD 128x1" title="128 x 64 Graphic LCD" id="18636430"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="13 DB6" id="connector12">
+   <part label="GLCD 128x1" title="128 x 64 Graphic LCD" id="18636430"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="12 DB5" id="connector11">
+   <part label="GLCD 128x1" title="128 x 64 Graphic LCD" id="18636430"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="11 DB4" id="connector10">
+   <part label="GLCD 128x1" title="128 x 64 Graphic LCD" id="18636430"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="RS" id="connector3">
+   <part label="LCD1" title="LCD screen" id="18636400"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="V0" id="connector2">
+   <part label="LCD1" title="LCD screen" id="18636400"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="VDD" id="connector1">
+   <part label="LCD1" title="LCD screen" id="18636400"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="VSS" id="connector0">
+   <part label="LCD1" title="LCD screen" id="18636400"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="LED-" id="connector15">
+   <part label="LCD1" title="LCD screen" id="18636400"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="LED+" id="connector14">
+   <part label="LCD1" title="LCD screen" id="18636400"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="DB7" id="connector13">
+   <part label="LCD1" title="LCD screen" id="18636400"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="DB3" id="connector9">
+   <part label="LCD1" title="LCD screen" id="18636400"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="DB6" id="connector12">
+   <part label="LCD1" title="LCD screen" id="18636400"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="DB2" id="connector8">
+   <part label="LCD1" title="LCD screen" id="18636400"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="DB5" id="connector11">
+   <part label="LCD1" title="LCD screen" id="18636400"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="DB1" id="connector7">
+   <part label="LCD1" title="LCD screen" id="18636400"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="DB0" id="connector6">
+   <part label="LCD1" title="LCD screen" id="18636400"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="DB4" id="connector10">
+   <part label="LCD1" title="LCD screen" id="18636400"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="E" id="connector5">
+   <part label="LCD1" title="LCD screen" id="18636400"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="R/W" id="connector4">
+   <part label="LCD1" title="LCD screen" id="18636400"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Column 2" id="connector3">
+   <part label="Dot Matrix1" title="LED Dot Matrix 18mm (0.7 INCH)" id="18636370"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Row 3" id="connector2">
+   <part label="Dot Matrix1" title="LED Dot Matrix 18mm (0.7 INCH)" id="18636370"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Column 1" id="connector1">
+   <part label="Dot Matrix1" title="LED Dot Matrix 18mm (0.7 INCH)" id="18636370"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Row 4" id="connector9">
+   <part label="Dot Matrix1" title="LED Dot Matrix 18mm (0.7 INCH)" id="18636370"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Row 1" id="connector12">
+   <part label="Dot Matrix1" title="LED Dot Matrix 18mm (0.7 INCH)" id="18636370"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Column 5" id="connector8">
+   <part label="Dot Matrix1" title="LED Dot Matrix 18mm (0.7 INCH)" id="18636370"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Row 2" id="connector11">
+   <part label="Dot Matrix1" title="LED Dot Matrix 18mm (0.7 INCH)" id="18636370"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Column 4" id="connector7">
+   <part label="Dot Matrix1" title="LED Dot Matrix 18mm (0.7 INCH)" id="18636370"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Row 7" id="connector6">
+   <part label="Dot Matrix1" title="LED Dot Matrix 18mm (0.7 INCH)" id="18636370"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Column 3" id="connector10">
+   <part label="Dot Matrix1" title="LED Dot Matrix 18mm (0.7 INCH)" id="18636370"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Row 6" id="connector5">
+   <part label="Dot Matrix1" title="LED Dot Matrix 18mm (0.7 INCH)" id="18636370"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Row 5" id="connector4">
+   <part label="Dot Matrix1" title="LED Dot Matrix 18mm (0.7 INCH)" id="18636370"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="common anode" id="connector3">
+   <part label="7 Segment1" title="7 Segment Display" id="18636340"/>
+  </connector>
+  <connector name="common anode" id="connector8">
+   <part label="7 Segment1" title="7 Segment Display" id="18636340"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Segment F" id="connector2">
+   <part label="7 Segment1" title="7 Segment Display" id="18636340"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Segment G" id="connector1">
+   <part label="7 Segment1" title="7 Segment Display" id="18636340"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Segment B" id="connector9">
+   <part label="7 Segment1" title="7 Segment Display" id="18636340"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Segment C" id="connector7">
+   <part label="7 Segment1" title="7 Segment Display" id="18636340"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Segment DP" id="connector6">
+   <part label="7 Segment1" title="7 Segment Display" id="18636340"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Segment A" id="connector10">
+   <part label="7 Segment1" title="7 Segment Display" id="18636340"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Segment D" id="connector5">
+   <part label="7 Segment1" title="7 Segment Display" id="18636340"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Segment E" id="connector4">
+   <part label="7 Segment1" title="7 Segment Display" id="18636340"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="R+" id="connector3">
+   <part label="Power RGB1" title="Prolight RGB 3 Watt Star" id="18636310"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="G+" id="connector2">
+   <part label="Power RGB1" title="Prolight RGB 3 Watt Star" id="18636310"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="B+" id="connector1">
+   <part label="Power RGB1" title="Prolight RGB 3 Watt Star" id="18636310"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="B-" id="connector6">
+   <part label="Power RGB1" title="Prolight RGB 3 Watt Star" id="18636310"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="G-" id="connector5">
+   <part label="Power RGB1" title="Prolight RGB 3 Watt Star" id="18636310"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="R-" id="connector4">
+   <part label="Power RGB1" title="Prolight RGB 3 Watt Star" id="18636310"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="anode" id="connector3">
+   <part label="LED3" title="Blue LED" id="18636280"/>
+  </connector>
+  <connector name="anode" id="connector0">
+   <part label="LED3" title="Blue LED" id="18636280"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="cathode" id="connector2">
+   <part label="LED3" title="Blue LED" id="18636280"/>
+  </connector>
+  <connector name="cathode" id="connector1">
+   <part label="LED3" title="Blue LED" id="18636280"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="blue anode" id="connector3">
+   <part label="LED2" title="RGB LED (com. cathode, rgb)" id="18636250"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="green anode" id="connector2">
+   <part label="LED2" title="RGB LED (com. cathode, rgb)" id="18636250"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="common cathode" id="connector1">
+   <part label="LED2" title="RGB LED (com. cathode, rgb)" id="18636250"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="red anode" id="connector0">
+   <part label="LED2" title="RGB LED (com. cathode, rgb)" id="18636250"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="anode" id="connector1">
+   <part label="LED1" title="Red (633nm) LED" id="18636220"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="cathode" id="connector0">
+   <part label="LED1" title="Red (633nm) LED" id="18636220"/>
+  </connector>
+ </net>
+</netlist>

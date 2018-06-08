@@ -1,0 +1,9 @@
+operation allPartsHaveLabel(label : Any) : Boolean { // Need to use 'Any' label rather than enum type because of bug
+  var allParts = Part.all;
+  for(part in allParts) {
+    if(part.type <> label) {
+      return false;
+    }
+  }
+  return true;
+}
