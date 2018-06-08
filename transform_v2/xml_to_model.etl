@@ -35,10 +35,36 @@ pre {
   inputParts.add("variable capacitor");
   
   var boards : Set<String>;
-  boards.add("arduino");
-  
+  boards.add("arduino uno");
+  boards.add("arduino yun");
+  boards.add("ichigojam");
+  boards.add("udoo board");
+  boards.add("bare conductive touch board");
+  boards.add("dquidio board");
+  boards.add("adafruit atmega32u4");
+  boards.add("96boards consumer");
+  boards.add("gogoboard");
+  boards.add("mbili");
+  boards.add("chipkit wf32");
+  boards.add("raspberry pi"); // Three; Zero;
+  boards.add("wiring"); // Wiring; Wiring USB Adapter;
+  boards.add("linino");
+  boards.add("stepoko");
+  boards.add("microcontroller");
+  boards.add("picaxe-08");
+  boards.add("parallax propeller");
+  boards.add("basic stamp 2");
+  boards.add("mbed");
+  boards.add("raspio duino");
+  boards.add("blueiot core");
+  boards.add("teensy");
+  boards.add("pinocc.io scout");
+  boards.add("lightblue bean");
+  boards.add("msp430g2");
+  boards.add("galileo");
+  boards.add("netduino");
+  boards.add("spark core");
   // TODO: need to check these do not appear in any other part names;
-  // TODO: add logic (check title.tolowercase.contains(string from outputparts)
 }
 
 rule xmlPart2Board

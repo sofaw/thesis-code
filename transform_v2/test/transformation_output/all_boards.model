@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="sew569_v2" xsi:schemaLocation="sew569_v2 ../../metamodel_v2.ecore">
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Connector/>
+  <Circuit>
+    <parts partId="18645970" title="IchigoJam T">
+      <connectors name="OUT6" connectedTo="/71/@parts.5/@connectors.0"/>
+      <connectors name="5V" connectedTo="/71/@parts.1/@connectors.0"/>
+    </parts>
+    <parts partId="18645910" title="Udoo Board">
+      <connectors name="D41" connectedTo="/71/@parts.0/@connectors.1"/>
+      <connectors name="SDA" connectedTo="/71/@parts.1/@connectors.2"/>
+      <connectors name="D20/SDA" connectedTo="/71/@parts.1/@connectors.1"/>
+      <connectors name="SCL" connectedTo="/71/@parts.1/@connectors.4"/>
+      <connectors name="D21/SCL" connectedTo="/71/@parts.1/@connectors.3"/>
+    </parts>
+    <parts partId="18642440" title="sodaq mbili">
+      <connectors name="RXD1" connectedTo="/71/@parts.14/@connectors.0"/>
+      <connectors name="TXD1" connectedTo="/71/@parts.14/@connectors.1"/>
+      <connectors name="TXD0" connectedTo="/71/@parts.14/@connectors.2"/>
+      <connectors name="RESET" connectedTo="/71/@parts.2/@connectors.4"/>
+      <connectors name="RESET" connectedTo="/71/@parts.2/@connectors.3"/>
+      <connectors name="V_BAT" connectedTo="/71/@parts.2/@connectors.6"/>
+      <connectors name="JP_BAT1" connectedTo="/71/@parts.2/@connectors.5"/>
+      <connectors name="D19" connectedTo="/71/@parts.2/@connectors.8"/>
+      <connectors name="JTAG_TMS" connectedTo="/71/@parts.2/@connectors.7"/>
+      <connectors name="D18" connectedTo="/71/@parts.2/@connectors.10"/>
+      <connectors name="JTAG_TCK" connectedTo="/71/@parts.2/@connectors.9"/>
+      <connectors name="BEE_9_DTR" connectedTo="/71/@parts.2/@connectors.12"/>
+      <connectors name="BEE_9_DTR" connectedTo="/71/@parts.2/@connectors.11"/>
+      <connectors name="BEE_8" connectedTo="/71/@parts.2/@connectors.14"/>
+      <connectors name="BEE_8_NC" connectedTo="/71/@parts.2/@connectors.13"/>
+      <connectors name="BEE_7" connectedTo="/71/@parts.2/@connectors.16"/>
+      <connectors name="BEE_7_NC" connectedTo="/71/@parts.2/@connectors.15"/>
+      <connectors name="JTAG_TD1" connectedTo="/71/@parts.2/@connectors.18"/>
+      <connectors name="D21" connectedTo="/71/@parts.2/@connectors.17"/>
+      <connectors name="BEE_6" connectedTo="/71/@parts.2/@connectors.20"/>
+      <connectors name="BEE_6_NC" connectedTo="/71/@parts.2/@connectors.19"/>
+      <connectors name="BEE_5_NC" connectedTo="/71/@parts.2/@connectors.22"/>
+      <connectors name="BEE_5_NC" connectedTo="/71/@parts.2/@connectors.21"/>
+      <connectors name="BEE_4_NC" connectedTo="/71/@parts.2/@connectors.24"/>
+      <connectors name="BEE_4_NC" connectedTo="/71/@parts.2/@connectors.23"/>
+      <connectors name="BEE_3_TXD" connectedTo="/71/@parts.2/@connectors.26"/>
+      <connectors name="BEE_3_TXD" connectedTo="/71/@parts.2/@connectors.25"/>
+      <connectors name="BEE_2_RXD" connectedTo="/71/@parts.2/@connectors.28"/>
+      <connectors name="BEE_2_RXD" connectedTo="/71/@parts.2/@connectors.27"/>
+      <connectors name="BEE_20_RI" connectedTo="/71/@parts.2/@connectors.30"/>
+      <connectors name="BEE_20_RI" connectedTo="/71/@parts.2/@connectors.29"/>
+      <connectors name="BEE_18_NC" connectedTo="/71/@parts.2/@connectors.32"/>
+      <connectors name="BEE_18_NC" connectedTo="/71/@parts.2/@connectors.31"/>
+      <connectors name="BEE_17_RESET" connectedTo="/71/@parts.2/@connectors.34"/>
+      <connectors name="BEE_17_RESET" connectedTo="/71/@parts.2/@connectors.33"/>
+      <connectors name="BEE_15_ASSOC" connectedTo="/71/@parts.2/@connectors.36"/>
+      <connectors name="BEE_15_ASSOC" connectedTo="/71/@parts.2/@connectors.35"/>
+      <connectors name="BEE_14_NC" connectedTo="/71/@parts.2/@connectors.38"/>
+      <connectors name="BEE_14_NC" connectedTo="/71/@parts.2/@connectors.37"/>
+      <connectors name="BEE_13_NC" connectedTo="/71/@parts.2/@connectors.40"/>
+      <connectors name="BEE_13_NC" connectedTo="/71/@parts.2/@connectors.39"/>
+      <connectors name="BEE_11_NC" connectedTo="/71/@parts.2/@connectors.42"/>
+      <connectors name="BEE_11_NC" connectedTo="/71/@parts.2/@connectors.41"/>
+    </parts>
+    <parts partId="18641710" title="chipKIT WF32">
+      <connectors name="D35" connectedTo="/71/@parts.13/@connectors.0"/>
+      <connectors name="D9" connectedTo="/71/@parts.13/@connectors.1"/>
+      <connectors name="D4" connectedTo="/71/@parts.13/@connectors.4"/>
+      <connectors name="D30" connectedTo="/71/@parts.13/@connectors.5"/>
+      <connectors name="D31" connectedTo="/71/@parts.16/@connectors.0"/>
+      <connectors name="D32" connectedTo="/71/@parts.16/@connectors.1"/>
+      <connectors name="D33" connectedTo="/71/@parts.16/@connectors.2"/>
+      <connectors name="A10" connectedTo="/71/@parts.4/@connectors.0"/>
+      <connectors name="A9" connectedTo="/71/@parts.4/@connectors.1"/>
+      <connectors name="A7" connectedTo="/71/@parts.4/@connectors.2"/>
+      <connectors name="A6" connectedTo="/71/@parts.4/@connectors.3"/>
+      <connectors name="A5" connectedTo="/71/@parts.4/@connectors.4"/>
+      <connectors name="A3" connectedTo="/71/@parts.4/@connectors.5"/>
+      <connectors name="A2" connectedTo="/71/@parts.4/@connectors.6"/>
+      <connectors name="A1" connectedTo="/71/@parts.4/@connectors.7"/>
+      <connectors name="VIN" connectedTo="/71/@parts.4/@connectors.8"/>
+    </parts>
+    <parts partId="18644610" title="Raspberry Pi 3">
+      <connectors name="GPIO24" connectedTo="/71/@parts.3/@connectors.7"/>
+      <connectors name="GPIO23" connectedTo="/71/@parts.3/@connectors.8"/>
+      <connectors name="GPIO18" connectedTo="/71/@parts.3/@connectors.9"/>
+      <connectors name="GPIO15" connectedTo="/71/@parts.3/@connectors.10"/>
+      <connectors name="GPIO10" connectedTo="/71/@parts.3/@connectors.11"/>
+      <connectors name="GPIO22" connectedTo="/71/@parts.3/@connectors.12"/>
+      <connectors name="GPIO27" connectedTo="/71/@parts.3/@connectors.13"/>
+      <connectors name="GPIO17" connectedTo="/71/@parts.3/@connectors.14"/>
+      <connectors name="GPIO3" connectedTo="/71/@parts.3/@connectors.15"/>
+    </parts>
+    <parts partId="18642500" title="Wiring">
+      <connectors name="D16" connectedTo="/71/@parts.0/@connectors.0"/>
+    </parts>
+    <parts partId="18645880" title="linino one">
+      <connectors name="RST" connectedTo="/71/@parts.6/@connectors.1"/>
+      <connectors name="RST" connectedTo="/71/@parts.6/@connectors.0"/>
+    </parts>
+    <parts partId="18645680" title="Raspberry Pi Zero">
+      <connectors name="pin 17" connectedTo="/71/@parts.7/@connectors.1"/>
+      <connectors name="pin 1" connectedTo="/71/@parts.7/@connectors.0"/>
+      <connectors name="pin 7" connectedTo="/71/@parts.8/@connectors.0"/>
+      <connectors name="pin 4" connectedTo="/71/@parts.7/@connectors.4"/>
+      <connectors name="pin 2" connectedTo="/71/@parts.7/@connectors.3"/>
+    </parts>
+    <parts partId="18641550" title="Bare Conductive Touch Board">
+      <connectors name="D6/D-CS PWM/A7 (VS1053)" connectedTo="/71/@parts.7/@connectors.2"/>
+      <connectors name="SDA" connectedTo="/71/@parts.8/@connectors.2"/>
+      <connectors name="D2/SDA (MPR121)" connectedTo="/71/@parts.8/@connectors.1"/>
+      <connectors name="E11" connectedTo="/71/@parts.8/@connectors.4"/>
+      <connectors name="E11" connectedTo="/71/@parts.8/@connectors.3"/>
+      <connectors name="E10" connectedTo="/71/@parts.8/@connectors.6"/>
+      <connectors name="E10" connectedTo="/71/@parts.8/@connectors.5"/>
+      <connectors name="E9" connectedTo="/71/@parts.8/@connectors.8"/>
+      <connectors name="E9" connectedTo="/71/@parts.8/@connectors.7"/>
+      <connectors name="E8" connectedTo="/71/@parts.8/@connectors.10"/>
+      <connectors name="E8" connectedTo="/71/@parts.8/@connectors.9"/>
+      <connectors name="E7" connectedTo="/71/@parts.8/@connectors.12"/>
+      <connectors name="E7" connectedTo="/71/@parts.8/@connectors.11"/>
+      <connectors name="E6" connectedTo="/71/@parts.8/@connectors.14"/>
+      <connectors name="E6" connectedTo="/71/@parts.8/@connectors.13"/>
+      <connectors name="E5" connectedTo="/71/@parts.8/@connectors.16"/>
+      <connectors name="E5" connectedTo="/71/@parts.8/@connectors.15"/>
+      <connectors name="E4" connectedTo="/71/@parts.8/@connectors.18"/>
+      <connectors name="E4" connectedTo="/71/@parts.8/@connectors.17"/>
+      <connectors name="E3" connectedTo="/71/@parts.8/@connectors.20"/>
+      <connectors name="E3" connectedTo="/71/@parts.8/@connectors.19"/>
+      <connectors name="E2" connectedTo="/71/@parts.8/@connectors.22"/>
+      <connectors name="E2" connectedTo="/71/@parts.8/@connectors.21"/>
+      <connectors name="E1" connectedTo="/71/@parts.8/@connectors.24"/>
+      <connectors name="E1" connectedTo="/71/@parts.8/@connectors.23"/>
+      <connectors name="E0" connectedTo="/71/@parts.8/@connectors.26"/>
+      <connectors name="E0" connectedTo="/71/@parts.8/@connectors.25"/>
+    </parts>
+    <parts partId="18644120" title="SparkFun Stepoko">
+      <connectors name="MOSI-D11-SPINDLE_PWM" connectedTo="/71/@parts.9/@connectors.1"/>
+      <connectors name="MOSI-D11-SPINDLE_PWM" connectedTo="/71/@parts.9/@connectors.0"/>
+      <connectors name="SCK-D13-SPINDLE_DIR" connectedTo="/71/@parts.9/@connectors.3"/>
+      <connectors name="SCK-D13-SPINDLE_DIR" connectedTo="/71/@parts.9/@connectors.2"/>
+      <connectors name="RESET" connectedTo="/71/@parts.9/@connectors.5"/>
+      <connectors name="RESET" connectedTo="/71/@parts.9/@connectors.4"/>
+    </parts>
+    <parts partId="18644090" title="JeeNode wireless microcontroller">
+      <connectors name="RST" connectedTo="/71/@parts.10/@connectors.1"/>
+      <connectors name="RST" connectedTo="/71/@parts.10/@connectors.0"/>
+      <connectors name="TXD" connectedTo="/71/@parts.10/@connectors.3"/>
+      <connectors name="TXD" connectedTo="/71/@parts.10/@connectors.2"/>
+      <connectors name="RXD" connectedTo="/71/@parts.10/@connectors.5"/>
+      <connectors name="RXD" connectedTo="/71/@parts.10/@connectors.4"/>
+    </parts>
+    <parts partId="18644030" title="PICAXE-08"/>
+    <parts partId="18644000" title="Parallax Propeller D40">
+      <connectors name="VSS" connectedTo="/71/@parts.12/@connectors.1"/>
+      <connectors name="VSS" connectedTo="/71/@parts.12/@connectors.0"/>
+    </parts>
+    <parts partId="18643690" title="BASIC Stamp 2 sx">
+      <connectors name="P2" connectedTo="/71/@parts.3/@connectors.0"/>
+      <connectors name="P1" connectedTo="/71/@parts.3/@connectors.1"/>
+      <connectors name="VSS" connectedTo="/71/@parts.13/@connectors.3"/>
+      <connectors name="VSS" connectedTo="/71/@parts.13/@connectors.2"/>
+      <connectors name="P14" connectedTo="/71/@parts.3/@connectors.2"/>
+      <connectors name="P13" connectedTo="/71/@parts.3/@connectors.3"/>
+    </parts>
+    <parts partId="18642920" title="mbed">
+      <connectors name="pin7" connectedTo="/71/@parts.2/@connectors.0"/>
+      <connectors name="pin6" connectedTo="/71/@parts.2/@connectors.1"/>
+      <connectors name="Vin" connectedTo="/71/@parts.2/@connectors.2"/>
+    </parts>
+    <parts partId="18642470" title="RaspIO Duino">
+      <connectors name="pin29" connectedTo="/71/@parts.15/@connectors.1"/>
+      <connectors name="pin30" connectedTo="/71/@parts.15/@connectors.0"/>
+      <connectors name="pin26" connectedTo="/71/@parts.15/@connectors.3"/>
+      <connectors name="pin25" connectedTo="/71/@parts.15/@connectors.2"/>
+      <connectors name="pin24" connectedTo="/71/@parts.15/@connectors.5"/>
+      <connectors name="pin23" connectedTo="/71/@parts.15/@connectors.4"/>
+      <connectors name="pin8" connectedTo="/71/@parts.15/@connectors.7"/>
+      <connectors name="pin7" connectedTo="/71/@parts.15/@connectors.6"/>
+      <connectors name="pin6" connectedTo="/71/@parts.15/@connectors.9"/>
+      <connectors name="pin5" connectedTo="/71/@parts.15/@connectors.8"/>
+      <connectors name="pin2" connectedTo="/71/@parts.15/@connectors.11"/>
+      <connectors name="pin1" connectedTo="/71/@parts.15/@connectors.10"/>
+      <connectors name="pin20" connectedTo="/71/@parts.15/@connectors.13"/>
+      <connectors name="pin19" connectedTo="/71/@parts.15/@connectors.12"/>
+      <connectors name="pin18" connectedTo="/71/@parts.15/@connectors.15"/>
+      <connectors name="pin17" connectedTo="/71/@parts.15/@connectors.14"/>
+      <connectors name="pin14" connectedTo="/71/@parts.15/@connectors.17"/>
+      <connectors name="pin13" connectedTo="/71/@parts.15/@connectors.16"/>
+      <connectors name="pin12" connectedTo="/71/@parts.15/@connectors.19"/>
+      <connectors name="pin11" connectedTo="/71/@parts.15/@connectors.18"/>
+      <connectors name="pin89" connectedTo="/71/@parts.15/@connectors.21"/>
+      <connectors name="pin88" connectedTo="/71/@parts.15/@connectors.20"/>
+      <connectors name="pin87" connectedTo="/71/@parts.15/@connectors.23"/>
+      <connectors name="pin86" connectedTo="/71/@parts.15/@connectors.22"/>
+      <connectors name="pin83" connectedTo="/71/@parts.15/@connectors.25"/>
+      <connectors name="pin82" connectedTo="/71/@parts.15/@connectors.24"/>
+      <connectors name="pin81" connectedTo="/71/@parts.15/@connectors.27"/>
+      <connectors name="pin80" connectedTo="/71/@parts.15/@connectors.26"/>
+      <connectors name="CE0" connectedTo="/71/@parts.15/@connectors.29"/>
+      <connectors name="GPIO8" connectedTo="/71/@parts.15/@connectors.28"/>
+      <connectors name="GPIO22" connectedTo="/71/@parts.15/@connectors.31"/>
+      <connectors name="GPIO_22" connectedTo="/71/@parts.15/@connectors.30"/>
+      <connectors name="GPIO27" connectedTo="/71/@parts.15/@connectors.33"/>
+      <connectors name="GPIO_21/27" connectedTo="/71/@parts.15/@connectors.32"/>
+      <connectors name="GPIO3" connectedTo="/71/@parts.15/@connectors.35"/>
+      <connectors name="GPIO_SCL" connectedTo="/71/@parts.15/@connectors.34"/>
+      <connectors name="pin77" connectedTo="/71/@parts.15/@connectors.37"/>
+      <connectors name="pin76" connectedTo="/71/@parts.15/@connectors.36"/>
+      <connectors name="GPIO_25" connectedTo="/71/@parts.15/@connectors.39"/>
+      <connectors name="GPIO25" connectedTo="/71/@parts.15/@connectors.38"/>
+      <connectors name="pin75" connectedTo="/71/@parts.15/@connectors.41"/>
+      <connectors name="pin74" connectedTo="/71/@parts.15/@connectors.40"/>
+      <connectors name="GPIO_24" connectedTo="/71/@parts.15/@connectors.43"/>
+      <connectors name="GPIO24" connectedTo="/71/@parts.15/@connectors.42"/>
+      <connectors name="GPIO_23" connectedTo="/71/@parts.15/@connectors.45"/>
+      <connectors name="GPIO23" connectedTo="/71/@parts.15/@connectors.44"/>
+      <connectors name="pin71" connectedTo="/71/@parts.15/@connectors.47"/>
+      <connectors name="pin70" connectedTo="/71/@parts.15/@connectors.46"/>
+      <connectors name="GPIO_18" connectedTo="/71/@parts.15/@connectors.49"/>
+      <connectors name="GPIO18" connectedTo="/71/@parts.15/@connectors.48"/>
+      <connectors name="pin69" connectedTo="/71/@parts.15/@connectors.51"/>
+      <connectors name="pin68" connectedTo="/71/@parts.15/@connectors.50"/>
+      <connectors name="pin65" connectedTo="/71/@parts.15/@connectors.53"/>
+      <connectors name="pin64" connectedTo="/71/@parts.15/@connectors.52"/>
+      <connectors name="pin63" connectedTo="/71/@parts.15/@connectors.55"/>
+      <connectors name="pin62" connectedTo="/71/@parts.15/@connectors.54"/>
+      <connectors name="rx(pi)" connectedTo="/71/@parts.15/@connectors.57"/>
+      <connectors name="GPIO15" connectedTo="/71/@parts.15/@connectors.56"/>
+      <connectors name="pin59" connectedTo="/71/@parts.15/@connectors.59"/>
+      <connectors name="pin58" connectedTo="/71/@parts.15/@connectors.58"/>
+      <connectors name="pin57" connectedTo="/71/@parts.15/@connectors.61"/>
+      <connectors name="pin56" connectedTo="/71/@parts.15/@connectors.60"/>
+      <connectors name="pin53" connectedTo="/71/@parts.15/@connectors.63"/>
+      <connectors name="pin52" connectedTo="/71/@parts.15/@connectors.62"/>
+      <connectors name="pin44" connectedTo="/71/@parts.15/@connectors.65"/>
+      <connectors name="pin43" connectedTo="/71/@parts.15/@connectors.64"/>
+      <connectors name="pin42" connectedTo="/71/@parts.15/@connectors.67"/>
+      <connectors name="pin41" connectedTo="/71/@parts.15/@connectors.66"/>
+      <connectors name="pin38" connectedTo="/71/@parts.15/@connectors.69"/>
+      <connectors name="pin37" connectedTo="/71/@parts.15/@connectors.68"/>
+      <connectors name="pin36" connectedTo="/71/@parts.15/@connectors.71"/>
+      <connectors name="pin35" connectedTo="/71/@parts.15/@connectors.70"/>
+      <connectors name="pin32" connectedTo="/71/@parts.15/@connectors.73"/>
+      <connectors name="pin31" connectedTo="/71/@parts.15/@connectors.72"/>
+    </parts>
+    <parts partId="18642530" title="Wiring USB Adapter">
+      <connectors name="GND" connectedTo="/71/@parts.3/@connectors.4"/>
+      <connectors name="5V" connectedTo="/71/@parts.3/@connectors.5"/>
+      <connectors name="RX" connectedTo="/71/@parts.3/@connectors.6"/>
+    </parts>
+    <parts partId="18642170" title="dquidio board"/>
+    <parts partId="18641740" title="blueIOT core">
+      <connectors name="GND" connectedTo="/71/@parts.18/@connectors.1"/>
+      <connectors name="GND" connectedTo="/71/@parts.18/@connectors.0"/>
+    </parts>
+    <parts partId="18641520" title="pinocc.io scout">
+      <connectors name="VBAT-" connectedTo="/71/@parts.19/@connectors.1"/>
+      <connectors name="GND" connectedTo="/71/@parts.19/@connectors.0"/>
+    </parts>
+    <parts partId="18641650" title="Adafruit Atmega32u4 Breakout Board"/>
+    <parts partId="18641620" title="Teensy 3.1">
+      <connectors name="GND" connectedTo="/71/@parts.21/@connectors.1"/>
+      <connectors name="GND" connectedTo="/71/@parts.21/@connectors.0"/>
+    </parts>
+    <parts partId="18641490" title="LightBlue Bean">
+      <connectors name="GND" connectedTo="/71/@parts.22/@connectors.1"/>
+      <connectors name="GND" connectedTo="/71/@parts.22/@connectors.0"/>
+    </parts>
+    <parts partId="18641430" title="TI Launchpad MSP430G2"/>
+    <parts partId="18645940" title="96boards Consumer Edition">
+      <connectors name="SYS_DCIN" connectedTo="/71/@parts.24/@connectors.1"/>
+      <connectors name="SYS_DCIN" connectedTo="/71/@parts.24/@connectors.0"/>
+    </parts>
+    <parts partId="18645820" title="Intel Galileo Gen2">
+      <connectors name="RESET" connectedTo="/71/@parts.25/@connectors.1"/>
+      <connectors name="RESET" connectedTo="/71/@parts.25/@connectors.0"/>
+      <connectors name="ICSP MOSI" connectedTo="/71/@parts.25/@connectors.3"/>
+      <connectors name="D11 PWM/MOSI" connectedTo="/71/@parts.25/@connectors.2"/>
+      <connectors name="ICSP SCK" connectedTo="/71/@parts.25/@connectors.5"/>
+      <connectors name="D13/SCK" connectedTo="/71/@parts.25/@connectors.4"/>
+      <connectors name="5V" connectedTo="/71/@parts.25/@connectors.7"/>
+      <connectors name="5V" connectedTo="/71/@parts.25/@connectors.6"/>
+      <connectors name="ICSP MISO" connectedTo="/71/@parts.25/@connectors.9"/>
+      <connectors name="D12/MISO" connectedTo="/71/@parts.25/@connectors.8"/>
+      <connectors name="A5/SCL" connectedTo="/71/@parts.25/@connectors.11"/>
+      <connectors name="A5/SCL" connectedTo="/71/@parts.25/@connectors.10"/>
+      <connectors name="A4/SDA" connectedTo="/71/@parts.25/@connectors.13"/>
+      <connectors name="A4/SDA" connectedTo="/71/@parts.25/@connectors.12"/>
+    </parts>
+    <parts partId="18645790" title="Arduino Yun">
+      <connectors name="RESET" connectedTo="/71/@parts.26/@connectors.1"/>
+      <connectors name="RESET" connectedTo="/71/@parts.26/@connectors.0"/>
+      <connectors name="ICSP MOSI" connectedTo="/71/@parts.26/@connectors.3"/>
+      <connectors name="D11 PWM/MOSI" connectedTo="/71/@parts.26/@connectors.2"/>
+      <connectors name="ICSP SCK" connectedTo="/71/@parts.26/@connectors.5"/>
+      <connectors name="D13/SCK" connectedTo="/71/@parts.26/@connectors.4"/>
+      <connectors name="5V" connectedTo="/71/@parts.26/@connectors.7"/>
+      <connectors name="5V" connectedTo="/71/@parts.26/@connectors.6"/>
+      <connectors name="D3 PWM" connectedTo="/71/@parts.26/@connectors.9"/>
+      <connectors name="D3/SCL" connectedTo="/71/@parts.26/@connectors.8"/>
+      <connectors name="D2" connectedTo="/71/@parts.26/@connectors.11"/>
+      <connectors name="D2/SDA" connectedTo="/71/@parts.26/@connectors.10"/>
+      <connectors name="ICSP MISO" connectedTo="/71/@parts.26/@connectors.13"/>
+      <connectors name="D12/MISO" connectedTo="/71/@parts.26/@connectors.12"/>
+    </parts>
+    <parts partId="18644060" title="GogoBoard 4.0">
+      <connectors name="SDA" connectedTo="/71/@parts.27/@connectors.1"/>
+      <connectors name="SDA" connectedTo="/71/@parts.27/@connectors.0"/>
+      <connectors name="SCL" connectedTo="/71/@parts.27/@connectors.3"/>
+      <connectors name="SCL" connectedTo="/71/@parts.27/@connectors.2"/>
+    </parts>
+    <parts partId="18641680" title="Netduino Plus2"/>
+    <parts partId="18641460" title="Spark Core (v1.0)">
+      <connectors name="GND" connectedTo="/71/@parts.29/@connectors.1"/>
+      <connectors name="GND" connectedTo="/71/@parts.29/@connectors.0"/>
+    </parts>
+    <parts partId="18641400" title="Arduino Uno (Rev3)">
+      <connectors name="A5/SCL" connectedTo="/71/@parts.30/@connectors.1"/>
+      <connectors name="A5/SCL" connectedTo="/71/@parts.30/@connectors.0"/>
+      <connectors name="A4/SDA" connectedTo="/71/@parts.30/@connectors.3"/>
+      <connectors name="A4/SDA" connectedTo="/71/@parts.30/@connectors.2"/>
+    </parts>
+  </Circuit>
+</xmi:XMI>

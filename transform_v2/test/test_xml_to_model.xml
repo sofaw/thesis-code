@@ -20,6 +20,26 @@
 			<model ref="ALL_OUTPUTS_XML" as="XML"/>
 			<model ref="ALL_OUTPUTS_OUT_FOR_TRANSFORM" as="OUT"/>
 		</epsilon.etl>
+	<!-- Transformation applied to netlist containing only boards -->
+		<epsilon.xml.loadModel name="ALL_BOARDS_XML"
+			file="input_xml/All_Boards_netlist.xml" read="true" store="false" />
+		<epsilon.emf.loadModel name="ALL_BOARDS_OUT_FOR_TRANSFORM"
+			modelfile="transformation_output/all_boards.model" metamodelfile="../metamodel_v2.ecore"
+			read="false" store="true" />
+		<epsilon.etl src="../xml_to_model.etl">
+			<model ref="ALL_BOARDS_XML" as="XML"/>
+			<model ref="ALL_BOARDS_OUT_FOR_TRANSFORM" as="OUT"/>
+		</epsilon.etl>
+	<!-- Transformation applied to netlist containing only 'other' components -->
+		<epsilon.xml.loadModel name="ALL_OTHERS_XML"
+			file="input_xml/All_Other_Except_ICs_and_Textile_netlist.xml" read="true" store="false" />
+		<epsilon.emf.loadModel name="ALL_OTHERS_OUT_FOR_TRANSFORM"
+			modelfile="transformation_output/all_other.model" metamodelfile="../metamodel_v2.ecore"
+			read="false" store="true" />
+		<epsilon.etl src="../xml_to_model.etl">
+			<model ref="ALL_OTHERS_XML" as="XML"/>
+			<model ref="ALL_OTHERS_OUT_FOR_TRANSFORM" as="OUT"/>
+		</epsilon.etl>
 	<!-- Load results of transformations for validation -->
 		<epsilon.emf.loadModel name="ALL_INPUTS_RESULT"
 			modelfile="transformation_output/all_inputs.model" metamodelfile="../metamodel_v2.ecore"
@@ -27,9 +47,18 @@
 		<epsilon.emf.loadModel name="ALL_OUTPUTS_RESULT"
 			modelfile="transformation_output/all_outputs.model" metamodelfile="../metamodel_v2.ecore"
 			read="true" store="false" />
+		<epsilon.emf.loadModel name="ALL_BOARDS_RESULT"
+			modelfile="transformation_output/all_boards.model" metamodelfile="../metamodel_v2.ecore"
+			read="true" store="false" />
+		<epsilon.emf.loadModel name="ALL_OTHERS_RESULT"
+			modelfile="transformation_output/all_other.model" metamodelfile="../metamodel_v2.ecore"
+			read="true" store="false" />
+	<!-- Run test cases -->
 		<epsilon.eunit src="test_xml_to_model.eunit">
 			<model ref="ALL_INPUTS_RESULT"/>
 			<model ref="ALL_OUTPUTS_RESULT"/>
+			<model ref="ALL_BOARDS_RESULT"/>
+			<model ref="ALL_OTHERS_RESULT"/>
 		</epsilon.eunit>
 	</target>
 </project>

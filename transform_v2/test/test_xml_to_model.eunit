@@ -11,3 +11,15 @@ $onlyWith Map {"" = "ALL_OUTPUTS_RESULT"}
 operation allOutputPartsClassifiedCorrectly() {
   assertTrue(allPartsHaveLabel(Type#Output));
 }
+
+$onlyWith Map {"" = "ALL_BOARDS_RESULT"}
+@test
+operation allBoardsClassifiedCorrectly() {
+  assertTrue(allPartsHaveLabel(Type#Board));
+}
+
+$onlyWith Map {"" = "ALL_OTHERS_RESULT"}
+@test
+operation allOthersClassifiedCorrectly() {
+  assertTrue(allPartsHaveLabel(Type#Other));
+}
