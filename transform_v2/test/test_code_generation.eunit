@@ -1,4 +1,4 @@
-$onlyWith Map {"" = "LED_OUT"}
+$onlyWith Map {"" = "LED_OUT_READ"}
 @test
 operation testNumParts() {
   Part.all.size.println();
