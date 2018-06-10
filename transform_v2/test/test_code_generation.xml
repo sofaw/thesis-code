@@ -1,9 +1,8 @@
 <project>
 	<target name="run-tests" depends="transform-and-gen">
 		<runGen srcfile="Potentiometer_LED_netlist.xml" srcmodel="LED_XML"
-			transformfile="led.model" transformmodelwriteonly="LED_OUT" 
-			transformmodelreadonly="LED_OUT_READ"
-			targetfile="led.cpp" />
+			transformfile="led.model" transformmodelwriteonly="LED_OUT"
+			transformmodelreadonly="LED_OUT_READ" targetfile="led.cpp" />
 
 		<epsilon.eunit src="test_code_generation.eunit">
 			<model ref="LED_XML" />
@@ -21,7 +20,7 @@
 			<attribute name="targetfile" />
 
 			<sequential>
-			    
+
 				<epsilon.xml.loadModel name="@{srcmodel}"
 					file="input_xml/@{srcfile}" read="true" store="false" />
 				<epsilon.emf.loadModel name="@{transformmodelwriteonly}"
