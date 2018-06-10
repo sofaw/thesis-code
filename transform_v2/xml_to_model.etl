@@ -1,5 +1,10 @@
 pre {
   "Starting Transformation".println();
+  
+  delete OUT!Circuit.all; // Solve issues with successive transformations
+  delete OUT!Connector.all;
+  delete OUT!Part.all;
+  
   var constructedPartIds : Sequence;
   var arduinoTitle = "Arduino Uno (Rev3)";
   
@@ -170,8 +175,6 @@ operation String checkContainsOneOfSet(strings : Set<String>) : Boolean {
 
 post {
   // Put parts under a root Circuit element
-
-  delete OUT!Circuit.all; // Solve issues with successive transformations
   var circuit : new OUT!Circuit;  
   circuit.parts.addAll(OUT!Part.all);
   
