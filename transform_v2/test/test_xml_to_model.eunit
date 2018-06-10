@@ -1,33 +1,39 @@
 import "test_queries.eol";
 
-$onlyWith Map {"" = "ALL_INPUTS_READ"}
+$onlyWith Map {"" = "ALL_INPUTS_OUT"}
 @test
 operation allInputPartsClassifiedCorrectly() {
   assertTrue(allPartsHaveLabel(Type#Input));
 }
 
-$onlyWith Map {"" = "ALL_OUTPUTS_READ"}
+$onlyWith Map {"" = "ALL_OUTPUTS_OUT"}
 @test
 operation allOutputPartsClassifiedCorrectly() {
   assertTrue(allPartsHaveLabel(Type#Output));
 }
 
-$onlyWith Map {"" = "ALL_BOARDS_READ"}
+$onlyWith Map {"" = "ALL_BOARDS_OUT"}
 @test
 operation allBoardsClassifiedCorrectly() {
   assertTrue(allPartsHaveLabel(Type#Board));
 }
 
-$onlyWith Map {"" = "ALL_OTHERS_READ"}
+$onlyWith Map {"" = "ALL_OTHERS_OUT"}
 @test
 operation allOthersClassifiedCorrectly() {
   assertTrue(allPartsHaveLabel(Type#Other));
   getNumParts().println();
 }
 
+$onlyWith Map {"" = "LED_OUT"}
+@test
+operation testttt() {
+  Part.all.size().println();
+}
+
 /*$onlyWith Map {"" = "BUTTON_OUT"}
 @test
 operation checkConnections() {
   getNumParts().println();
-  //assertTrue(getNumParts() == 4);
+  assertTrue(getNumParts() == 4);
 }*/

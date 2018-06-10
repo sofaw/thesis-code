@@ -1,38 +1,38 @@
 <project>
 	<target name="run-tests" depends="transform">
-		<runTransform srcfile="All_Core_Input_Parts_netlist.xml" srcmodel="ALL_INPUTS_XML" transformfile="all_inputs.model" transformmodelwriteonly="ALL_INPUTS_WRITE" transformmodelreadonly="ALL_INPUTS_READ" />
-		<runTransform srcfile="All_Core_Output_Parts_netlist.xml" srcmodel="ALL_OUTPUTS_XML" transformfile="all_outputs.model" transformmodelwriteonly="ALL_OUTPUTS_WRITE" transformmodelreadonly="ALL_OUTPUTS_READ" />
-		<runTransform srcfile="All_Boards_netlist.xml" srcmodel="ALL_BOARDS_XML" transformfile="all_boards.model" transformmodelwriteonly="ALL_BOARDS_WRITE" transformmodelreadonly="ALL_BOARDS_READ" />
-		<runTransform srcfile="All_Other_Except_ICs_and_Textile_netlist.xml" srcmodel="ALL_OTHERS_XML" transformfile="all_other.model" transformmodelwriteonly="ALL_OTHERS_WRITE" transformmodelreadonly="ALL_OTHERS_READ" />
+		<runTransform srcfile="All_Core_Input_Parts_netlist.xml" srcmodel="ALL_INPUTS_XML" transformfile="all_inputs.model" transformmodel="ALL_INPUTS_OUT" />
+		<runTransform srcfile="All_Core_Output_Parts_netlist.xml" srcmodel="ALL_OUTPUTS_XML" transformfile="all_outputs.model" transformmodel="ALL_OUTPUTS_OUT" />
+		<runTransform srcfile="All_Boards_netlist.xml" srcmodel="ALL_BOARDS_XML" transformfile="all_boards.model" transformmodel="ALL_BOARDS_OUT" />
+		<runTransform srcfile="All_Other_Except_ICs_and_Textile_netlist.xml" srcmodel="ALL_OTHERS_XML" transformfile="all_others.model" transformmodel="ALL_OTHERS_OUT"/>
+		<runTransform srcfile="Potentiometer_LED_netlist.xml" srcmodel="LED_XML" transformfile="led.model" transformmodel="LED_OUT" />
+
 		<epsilon.eunit src="test_xml_to_model.eunit">
-			<model ref="ALL_INPUTS_READ" />
-			<model ref="ALL_OUTPUTS_READ"/>
-			<model ref="ALL_BOARDS_READ"/>
-			<model ref="ALL_OTHERS_READ"/>
+			<model ref="ALL_INPUTS_OUT" />
+			<model ref="ALL_OUTPUTS_OUT" />
+			<model ref="ALL_BOARDS_OUT" />
+			<model ref="ALL_OTHERS_OUT" />
+			<model ref="LED_OUT" />
 		</epsilon.eunit>
-		<epsilon.disposeModels />
 	</target>
+
 	<target name="transform">
 		<macrodef name="runTransform">
 			<attribute name="srcfile" />
 			<attribute name="srcmodel" />
 			<attribute name="transformfile" />
-			<attribute name="transformmodelwriteonly" />
-			<attribute name="transformmodelreadonly" />
+			<attribute name="transformmodel"/>
 
 			<sequential>
-
+				
 				<epsilon.xml.loadModel name="@{srcmodel}" file="input_xml/@{srcfile}" read="true" store="false" />
-				<epsilon.emf.loadModel name="@{transformmodelwriteonly}" modelfile="transformation_output/@{transformfile}" metamodelfile="../metamodel_v2.ecore" read="false" store="true" />
+				<epsilon.emf.loadModel name="@{transformmodel}" modelfile="transformation_output/@{transformfile}" metamodelfile="../metamodel_v2.ecore" read="true" store="true" />
 
 				<!-- Apply transformation -->
 				<epsilon.etl src="../xml_to_model.etl">
 					<model ref="@{srcmodel}" as="XML" />
-					<model ref="@{transformmodelwriteonly}" as="OUT" />
+					<model ref="@{transformmodel}" as="OUT" />
 				</epsilon.etl>
 
-				<!-- Load transformation output for queries -->
-				<epsilon.emf.loadModel name="@{transformmodelreadonly}" modelfile="transformation_output/@{transformfile}" metamodelfile="../metamodel_v2.ecore" read="true" store="false" />
 			</sequential>
 		</macrodef>
 	</target>
