@@ -1,0 +1,40 @@
+<project>
+	<target name="run-tests" depends="transform-and-gen">
+		<runGen srcfile="Potentiometer_LED_netlist.xml" srcmodel="LED_XML"
+			transformfile="led.model" transformmodel="LED_OUT" targetfile="led.cpp" />
+
+		<epsilon.eunit src="test_code_generation.eunit">
+			<model ref="LED_XML" />
+			<model ref="LED_OUT" />
+		</epsilon.eunit>
+	</target>
+
+	<target name="transform-and-gen">
+		<macrodef name="runGen">
+			<attribute name="srcfile" />
+			<attribute name="srcmodel" />
+			<attribute name="transformfile" />
+			<attribute name="transformmodel" />
+			<attribute name="targetfile" />
+
+			<sequential>
+				<epsilon.xml.loadModel name="@{srcmodel}"
+					file="input_xml/@{srcfile}" read="true" store="false" />
+				<epsilon.emf.loadModel name="@{transformmodel}"
+					modelfile="transformation_output/@{transformfile}" metamodelfile="../metamodel_v2.ecore"
+					read="false" store="false" />
+
+				<!-- Apply transformation -->
+				<epsilon.etl src="../xml_to_model.etl">
+					<model ref="@{srcmodel}" as="XML" />
+					<model ref="@{transformmodel}" as="OUT" />
+				</epsilon.etl>
+
+				<!-- Generate code -->
+				<epsilon.egl src="../generate_skeleton.egl" target="code_generation_output/@{targetfile}">
+					<model ref="@{transformmodel}" />
+				</epsilon.egl>
+			</sequential>
+		</macrodef>
+	</target>
+</project>

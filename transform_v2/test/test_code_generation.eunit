@@ -1,0 +1,5 @@
+$onlyWith Map {"" = "LED_OUT"}
+@test
+operation testNumParts() {
+  Part.all.size.println();
+}
