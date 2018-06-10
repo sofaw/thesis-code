@@ -1,0 +1,68 @@
+operation generatePinVariables() : Map<String, Integer> {
+  var connections = getBoardConnections();
+  
+  var pinVariables : Map<String, Integer>;
+  for(boardCon in connections.keySet()) {
+    var boardPin = new Native("java.lang.String")(boardCon.name);
+    
+    // Check it's not ground or volts
+    if(not ("V".isSubstringOf(boardPin) or "GND".isSubstringOf(boardPin))) {
+      boardPin = boardPin.replaceAll("\\D+",""); // Remove non-numeric characters
+      if(not boardPin.isEmpty()) {
+        var component = connections.get(boardCon).parent;
+        var componentStr = new Native("java.lang.String")(component.title);
+        componentStr = componentStr.replaceAll("\\s",""); // Remove spaces
+        componentStr = componentStr.replaceAll("[^a-zA-Z0-9]", ""); // Remove non-alphabetic characters
+        if(component.type == Type#Input) {
+          componentStr = componentStr + "ReadPin";
+        } else {
+          componentStr = componentStr + "WritePin";
+        }
+        pinVariables.put(componentStr, boardPin.asInteger());
+      }
+    }
+
+  }
+  return pinVariables;
+}
+
+operation getBoardConnections() : Map<Connector, Connector> {
+  var board = Part.all.selectOne(p | p.type == Type#Board);
+
+  var connections : Map<Connector, Connector>;
+
+  for (connector in board.connectors) {
+    var sensor = bfsSensors(connector);
+    if(sensor <> null) {
+     connections.put(connector, sensor);
+    }
+  }
+  
+  return connections;
+}
+
+operation bfsSensors(start : Connector) : Connector {
+  var queue = new Native("java.util.LinkedList");
+  queue.add(start);
+  var visited : Set<Connector>;
+  
+  while(not queue.isEmpty()) {
+    var con = queue.removeFirst();
+    if(not visited.includes(con)) {
+      visited.add(con);
+      
+      if(con.parent.type == Type#Input or con.parent.type == Type#Output) {
+        return con;
+      }
+      queue.add(con.connectedTo);
+      
+      if(not (con.parent.type == Type#Board)) {
+        for(c in con.parent.connectors) {
+          queue.add(c);
+        }
+      }
+    }
+  }
+  
+  return null;
+}

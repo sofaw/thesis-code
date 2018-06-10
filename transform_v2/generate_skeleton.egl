@@ -1,3 +1,9 @@
+[%import "model_generation_queries.eol";%]
+[%var pinVariables = generatePinVariables();%]  
+[%for(pinName in pinVariables.keySet()) {%]
+int [%=pinName%] = [%=pinVariables.get(pinName)%];  
+[%}%]
+
 void setup() {
 }
 
