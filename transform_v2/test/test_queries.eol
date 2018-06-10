@@ -7,3 +7,7 @@ operation allPartsHaveLabel(label : Any) : Boolean { // Need to use 'Any' label 
   }
   return true;
 }
+
+operation getNumParts() : Integer {
+  return Part.all.size();
+}

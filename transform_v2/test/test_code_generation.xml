@@ -5,7 +5,6 @@
 			transformmodelreadonly="LED_OUT_READ" targetfile="led.cpp" />
 
 		<epsilon.eunit src="test_code_generation.eunit">
-			<model ref="LED_XML" />
 			<model ref="LED_OUT_READ" />
 		</epsilon.eunit>
 	</target>
