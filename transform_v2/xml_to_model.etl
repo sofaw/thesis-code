@@ -107,6 +107,14 @@ rule xmlNet2ModelConnectors
   
 }
 
+/*rule netlist2Circuit
+  transform x : XML!t_netlist
+  to c : OUT!Circuit {
+  
+  c.parts.addAll(OUT!Part.all);
+  
+}*/
+
 operation createConnectors(i : Integer, c : OUT!Connector, connectors : Sequence<XML!Connector>) {
   var con1 = connectors.get(i);
   var con2 = connectors.get(i+1);
@@ -162,6 +170,8 @@ operation String checkContainsOneOfSet(strings : Set<String>) : Boolean {
 
 post {
   // Put parts under a root Circuit element
+
+  delete OUT!Circuit.all; // Solve issues with successive transformations
   var circuit : new OUT!Circuit;  
   circuit.parts.addAll(OUT!Part.all);
   
