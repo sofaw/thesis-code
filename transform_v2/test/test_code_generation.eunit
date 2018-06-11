@@ -1,5 +1,66 @@
-$onlyWith Map {"" = "LED_OUT_READ"}
+import "../model_generation_queries.eol";
+
+$onlyWith Map {"" = "LED_OUT"}
 @test
-operation testNumParts() {
-  Part.all.size.println();
+operation testCorrectPinsIdentifiedLED() {
+  var pins = generatePinVariables().values();
+  var expectedPins : Sequence<Integer>;
+  expectedPins.add(0);
+  expectedPins.add(13);
+  assertTrue(pins.includesAll(expectedPins));
+  assertTrue(pins.size() == expectedPins.size());
+}
+
+$onlyWith Map {"" = "BUTTON_OUT"}
+@test
+operation testCorrectPinsIdentifiedButton() {
+  var pins = generatePinVariables().values();
+  var expectedPins : Sequence<Integer>;
+  expectedPins.add(2);
+  expectedPins.add(13);
+  assertTrue(pins.includesAll(expectedPins));
+  assertTrue(pins.size() == expectedPins.size());
+}
+
+// Tests multiple of same component
+$onlyWith Map {"" = "PA_OUT"}
+@test
+operation testCorrectPinsIdentifiedPA() {
+  var pins = generatePinVariables().values();
+  var expectedPins : Sequence<Integer>;
+  expectedPins.add(0);
+  expectedPins.add(1);
+  expectedPins.add(3);
+  expectedPins.add(4);
+  expectedPins.add(5);
+  expectedPins.add(6);
+  expectedPins.add(7);
+  expectedPins.add(8);
+  expectedPins.add(9);
+  expectedPins.add(10);
+  expectedPins.add(11);
+  expectedPins.add(12);
+  assertTrue(pins.includesAll(expectedPins));
+  assertTrue(pins.size() == expectedPins.size());
+}
+
+// Test component w. multiple inputs/outputs
+$onlyWith Map {"" = "7_OUT"}
+@test
+operation testCorrectPinsIdentified7Segment() {
+  var pins = generatePinVariables().values();
+  var expectedPins : Sequence<Integer>;
+  expectedPins.add(2);
+  expectedPins.add(3);
+  expectedPins.add(4);
+  expectedPins.add(5);
+  expectedPins.add(6);
+  expectedPins.add(7);
+  expectedPins.add(8);
+  expectedPins.add(10);
+  expectedPins.add(11);
+  expectedPins.add(12);
+  expectedPins.add(13);
+  assertTrue(pins.includesAll(expectedPins));
+  assertTrue(pins.size() == expectedPins.size());
 }

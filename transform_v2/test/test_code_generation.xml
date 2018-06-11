@@ -1,11 +1,26 @@
 <project>
 	<target name="run-tests" depends="transform-and-gen">
 		<runGen srcfile="Potentiometer_LED_netlist.xml" srcmodel="LED_XML"
-			transformfile="led.model" transformmodelwriteonly="LED_OUT"
-			transformmodelreadonly="LED_OUT_READ" targetfile="led.cpp" />
+			transformfile="led.model" transformmodel="LED_OUT"
+			targetfile="led.cpp" />
 
+		<runGen srcfile="Button_netlist.xml" srcmodel="BUTTON_XML"
+			transformfile="button.model" transformmodel="BUTTON_OUT"
+			targetfile="button.cpp" />
+		
+		<runGen srcfile="Parking-Assistant_netlist.xml" srcmodel="PA_XML"
+			transformfile="pa.model" transformmodel="PA_OUT"
+			targetfile="pa.cpp" />
+		
+		<runGen srcfile="7Segment_direct_netlist.xml" srcmodel="7_XML"
+			transformfile="seven_seg.model" transformmodel="7_OUT"
+			targetfile="seven_seg.cpp" />
+		
 		<epsilon.eunit src="test_code_generation.eunit">
-			<model ref="LED_OUT_READ" />
+			<model ref="LED_OUT"/>
+			<model ref="BUTTON_OUT"/>
+			<model ref="PA_OUT"/>
+			<model ref="7_OUT"/>
 		</epsilon.eunit>
 	</target>
 
@@ -14,33 +29,32 @@
 			<attribute name="srcfile" />
 			<attribute name="srcmodel" />
 			<attribute name="transformfile" />
-			<attribute name="transformmodelwriteonly" />
-			<attribute name="transformmodelreadonly" />
+			<attribute name="transformmodel"/>
 			<attribute name="targetfile" />
 
 			<sequential>
 
 				<epsilon.xml.loadModel name="@{srcmodel}"
 					file="input_xml/@{srcfile}" read="true" store="false" />
-				<epsilon.emf.loadModel name="@{transformmodelwriteonly}"
+				<epsilon.emf.loadModel name="@{transformmodel}"
 					modelfile="transformation_output/@{transformfile}" metamodelfile="../metamodel_v2.ecore"
 					read="false" store="true" />
 
 				<!-- Apply transformation -->
 				<epsilon.etl src="../xml_to_model.etl">
 					<model ref="@{srcmodel}" as="XML" />
-					<model ref="@{transformmodelwriteonly}" as="OUT" />
+					<model ref="@{transformmodel}" as="OUT" />
 				</epsilon.etl>
-
-				<!-- Load transformation output for queries -->
-				<epsilon.emf.loadModel name="@{transformmodelreadonly}"
-					modelfile="transformation_output/@{transformfile}" metamodelfile="../metamodel_v2.ecore"
-					read="true" store="false" />
 
 				<!-- Generate code -->
 				<epsilon.egl src="../generate_skeleton.egl" target="code_generation_output/@{targetfile}">
-					<model ref="@{transformmodelreadonly}" />
+					<model ref="@{transformmodel}" />
 				</epsilon.egl>
+				
+				<!-- Need to read here in case this is the first time file is created (read=false above) -->
+				<epsilon.emf.loadModel name="@{transformmodel}"
+					modelfile="transformation_output/@{transformfile}" metamodelfile="../metamodel_v2.ecore"
+					read="true" store="false" />
 			</sequential>
 		</macrodef>
 	</target>

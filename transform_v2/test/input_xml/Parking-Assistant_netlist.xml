@@ -1,0 +1,312 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Fritzing (http://www.fritzing.org/) -->
+<netlist sketch="Parking-Assistant.fzz" date="Fri Jun 8 19:31:31 2018">
+ <net>
+  <connector name="Vcc" id="connector2">
+   <part label="J2" title="Infrared Proximity Sensor" id="18454220"/>
+  </connector>
+  <connector name="GND" id="connector1">
+   <part label="J2" title="Infrared Proximity Sensor" id="18454220"/>
+  </connector>
+  <connector name="cathode" id="connector0">
+   <part label="LED9" title="Red (633nm) LED" id="17290770"/>
+  </connector>
+  <connector name="GND" id="connector1">
+   <part label="J1" title="Infrared Proximity Sensor" id="18454190"/>
+  </connector>
+  <connector name="Vcc" id="connector2">
+   <part label="J1" title="Infrared Proximity Sensor" id="18454190"/>
+  </connector>
+  <connector name="cathode" id="connector0">
+   <part label="LED10" title="Red (633nm) LED" id="17290780"/>
+  </connector>
+  <connector name="5V" id="connector87">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+  <connector name="cathode" id="connector0">
+   <part label="LED7" title="Red (633nm) LED" id="17290750"/>
+  </connector>
+  <connector name="GND" id="connector57">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+  <connector name="GND" id="connector88">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+  <connector name="GND" id="connector89">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+  <connector name="cathode" id="connector0">
+   <part label="LED13" title="Yellow (585nm) LED" id="17290810"/>
+  </connector>
+  <connector name="cathode" id="connector0">
+   <part label="LED8" title="Red (633nm) LED" id="17290760"/>
+  </connector>
+  <connector name="cathode" id="connector0">
+   <part label="LED12" title="Yellow (585nm) LED" id="17290800"/>
+  </connector>
+  <connector name="cathode" id="connector0">
+   <part label="LED16" title="Yellow (585nm) LED" id="17290840"/>
+  </connector>
+  <connector name="cathode" id="connector0">
+   <part label="LED11" title="Yellow (585nm) LED" id="17290790"/>
+  </connector>
+  <connector name="cathode" id="connector0">
+   <part label="LED15" title="Yellow (585nm) LED" id="17290830"/>
+  </connector>
+  <connector name="cathode" id="connector0">
+   <part label="LED14" title="Yellow (585nm) LED" id="17290820"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="A0" id="connector0">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+  <connector name="Vout" id="connector0">
+   <part label="J1" title="Infrared Proximity Sensor" id="18454190"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Vout" id="connector0">
+   <part label="J2" title="Infrared Proximity Sensor" id="18454220"/>
+  </connector>
+  <connector name="A1" id="connector1">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Pin 1" id="connector1">
+   <part label="220Ω10" title="220Ω Resistor" id="17290940"/>
+  </connector>
+  <connector name="D12/MISO" id="connector55">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Pin 1" id="connector1">
+   <part label="220Ω9" title="220Ω Resistor" id="17290930"/>
+  </connector>
+  <connector name="D11 PWM/MOSI" id="connector54">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Pin 1" id="connector1">
+   <part label="220Ω8" title="220Ω Resistor" id="17290920"/>
+  </connector>
+  <connector name="D10 PWM/SS" id="connector53">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Pin 1" id="connector1">
+   <part label="220Ω6" title="220Ω Resistor" id="17290900"/>
+  </connector>
+  <connector name="D9 PWM" id="connector52">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Pin 1" id="connector1">
+   <part label="220Ω3" title="220Ω Resistor" id="17290870"/>
+  </connector>
+  <connector name="D4" id="connector65">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Pin 1" id="connector1">
+   <part label="220Ω2" title="220Ω Resistor" id="17290860"/>
+  </connector>
+  <connector name="D3 PWM" id="connector64">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Pin 1" id="connector1">
+   <part label="220Ω1" title="220Ω Resistor" id="17290850"/>
+  </connector>
+  <connector name="D5 PWM" id="connector66">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Pin 1" id="connector1">
+   <part label="220Ω4" title="220Ω Resistor" id="17290880"/>
+  </connector>
+  <connector name="D6 PWM" id="connector67">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Pin 1" id="connector1">
+   <part label="220Ω7" title="220Ω Resistor" id="17290910"/>
+  </connector>
+  <connector name="D8" id="connector51">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Pin 0" id="connector0">
+   <part label="220Ω3" title="220Ω Resistor" id="17290870"/>
+  </connector>
+  <connector name="anode" id="connector1">
+   <part label="LED10" title="Red (633nm) LED" id="17290780"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="anode" id="connector1">
+   <part label="LED13" title="Yellow (585nm) LED" id="17290810"/>
+  </connector>
+  <connector name="Pin 0" id="connector0">
+   <part label="220Ω5" title="220Ω Resistor" id="17290890"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Pin 0" id="connector0">
+   <part label="220Ω8" title="220Ω Resistor" id="17290920"/>
+  </connector>
+  <connector name="anode" id="connector1">
+   <part label="LED16" title="Yellow (585nm) LED" id="17290840"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Pin 1" id="connector1">
+   <part label="220Ω5" title="220Ω Resistor" id="17290890"/>
+  </connector>
+  <connector name="D7" id="connector68">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="anode" id="connector1">
+   <part label="LED14" title="Yellow (585nm) LED" id="17290820"/>
+  </connector>
+  <connector name="Pin 0" id="connector0">
+   <part label="220Ω7" title="220Ω Resistor" id="17290910"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Pin 0" id="connector0">
+   <part label="220Ω4" title="220Ω Resistor" id="17290880"/>
+  </connector>
+  <connector name="anode" id="connector1">
+   <part label="LED12" title="Yellow (585nm) LED" id="17290800"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Pin 0" id="connector0">
+   <part label="220Ω6" title="220Ω Resistor" id="17290900"/>
+  </connector>
+  <connector name="anode" id="connector1">
+   <part label="LED15" title="Yellow (585nm) LED" id="17290830"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Pin 0" id="connector0">
+   <part label="220Ω1" title="220Ω Resistor" id="17290850"/>
+  </connector>
+  <connector name="anode" id="connector1">
+   <part label="LED11" title="Yellow (585nm) LED" id="17290790"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Pin 0" id="connector0">
+   <part label="220Ω2" title="220Ω Resistor" id="17290860"/>
+  </connector>
+  <connector name="anode" id="connector1">
+   <part label="LED9" title="Red (633nm) LED" id="17290770"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="anode" id="connector1">
+   <part label="LED7" title="Red (633nm) LED" id="17290750"/>
+  </connector>
+  <connector name="Pin 0" id="connector0">
+   <part label="220Ω10" title="220Ω Resistor" id="17290940"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="Pin 0" id="connector0">
+   <part label="220Ω9" title="220Ω Resistor" id="17290930"/>
+  </connector>
+  <connector name="anode" id="connector1">
+   <part label="LED8" title="Red (633nm) LED" id="17290760"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="D2" id="connector63">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="D1/TX" id="connector62">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="D0/RX" id="connector61">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="3V3" id="connector86">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="A5/SCL" id="connector60">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+  <connector name="A5/SCL" id="connector5">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="RESET" id="connector85">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="ioref" id="connector84">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="A4/SDA" id="connector59">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+  <connector name="A4/SDA" id="connector4">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="AREF" id="connector58">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="D13/SCK" id="connector56">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="N/C" id="connector91">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="VIN" id="connector90">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="A3" id="connector3">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="A2" id="connector2">
+   <part label="Arduino1" title="Arduino Uno (Rev3)" id="18381660"/>
+  </connector>
+ </net>
+</netlist>
