@@ -25,7 +25,8 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/case_study_arduino/libraries/Servo/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/case_study_arduino/libraries/Wire}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/case_study_arduino/libraries/Wire/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/case_study_arduino/libraries/Adafruit_HTU21DF_Library}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/case_study_arduino/libraries/DHT_sensor_library}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/case_study_arduino/libraries/Adafruit_Unified_Sensor}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.cpp.sketch.input.868342102" name="CPP source files" superClass="io.sloeber.compiler.cpp.sketch.input"/>
 							</tool>
@@ -37,7 +38,8 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/case_study_arduino/libraries/Servo/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/case_study_arduino/libraries/Wire}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/case_study_arduino/libraries/Wire/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/case_study_arduino/libraries/Adafruit_HTU21DF_Library}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/case_study_arduino/libraries/DHT_sensor_library}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/case_study_arduino/libraries/Adafruit_Unified_Sensor}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.c.sketch.input.1758265962" name="C Source Files" superClass="io.sloeber.compiler.c.sketch.input"/>
 							</tool>
@@ -49,7 +51,8 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/case_study_arduino/libraries/Servo/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/case_study_arduino/libraries/Wire}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/case_study_arduino/libraries/Wire/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/case_study_arduino/libraries/Adafruit_HTU21DF_Library}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/case_study_arduino/libraries/DHT_sensor_library}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/case_study_arduino/libraries/Adafruit_Unified_Sensor}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.S.sketch.input.756126621" name="Assembly source files" superClass="io.sloeber.compiler.S.sketch.input"/>
 							</tool>

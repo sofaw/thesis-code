@@ -1,11 +1,15 @@
 #include <Servo.h>                           // Include servo library
 #include <Wire.h>
-#include "Adafruit_HTU21DF.h"
+//#include "Adafruit_HTU21DF.h"
+#include "DHT.h"
+
+#define DHTPIN 6
+#define DHTTYPE DHT22
 
 Servo servoLeft;                             // Declare left and right servos
 Servo servoRight;
 
-Adafruit_HTU21DF humiditySensor;
+DHT humiditySensor(DHTPIN, DHTTYPE);
 
 void setup()                                 // Built-in initialization block
 {
@@ -16,9 +20,9 @@ void setup()                                 // Built-in initialization block
 
 	pinMode(10, INPUT);
 	pinMode(9, OUTPUT);    // Left IR LED & Receiver
-	pinMode(6, INPUT);
-	pinMode(3, OUTPUT);    // Right IR LED & Receiver
-	pinMode(2, OUTPUT);    // LED
+	pinMode(3, INPUT);
+	pinMode(2, OUTPUT);    // Right IR LED & Receiver
+	pinMode(7, OUTPUT);    // LED
 
 	tone(4, 3000, 1000);                       // Play tone for 1 second
 	delay(1000);                               // Delay to finish tone
@@ -34,7 +38,7 @@ void loop()                                  // Main loop auto-repeats
 	indicateAboveHumidity(25.0);
 
 	int irLeft = irDetect(9, 10, 38000);       // Check for object on left
-	int irRight = irDetect(3, 6, 38000);       // Check for object on right
+	int irRight = irDetect(2, 3, 38000);       // Check for object on right
 
 	if ((irLeft == 0) && (irRight == 0))        // If both sides detect
 			{
@@ -95,6 +99,6 @@ void indicateAboveTemp(int thresh) {
 void indicateAboveHumidity(float thresh) {
 	float h = humiditySensor.readHumidity();
 	if (h > thresh) {
-		digitalWrite(2, 1);
+		digitalWrite(7, 1);
 	}
 }
