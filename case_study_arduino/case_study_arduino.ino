@@ -38,9 +38,10 @@ void loop()                                  // Main loop auto-repeats
       irRightOld = irRight;
       if(counter == 4)                       // Stuck in a corner?
       {
-        irLeft = 0;                           // Set up for U-turn
+    	maneuver(-50, -50, 1000);
+        /*irLeft = 0;                           // Set up for U-turn
         irRight = 0;
-        counter = 0;                         // Clear alternate corner count
+        counter = 0;                         // Clear alternate corner count*/
       }
     }
     else                                     // Not alternate from last time
@@ -53,23 +54,19 @@ void loop()                                  // Main loop auto-repeats
 
   if((irLeft == 0) && (irRight == 0))        // If both sides detect
   {
-    maneuver(-200, -200, 60);                // Backward 20 milliseconds
-    delay(60);
+    maneuver(-50, -50, 200);                // Backward 20 milliseconds
   }
   else if(irLeft == 0)                       // If only left side detects
   {
-    maneuver(200, -200, 20);                 // Right for 20 ms
-    delay(20);
+    maneuver(50, -50, 100);                 // Right for 20 ms
   }
   else if(irRight == 0)                      // If only right side detects
   {
-    maneuver(-200, 200, 20);                 // Left for 20 ms
-    delay(20);
+    maneuver(-50, 50, 100);                 // Left for 20 ms
   }
   else                                       // Otherwise, no IR detects
   {
-    maneuver(200, 200, 20);                  // Forward 20 ms
-    delay(20);
+    maneuver(50, 50, 100);                  // Forward 20 ms
   }
 }
 
