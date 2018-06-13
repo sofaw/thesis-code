@@ -9,6 +9,8 @@
 int irLeft, irRight;                            // IR variables
 
 int humPin = 6;
+int ledPin = 8;
+float humThresh = 25.0;
 
 int main()                                      // main function
 {
@@ -27,6 +29,12 @@ int main()                                      // main function
     putchar('\n');
     myPrintf(temp);
     putchar('\n');
+    
+    if(temp > humThresh) {
+      high(ledPin);
+    } else {
+      low(ledPin);
+    }           
     
     freqout(11, 1, 38000);                      // Check left & right objects
     irLeft = input(10);
