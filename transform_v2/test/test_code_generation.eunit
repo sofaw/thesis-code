@@ -64,3 +64,18 @@ operation testCorrectPinsIdentified7Segment() {
   assertTrue(pins.includesAll(expectedPins));
   assertTrue(pins.size() == expectedPins.size());
 }
+
+$onlyWith Map {"" = "CASE_STUDY_OUT"}
+@test
+operation testCorrectPinsIdentifiedCaseStudy() {
+  var pins = generatePinVariables().values();
+  var expectedPins : Sequence<Integer>;
+  expectedPins.add(2);
+  expectedPins.add(3);
+  expectedPins.add(6);
+  expectedPins.add(7);
+  expectedPins.add(9);
+  expectedPins.add(10);
+  assertTrue(pins.includesAll(expectedPins));
+  assertTrue(pins.size() == expectedPins.size());
+}

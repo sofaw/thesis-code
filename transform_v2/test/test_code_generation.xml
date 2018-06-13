@@ -16,11 +16,16 @@
 			transformfile="seven_seg.model" transformmodel="7_OUT"
 			targetfile="seven_seg.cpp" />
 		
+		<runGen srcfile="case_study_arduino_netlist.xml" srcmodel="CASE_STUDY_XML"
+			transformfile="case_study.model" transformmodel="CASE_STUDY_OUT"
+			targetfile="case_study.cpp" />
+		
 		<epsilon.eunit src="test_code_generation.eunit">
 			<model ref="LED_OUT"/>
 			<model ref="BUTTON_OUT"/>
 			<model ref="PA_OUT"/>
 			<model ref="7_OUT"/>
+			<model ref="CASE_STUDY_OUT"/>
 		</epsilon.eunit>
 	</target>
 

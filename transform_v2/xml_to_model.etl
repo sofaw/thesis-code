@@ -38,6 +38,7 @@ pre {
   inputParts.add("pushbutton"); // (There are two pushbuttons)
   inputParts.add("rotary encoder"); // Hexa rotary encoder; Rotary encoder;
   inputParts.add("variable capacitor");
+  inputParts.add("tsop312"); // Not core part but required for case study
   
   var boards : Set<String>;
   boards.add("arduino uno");
@@ -100,14 +101,8 @@ rule xmlNet2ModelConnectors
   
   var i = 0;
   while (i < (connectors.size - 1)) {
-    if(connectors.size == 2 or 
-    (connectors.get(i).children.first.a_title == arduinoTitle xor 
-    connectors.get(i+1).children.first.a_title == arduinoTitle)) {
-      createConnectors(i, c, connectors);
-      i = i + 2;
-    } else {
-      i = i + 1;
-    }    
+    createConnectors(i, c, connectors);
+    i = i + 1;    
   }
   
 }
