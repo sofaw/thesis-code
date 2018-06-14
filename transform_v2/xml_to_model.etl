@@ -6,71 +6,12 @@ pre {
   delete OUT!Part.all;
   
   var constructedPartIds : Sequence;
-  var arduinoTitle = "Arduino Uno (Rev3)";
   
-  var outputParts : Set<String>;
-  outputParts.add("led"); // Regular LED; RGB LED; Superflux LED;
-  // TODO: handle IC LED_Driver and intel edison
-  outputParts.add("prolight rgb 3 watt star");
-  outputParts.add("7 segment display");
-  outputParts.add("dot matrix");
-  outputParts.add("lcd"); // Graphic LCD; LCD screen;
-  outputParts.add("speaker"); // Piezo speaker; Loudspeaker;
-  outputParts.add("microphone");
-  outputParts.add("motor"); // DC Motor; Stepper Motor; Motor driver;
-  outputParts.add("edgy");
-  outputParts.add("servo");
-  outputParts.add("solenoid");
-  outputParts.add("relay"); // Relay; DIP Relay;
-  outputParts.add("peltier element");
-  
-  var inputParts : Set<String>;
-  inputParts.add("potentiometer"); // Digital potentiometer; Slide potentiometer; Rotary potentiometer; Trimmer potentiometer;
-  inputParts.add("sensor"); // Humidity and temp sensor; Barometric pressure sensor; Temp. sensor; Infrared proximity sensor;
-  inputParts.add("rfid reader");
-  inputParts.add("antenna");
-  inputParts.add("switch"); // Reed switch; Tilt switch; Mini toggle switch; Toggle switch;
-  inputParts.add("lsm303c");
-  inputParts.add("accelerometer");
-  inputParts.add("photocell");
-  inputParts.add("basic flex resistor"); // Need to differentiate between regular resistor
-  inputParts.add("basic force sensing resistor"); // ""
-  inputParts.add("pushbutton"); // (There are two pushbuttons)
-  inputParts.add("rotary encoder"); // Hexa rotary encoder; Rotary encoder;
-  inputParts.add("variable capacitor");
-  inputParts.add("tsop312"); // Not core part but required for case study
-  
-  var boards : Set<String>;
-  boards.add("arduino uno");
-  boards.add("arduino yun");
-  boards.add("ichigojam");
-  boards.add("udoo board");
-  boards.add("bare conductive touch board");
-  boards.add("dquidio board");
-  boards.add("adafruit atmega32u4");
-  boards.add("96boards consumer");
-  boards.add("gogoboard");
-  boards.add("mbili");
-  boards.add("chipkit wf32");
-  boards.add("raspberry pi"); // Three; Zero;
-  boards.add("wiring"); // Wiring; Wiring USB Adapter;
-  boards.add("linino");
-  boards.add("stepoko");
-  boards.add("microcontroller");
-  boards.add("picaxe-08");
-  boards.add("parallax propeller");
-  boards.add("basic stamp 2");
-  boards.add("mbed");
-  boards.add("raspio duino");
-  boards.add("blueiot core");
-  boards.add("teensy");
-  boards.add("pinocc.io scout");
-  boards.add("lightblue bean");
-  boards.add("msp430g2");
-  boards.add("galileo");
-  boards.add("netduino");
-  boards.add("spark core");
-  // TODO: need to check these do not appear in any other part names;
+  var allParts = CONFIG!t_part.all;
+
+  var outputParts = allParts.select(p | p.a_type == "OUTPUT").collect(p | p.a_title).asSet();
+  var inputParts = allParts.select(p | p.a_type == "INPUT").collect(p | p.a_title).asSet();
+  var boards = allParts.select(p | p.a_type == "BOARD").collect(p | p.a_title).asSet();
 }
 
 rule xmlPart2Board

@@ -3,25 +3,29 @@
   <parts partId="58300" title="Rotary Potentiometer (Small)" type="Input">
     <connectors name="leg2" connectedTo="//@parts.1/@connectors.0"/>
     <connectors name="wiper" connectedTo="//@parts.1/@connectors.1"/>
-    <connectors name="leg1" connectedTo="//@parts.1/@connectors.3"/>
+    <connectors name="leg1" connectedTo="//@parts.1/@connectors.6"/>
   </parts>
   <parts partId="58210" title="Arduino Uno (Rev3)">
     <connectors name="5V" connectedTo="//@parts.0/@connectors.0"/>
     <connectors name="A0" connectedTo="//@parts.0/@connectors.1"/>
     <connectors name="GND" connectedTo="//@parts.2/@connectors.1"/>
+    <connectors name="GND" connectedTo="//@parts.2/@connectors.2"/>
+    <connectors name="GND" connectedTo="//@parts.1/@connectors.5"/>
+    <connectors name="GND" connectedTo="//@parts.1/@connectors.4"/>
     <connectors name="GND" connectedTo="//@parts.0/@connectors.2"/>
     <connectors name="D13/SCK" connectedTo="//@parts.3/@connectors.1"/>
-    <connectors name="A5/SCL" connectedTo="//@parts.1/@connectors.6"/>
-    <connectors name="A5/SCL" connectedTo="//@parts.1/@connectors.5"/>
-    <connectors name="A4/SDA" connectedTo="//@parts.1/@connectors.8"/>
-    <connectors name="A4/SDA" connectedTo="//@parts.1/@connectors.7"/>
+    <connectors name="A5/SCL" connectedTo="//@parts.1/@connectors.9"/>
+    <connectors name="A5/SCL" connectedTo="//@parts.1/@connectors.8"/>
+    <connectors name="A4/SDA" connectedTo="//@parts.1/@connectors.11"/>
+    <connectors name="A4/SDA" connectedTo="//@parts.1/@connectors.10"/>
   </parts>
   <parts partId="58610" title="Red (633nm) LED" type="Output">
     <connectors name="anode" connectedTo="//@parts.3/@connectors.0"/>
     <connectors name="cathode" connectedTo="//@parts.1/@connectors.2"/>
+    <connectors name="cathode" connectedTo="//@parts.1/@connectors.3"/>
   </parts>
   <parts partId="58670" title="220&#x3a9; Resistor" type="Other">
     <connectors name="Pin 1" connectedTo="//@parts.2/@connectors.0"/>
-    <connectors name="Pin 0" connectedTo="//@parts.1/@connectors.4"/>
+    <connectors name="Pin 0" connectedTo="//@parts.1/@connectors.7"/>
   </parts>
 </Circuit>

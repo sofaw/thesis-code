@@ -1,0 +1,5 @@
+<parts>
+<part title="led" type="OUTPUT"/>
+<part title="potentiometer" type="INPUT"/>
+<part title="arduino uno" type="BOARD"/>
+</parts>
