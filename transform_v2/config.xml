@@ -1,5 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <parts>
-<part title="led" type="OUTPUT"/>
-<part title="potentiometer" type="INPUT"/>
-<part title="arduino uno" type="BOARD"/>
+<!-- Output parts -->
+	<part title="led" type="OUTPUT"/> <!-- Regular LED; RGB LED; Superflux LED; -->
+	<part title="prolight rgb 3 watt star" type="OUTPUT"/>
+	<part title="7 segment display" type="OUTPUT"/>
+	<part title="dot matrix" type="OUTPUT"/>
+	<part title="lcd" type="OUTPUT"/> <!-- Graphic LCD; LCD screen; -->
+	<part title="speaker" type="OUTPUT"/> <!-- Piezo speaker; Loudspeaker; -->
+	<part title="microphone" type="OUTPUT"/>
+	<part title="motor" type="OUTPUT"/> <!-- DC Motor; Stepper Motor; Motor driver; -->
+	<part title="edgy" type="OUTPUT"/>
+	<part title="servo" type="OUTPUT"/>
+	<part title="solenoid" type="OUTPUT"/>
+	<part title="relay" type="OUTPUT"/> <!-- Relay; DIP Relay; -->
+	<part title="peltier element" type="OUTPUT"/>
+	
+<!-- Input parts -->	
+	<part title="potentiometer" type="INPUT"/> <!-- Digital potentiometer; Slide potentiometer; Rotary potentiometer; Trimmer potentiometer; -->
+	<part title="sensor" type="INPUT"/> <!-- Humidity and temp sensor; Barometric pressure sensor; Temp. sensor; Infrared proximity sensor; -->
+	<part title="rfid reader" type="INPUT"/>
+	<part title="antenna" type="INPUT"/>
+	<part title="switch" type="INPUT"/> <!-- Reed switch; Tilt switch; Mini toggle switch; Toggle switch; -->
+	<part title="lsm303c" type="INPUT"/>
+	<part title="accelerometer" type="INPUT"/>
+	<part title="photocell" type="INPUT"/>
+	<part title="basic flex resistor" type="INPUT"/>
+	<part title="basic force sensing resistor" type="INPUT"/>
+	<part title="pushbutton" type="INPUT"/>
+	<part title="rotary encoder" type="INPUT"/> <!-- Hexa rotary encoder; Rotary encoder; -->
+	<part title="variable capacitor" type="INPUT"/>
+	<part title="tsop312" type="INPUT"/> <!-- Not core part but required for case study -->
+	
+<!-- Boards -->	
+	<part title="arduino uno" type="BOARD"/>
 </parts>

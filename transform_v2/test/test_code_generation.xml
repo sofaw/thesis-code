@@ -39,16 +39,20 @@
 
 			<sequential>
 
+				<epsilon.xml.loadModel name="CONFIG"
+				    file="../config.xml" read="true" store="true" />
 				<epsilon.xml.loadModel name="@{srcmodel}"
 					file="input_xml/@{srcfile}" read="true" store="false" />
 				<epsilon.emf.loadModel name="@{transformmodel}"
 					modelfile="transformation_output/@{transformfile}" metamodelfile="../metamodel_v2.ecore"
 					read="false" store="true" />
 
+
 				<!-- Apply transformation -->
 				<epsilon.etl src="../xml_to_model.etl">
 					<model ref="@{srcmodel}" as="XML" />
 					<model ref="@{transformmodel}" as="OUT" />
+					<model ref="CONFIG"/>
 				</epsilon.etl>
 
 				<!-- Generate code -->
