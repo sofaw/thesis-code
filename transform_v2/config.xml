@@ -33,4 +33,32 @@
 	
 <!-- Boards -->	
 	<part title="arduino uno" type="BOARD"/>
+	<part title="arduino yun" type="BOARD"/>
+	<part title="ichigojam" type="BOARD"/>
+	<part title="udoo board" type="BOARD"/>
+	<part title="bare conductive touch board" type="BOARD"/>
+	<part title="dquidio board" type="BOARD"/>
+	<part title="adafruit atmega32u4" type="BOARD"/>
+	<part title="96boards consumer" type="BOARD"/>
+	<part title="gogoboard" type="BOARD"/>
+	<part title="mbili" type="BOARD"/>
+	<part title="chipkit wf32" type="BOARD"/>
+	<part title="raspberry pi" type="BOARD"/> <!-- Three; Zero; -->
+	<part title="wiring" type="BOARD"/> <!-- Wiring; Wiring USB Adapter; -->
+	<part title="linino" type="BOARD"/>
+	<part title="stepoko" type="BOARD"/>
+	<part title="microcontroller" type="BOARD"/>
+	<part title="picaxe-08" type="BOARD"/>
+	<part title="parallax propeller" type="BOARD"/>
+	<part title="basic stamp 2" type="BOARD"/>
+	<part title="mbed" type="BOARD"/>
+	<part title="raspio duino" type="BOARD"/>
+	<part title="blueiot core" type="BOARD"/>
+	<part title="teensy" type="BOARD"/>
+	<part title="pinocc.io scout" type="BOARD"/>
+	<part title="lightblue bean" type="BOARD"/>
+	<part title="msp430g2" type="BOARD"/>
+	<part title="galileo" type="BOARD"/>
+	<part title="netduino" type="BOARD"/>
+	<part title="spark core" type="BOARD"/>
 </parts>
