@@ -5,7 +5,9 @@ const int [%=pinName%] = [%=pinVariables.get(pinName)%];
 [%}%]
 
 void setup() {
+  // TODO: Complete setup code
 }
 
 void loop() {
+  // TODO: Complete main code
 }
