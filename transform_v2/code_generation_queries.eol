@@ -1,3 +1,42 @@
+operation getLibraryNames() : Set<String> {
+  // /Applications/Eclipse.app/Contents/Eclipse/arduinoPlugin/libraries
+  // TODO: change to relative path
+  var libDirPath = "/Applications/Eclipse.app/Contents/Eclipse/arduinoPlugin/libraries";
+  var libDir = new Native("java.io.File")(libDirPath);
+
+  var headerFiles = dfsHeaderFiles(libDir);
+  return headerFiles;
+}
+
+operation dfsHeaderFiles(dir : Native("java.io.File")) : Set<Native("java.io.File")> {
+  // check not null
+  // add all *.h files to result
+  // dfs all subdirs and add to result
+  // return result
+  
+  var results : Set<Native("java.io.File")>;
+  for(l in dir.list()) {
+    var fileOrDir = new Native("java.io.File")(dir.getAbsolutePath() + "/" + l);
+    
+    if(fileOrDir.isFile()) {     // If header file, add to result
+      var fileName = fileOrDir.getName();
+      var path = fileOrDir.getAbsolutePath();
+      var i = fileName.lastIndexOf('.');
+
+      if (i > 0) {
+        var extension = fileName.substring(i+1);
+        if(extension.equals("h") and not (path.contains("extras") or path.contains("utility"))) {
+          results.add(fileOrDir);
+        }
+      } 
+    } else {	// Dfs dir and add to results
+      results.addAll(dfsHeaderFiles(fileOrDir));
+    }
+  }
+  
+  return results;
+}
+
 operation generatePinVariables() : Map<String, Integer> {
   var connections = getBoardConnections();
   

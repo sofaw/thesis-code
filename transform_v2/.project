@@ -8,4 +8,17 @@
 	</buildSpec>
 	<natures>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>ARDUINO_LIBS</name>
+			<type>2</type>
+			<locationURI>ARDUINO_LIBS</locationURI>
+		</link>
+	</linkedResources>
+	<variableList>
+		<variable>
+			<name>ARDUINO_LIBS</name>
+			<value>$%7BECLIPSE_HOME%7D/arduinoPlugin/libraries</value>
+		</variable>
+	</variableList>
 </projectDescription>
