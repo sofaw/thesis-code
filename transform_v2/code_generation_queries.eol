@@ -4,16 +4,33 @@
 // TODO: add code (to .egl) that prompts user with top 3 ranked libraries
 
 var libNames = getLibraryNames();
-rankLibraries("Infrared (850nm) LED", libNames);
+var ranks = rankLibraries("Infrared (850nm) LED", libNames);
+
+for(k in ranks.keySet()) {
+  if(ranks.get(k) > 0) {
+    ranks.get(k).print();
+    " : ".print();
+    k.println();
+  }
+}
 
 operation rankLibraries(partName : String, libraryFiles : Set<String>) : Map<String, Integer> {
   var results : Map<String, Integer>();
   
+  var helper = new Native("org.sew569.transform_tools.CodeGenHelper");
+  
   for(l in libraryFiles) {
     var libPath = new Native("java.lang.String")(l);
   
-    var headerString = new Native("org.sew569.transform_tools.ReadFilesTool").readFile(libPath);
+    var headerString = helper.readFile(libPath);
     // TODO: add code to count partname occurrences
+    
+    var subStrs = new Native("java.lang.String")(partName).split("\\s+");
+    var totalOccurs = 0;
+    for(s in subStrs) {
+      totalOccurs = totalOccurs + helper.countOccurrences(headerString.toLowerCase(), s.toLowerCase());
+    }
+    results.put(l, totalOccurs);
   }
   
   return results;

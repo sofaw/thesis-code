@@ -1,10 +1,15 @@
 package org.sew569.transform_tools;
 
 import java.io.*;
+import org.apache.commons.lang3.StringUtils;
 
-public class ReadFilesTool {
+public class CodeGenHelper {
 	
-	public ReadFilesTool() {
+	public CodeGenHelper() {
+	}
+	
+	public static int countOccurrences(String str, String sub) {
+		return StringUtils.countMatches(str, sub);
 	}
 	
 	// https://www.caveofprogramming.com/java/java-file-reading-and-writing-files-in-java.html
