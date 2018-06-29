@@ -1,36 +1,58 @@
+// TODO: add function that searches the header files for instances of part name substring and
+// ranks header files based on occurrences
+
+// TODO: add code (to .egl) that prompts user with top 3 ranked libraries
+
+var libNames = getLibraryNames();
+rankLibraries("Infrared (850nm) LED", libNames);
+
+operation rankLibraries(partName : String, libraryFiles : Set<String>) : Map<String, Integer> {
+  var results : Map<String, Integer>();
+  
+  for(l in libraryFiles) {
+    var libPath = new Native("java.lang.String")(l);
+  
+    var headerString = new Native("org.sew569.transform_tools.ReadFilesTool").readFile(libPath);
+    // TODO: add code to count partname occurrences
+  }
+  
+  return results;
+}
+
 operation getLibraryNames() : Set<String> {
   // /Applications/Eclipse.app/Contents/Eclipse/arduinoPlugin/libraries
   // TODO: change to relative path
   var libDirPath = "/Applications/Eclipse.app/Contents/Eclipse/arduinoPlugin/libraries";
-  var libDir = new Native("java.io.File")(libDirPath);
 
-  var headerFiles = dfsHeaderFiles(libDir);
+  var headerFiles = dfsHeaderFiles(libDirPath);
   return headerFiles;
 }
 
-operation dfsHeaderFiles(dir : Native("java.io.File")) : Set<Native("java.io.File")> {
+operation dfsHeaderFiles(dirPath : String) : Set<String> {
   // check not null
   // add all *.h files to result
   // dfs all subdirs and add to result
   // return result
   
-  var results : Set<Native("java.io.File")>;
+  var dir = new Native("java.io.File")(dirPath);
+  
+  var results : Set<String>;
   for(l in dir.list()) {
     var fileOrDir = new Native("java.io.File")(dir.getAbsolutePath() + "/" + l);
+    var path = fileOrDir.getAbsolutePath();
     
     if(fileOrDir.isFile()) {     // If header file, add to result
       var fileName = fileOrDir.getName();
-      var path = fileOrDir.getAbsolutePath();
       var i = fileName.lastIndexOf('.');
 
       if (i > 0) {
         var extension = fileName.substring(i+1);
         if(extension.equals("h") and not (path.contains("extras") or path.contains("utility"))) {
-          results.add(fileOrDir);
+          results.add(path);
         }
       } 
     } else {	// Dfs dir and add to results
-      results.addAll(dfsHeaderFiles(fileOrDir));
+      results.addAll(dfsHeaderFiles(path));
     }
   }
   
