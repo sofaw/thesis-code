@@ -1,20 +1,27 @@
-// TODO: add function that searches the header files for instances of part name substring and
-// ranks header files based on occurrences
-
-// TODO: add code (to .egl) that prompts user with top 3 ranked libraries
-
-var libNames = getLibraryNames();
-var ranks = rankLibraries("Infrared (850nm) LED", libNames);
-
-for(k in ranks.keySet()) {
-  if(ranks.get(k) > 0) {
-    ranks.get(k).print();
-    " : ".print();
-    k.println();
+operation getIoPartNames() : Set<String> {
+  var results : Set<String>;
+  for(p in Part.all) {
+    if(p.type == Type#Input or p.type == Type#Output) {
+      results.add(p.title);
+    }
   }
+  return results;
 }
 
-operation rankLibraries(partName : String, libraryFiles : Set<String>) : Map<String, Integer> {
+operation suggestLibraries(partName : String) : OrderedSet<String> {
+  var ranks = rankLibraries(partName, getLibraryNames());
+  
+  var suggestions : OrderedSet<String>;
+  var orderedRanks = ranks.keySet().sortBy(r | r).invert();
+  while(suggestions.size() < 5) {
+    suggestions.addAll(ranks.get(orderedRanks.first()));
+    orderedRanks.removeAt(0);
+  }
+  
+  return suggestions;
+}
+
+operation rankLibraries(partName : String, libraryFiles : Set<String>) : Map<Integer, Set<String>> {
   var results : Map<String, Integer>();
   
   var helper = new Native("org.sew569.transform_tools.CodeGenHelper");
@@ -23,14 +30,21 @@ operation rankLibraries(partName : String, libraryFiles : Set<String>) : Map<Str
     var libPath = new Native("java.lang.String")(l);
   
     var headerString = helper.readFile(libPath);
-    // TODO: add code to count partname occurrences
     
     var subStrs = new Native("java.lang.String")(partName).split("\\s+");
     var totalOccurs = 0;
     for(s in subStrs) {
       totalOccurs = totalOccurs + helper.countOccurrences(headerString.toLowerCase(), s.toLowerCase());
     }
-    results.put(l, totalOccurs);
+    
+    var s = results.get(totalOccurs);
+    if(s == null) {
+      s = new Set<String>;
+    }
+    var fileName = l.split("/").last();
+    s.add(fileName);
+    
+    results.put(totalOccurs, s);
   }
   
   return results;

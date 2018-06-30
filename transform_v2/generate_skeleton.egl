@@ -1,4 +1,16 @@
 [%import "code_generation_queries.eol";%]
+[*Suggest libraries*]
+[%var none = "<none>";%]
+[%for(partName in getIoPartNames()) {%]
+[%var choices : OrderedSet<String>; %]
+[%choices.add("<none>"); %]
+[%choices.addAll(suggestLibraries(partName)); %]
+[%var libChoice = UserInput.choose("Suggested libraries for " + partName, choices, "");%]
+[%if(libChoice <> "<none>" and libChoice <> "") {%]
+#include "[%=libChoice%]"
+[%}%]
+[%}%]
+[*Init pin variables*]
 [%var pinVariables = generatePinVariables();%]  
 [%for(pinName in pinVariables.keySet()) {%]
 const int [%=pinName%] = [%=pinVariables.get(pinName)%];  
