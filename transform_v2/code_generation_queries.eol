@@ -1,29 +1,9 @@
-updateConfigFile(Part.all.selectOne(p | p.type == Type#Output), "<none>");
-
 operation updateConfigFile(part : Part, libChoice : String) {
   // Find corresponding part element
-  var xmlParts;
-  switch(part.type) {
-    case Type#Output : xmlParts = X!t_part.all.select(p | p.a_type == "OUTPUT");
-    case Type#Input : xmlParts = X!t_part.all.select(p | p.a_type == "INPUT");
-    case Type#Board : xmlParts = X!t_part.all.select(p | p.a_type == "BOARD");
-    case Type#Other : xmlParts = X!t_part.all.select(p | p.a_type == "OTHER");
-    default : {"invalid part for config update".println(); return;}
-  }
-
-  var elems = xmlParts.select(p | p.a_title.isSubstringOf(part.title.toLowerCase()));
-  if(elems.size() > 1) {
-    "ambiguous config element".println();
-    return;
-  } 
-  if(elems.size() <= 0) {
-    "unable to update config".println();
-    return;
-  }
+  var elem = getConfigElemFromPartName(part.title);
  
   // If lib has been previously chosen, update count
   // Otherwise add new library child element
-  var elem = elems.first();
   var libs = elem.children.select(a | a.tagName == "library");
   var libElem = libs.selectOne(l | l.a_name == libChoice);
   if(libElem <> null) {
@@ -34,6 +14,19 @@ operation updateConfigFile(part : Part, libChoice : String) {
     newLibElem.a_count = 1;
     elem.appendChild(newLibElem);
   }
+}
+
+operation getConfigElemFromPartName(partName : String) : X!t_part {
+  var elems = X!t_part.all.select(p | p.a_title.isSubstringOf(partName.toLowerCase()));
+  if(elems.size() > 1) {
+    "ambiguous config element".println();
+    return null;
+  } 
+  if(elems.size() <= 0) {
+    "unable to update config".println();
+    return null;
+  }
+  return elems.first();
 }
 
 
@@ -51,6 +44,12 @@ operation suggestLibraries(partName : String) : OrderedSet<String> {
   var ranks = rankLibraries(partName, getLibraryNames());
   
   var suggestions : OrderedSet<String>;
+  
+  // First use config file to provide suggestions
+  var chosenLibs = getConfigElemFromPartName(partName).children.select(a | a.tagName == "library").collect(l | l.a_name);
+  suggestions.addAll(chosenLibs);
+  
+  // If few suggestions from config file, try searching for part name in header files
   var orderedRanks = ranks.keySet().sortBy(r | r).invert();
   while(suggestions.size() < 5) {
     suggestions.addAll(ranks.get(orderedRanks.first()));
