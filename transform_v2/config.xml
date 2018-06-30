@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <parts>
 <!-- Output parts -->
-	<part title="led" type="OUTPUT"/> <!-- Regular LED; RGB LED; Superflux LED; -->
+	<part title="led" type="OUTPUT"></part> <!-- Regular LED; RGB LED; Superflux LED; -->
 	<part title="prolight rgb 3 watt star" type="OUTPUT"/>
 	<part title="7 segment display" type="OUTPUT"/>
 	<part title="dot matrix" type="OUTPUT"/>
@@ -16,7 +16,7 @@
 	<part title="peltier element" type="OUTPUT"/>
 	
 <!-- Input parts -->	
-	<part title="potentiometer" type="INPUT"/> <!-- Digital potentiometer; Slide potentiometer; Rotary potentiometer; Trimmer potentiometer; -->
+	<part title="potentiometer" type="INPUT"></part> <!-- Digital potentiometer; Slide potentiometer; Rotary potentiometer; Trimmer potentiometer; -->
 	<part title="sensor" type="INPUT"/> <!-- Humidity and temp sensor; Barometric pressure sensor; Temp. sensor; Infrared proximity sensor; -->
 	<part title="rfid reader" type="INPUT"/>
 	<part title="antenna" type="INPUT"/>
