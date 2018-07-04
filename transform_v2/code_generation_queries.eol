@@ -1,16 +1,3 @@
-var libNames = new Native("java.util.ArrayList")(getLibraryNames()).println();
-
-var ranker = new Native("org.sew569.ranking.LibraryRanker");
-ranker.setFilesToIndex(libNames);
-
-for(lib in libNames) {
-  var fileName = lib.split("/").last().print();
-  " : ".print();
-  ranker.calculateTfIdfWeight("humidity", lib).println();
-}
-
-
-
 operation updateConfigFile(part : String, libChoice : String) {
   // Find corresponding part element
   var elem = getConfigElemFromPartName(part);
@@ -55,48 +42,46 @@ operation getIoParts() : Set<String> {
 }
 
 operation suggestLibraries(partName : String) : OrderedSet<String> {
-  var ranks = rankLibraries(partName, getLibraryNames());
+  var ranks = getLibraryRanks(partName, getLibraryNames());
   
   var suggestions : OrderedSet<String>;
   
   // First use config file to provide suggestions
-  var chosenLibs = getConfigElemFromPartName(partName).children.select(a | a.tagName == "library").collect(l | l.a_name);
+  var configElem = getConfigElemFromPartName(partName);
+  var chosenLibs = configElem.children.select(a | a.tagName == "library").collect(l | l.a_name);
   suggestions.addAll(chosenLibs);
+
   
-  // If few suggestions from config file, try searching for part name in header files
-  var orderedRanks = ranks.keySet().sortBy(r | r).invert();
-  while(suggestions.size() < 15) {
-    suggestions.addAll(ranks.get(orderedRanks.first()));
-    orderedRanks.removeAt(0);
+  // Add all highly weighted libraries
+  for(lib in ranks.keySet()) {
+    if(ranks.get(lib) > 1) {
+      suggestions.add(lib);
+    }
   }
   
+  // If suggestions is still empty, add all libraries
+  if(suggestions.size() == 0) {
+    suggestions.addAll(ranks.keySet());
+  }
   return suggestions;
 }
 
-operation rankLibraries(partName : String, libraryFiles : Set<String>) : Map<Integer, Set<String>> {
-  var results : Map<String, Integer>();
+operation getLibraryRanks(partName : String, libraryFiles : Set<String>) : Map<String, Real> {
+  var results : Map<String, Real>();
   
-  var helper = new Native("org.sew569.transform_tools.CodeGenHelper");
+  var ranker = new Native("org.sew569.ranking.LibraryRanker");
+  ranker.setFilesToIndex(new Native("java.util.ArrayList")(libraryFiles));
   
-  for(l in libraryFiles) {
-    var libPath = new Native("java.lang.String")(l);
-  
-    var headerString = helper.readFile(libPath);
+  for(lib in libraryFiles) {
+    var totalWeight : Real = 0.0;
+    var tokenisedPartName = new Native("java.lang.String")(partName).split("\\s+");
     
-    var subStrs = new Native("java.lang.String")(partName).split("\\s+");
-    var totalOccurs = 0;
-    for(s in subStrs) {
-      totalOccurs = totalOccurs + helper.countOccurrences(headerString.toLowerCase(), s.toLowerCase());
+    for(token in tokenisedPartName) {
+      totalWeight = totalWeight + ranker.calculateTfIdfWeight(token, lib); 
     }
     
-    var s = results.get(totalOccurs);
-    if(s == null) {
-      s = new Set<String>;
-    }
-    var fileName = l.split("/").last();
-    s.add(fileName);
-    
-    results.put(totalOccurs, s);
+    var fileName = lib.split("/").last();
+    results.put(fileName, totalWeight);
   }
   
   return results;

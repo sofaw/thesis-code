@@ -86,3 +86,9 @@ operation testCorrectLibrarySuggested() {
   var suggestedLibs = suggestLibraries("Humidity and Temperature Sensor RHT03").println();
   assertTrue(suggestedLibs.contains("DHT.h"));
 }
+
+$onlyWith Map {"" = "X"}
+@test
+operation testPartNotInConfigThrowsError() {
+  assertError(suggestLibraries("123456789"));
+}
