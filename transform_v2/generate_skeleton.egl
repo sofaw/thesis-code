@@ -4,8 +4,9 @@
 [%for(part in getIoParts()) {%]
 [%var choices : OrderedSet<String>; %]
 [%choices.add("<none>"); %]
-[%choices.addAll(suggestLibraries(part.title)); %]
-[%var libChoice = UserInput.choose("Suggested libraries for " + part.title, choices, "");%]
+[%choices.addAll(suggestLibraries(part)); %]
+[*[%var libChoice = System.user.choose("Suggested libraries for " + part, choices, "");%]*]
+[%var libChoice = "<none>";%]
 [%if(libChoice <> "<none>" and libChoice <> "") {%]
 #include "[%=libChoice%]"
 [%}%]

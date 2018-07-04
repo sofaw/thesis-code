@@ -1,6 +1,19 @@
-operation updateConfigFile(part : Part, libChoice : String) {
+var libNames = new Native("java.util.ArrayList")(getLibraryNames()).println();
+
+var ranker = new Native("org.sew569.ranking.LibraryRanker");
+ranker.setFilesToIndex(libNames);
+
+for(lib in libNames) {
+  var fileName = lib.split("/").last().print();
+  " : ".print();
+  ranker.calculateTfIdfWeight("humidity", lib).println();
+}
+
+
+
+operation updateConfigFile(part : String, libChoice : String) {
   // Find corresponding part element
-  var elem = getConfigElemFromPartName(part.title);
+  var elem = getConfigElemFromPartName(part);
  
   // If lib has been previously chosen, update count
   // Otherwise add new library child element
@@ -17,6 +30,7 @@ operation updateConfigFile(part : Part, libChoice : String) {
 }
 
 operation getConfigElemFromPartName(partName : String) : X!t_part {
+  partName.println();
   var elems = X!t_part.all.select(p | p.a_title.isSubstringOf(partName.toLowerCase()));
   if(elems.size() > 1) {
     "ambiguous config element".println();
@@ -30,11 +44,11 @@ operation getConfigElemFromPartName(partName : String) : X!t_part {
 }
 
 
-operation getIoParts() : Set<Part> {
-  var results : Set<Part>;
+operation getIoParts() : Set<String> {
+  var results : Set<String>;
   for(p in Part.all) {
     if(p.type == Type#Input or p.type == Type#Output) {
-      results.add(p);
+      results.add(p.title);
     }
   }
   return results;
@@ -51,7 +65,7 @@ operation suggestLibraries(partName : String) : OrderedSet<String> {
   
   // If few suggestions from config file, try searching for part name in header files
   var orderedRanks = ranks.keySet().sortBy(r | r).invert();
-  while(suggestions.size() < 5) {
+  while(suggestions.size() < 15) {
     suggestions.addAll(ranks.get(orderedRanks.first()));
     orderedRanks.removeAt(0);
   }

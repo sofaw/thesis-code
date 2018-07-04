@@ -1,24 +1,27 @@
 <project>
 	<target name="run-tests" depends="transform-and-gen">
+		<epsilon.xml.loadModel name="CONFIG"
+		    file="test_config.xml" read="true" store="true" />
+		
 		<runGen srcfile="Potentiometer_LED_netlist.xml" srcmodel="LED_XML"
 			transformfile="led.model" transformmodel="LED_OUT"
-			targetfile="led.cpp" />
+			targetfile="led.cpp" configFile="CONFIG"/>
 
 		<runGen srcfile="Button_netlist.xml" srcmodel="BUTTON_XML"
 			transformfile="button.model" transformmodel="BUTTON_OUT"
-			targetfile="button.cpp" />
+			targetfile="button.cpp" configFile="CONFIG"/>
 		
 		<runGen srcfile="Parking-Assistant_netlist.xml" srcmodel="PA_XML"
 			transformfile="pa.model" transformmodel="PA_OUT"
-			targetfile="pa.cpp" />
+			targetfile="pa.cpp" configFile="CONFIG"/>
 		
 		<runGen srcfile="7Segment_direct_netlist.xml" srcmodel="7_XML"
 			transformfile="seven_seg.model" transformmodel="7_OUT"
-			targetfile="seven_seg.cpp" />
+			targetfile="seven_seg.cpp" configFile="CONFIG"/>
 		
 		<runGen srcfile="case_study_arduino_netlist.xml" srcmodel="CASE_STUDY_XML"
 			transformfile="case_study.model" transformmodel="CASE_STUDY_OUT"
-			targetfile="case_study.cpp" />
+			targetfile="case_study.cpp" configFile="CONFIG"/>
 		
 		<epsilon.eunit src="test_code_generation.eunit">
 			<model ref="LED_OUT"/>
@@ -26,6 +29,7 @@
 			<model ref="PA_OUT"/>
 			<model ref="7_OUT"/>
 			<model ref="CASE_STUDY_OUT"/>
+			<model ref="CONFIG" as="X"/>
 		</epsilon.eunit>
 	</target>
 
@@ -36,28 +40,26 @@
 			<attribute name="transformfile" />
 			<attribute name="transformmodel"/>
 			<attribute name="targetfile" />
+			<attribute name="configFile" />
 
 			<sequential>
-
-				<epsilon.xml.loadModel name="CONFIG"
-				    file="../config.xml" read="true" store="true" />
 				<epsilon.xml.loadModel name="@{srcmodel}"
 					file="input_xml/@{srcfile}" read="true" store="false" />
 				<epsilon.emf.loadModel name="@{transformmodel}"
 					modelfile="transformation_output/@{transformfile}" metamodelfile="../metamodel_v2.ecore"
 					read="false" store="true" />
 
-
 				<!-- Apply transformation -->
 				<epsilon.etl src="../xml_to_model.etl">
 					<model ref="@{srcmodel}" as="XML" />
 					<model ref="@{transformmodel}" as="OUT" />
-					<model ref="CONFIG"/>
+					<model ref="@{configFile}"/>
 				</epsilon.etl>
 
 				<!-- Generate code -->
 				<epsilon.egl src="../generate_skeleton.egl" target="code_generation_output/@{targetfile}">
 					<model ref="@{transformmodel}" />
+					<model ref="@{configFile}" as="X"/>
 				</epsilon.egl>
 				
 				<!-- Need to read here in case this is the first time file is created (read=false above) -->

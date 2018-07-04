@@ -79,3 +79,10 @@ operation testCorrectPinsIdentifiedCaseStudy() {
   assertTrue(pins.includesAll(expectedPins));
   assertTrue(pins.size() == expectedPins.size());
 }
+
+$onlyWith Map {"" = "X"}
+@test
+operation testCorrectLibrarySuggested() {
+  var suggestedLibs = suggestLibraries("Humidity and Temperature Sensor RHT03").println();
+  assertTrue(suggestedLibs.contains("DHT.h"));
+}

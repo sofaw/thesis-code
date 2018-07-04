@@ -4,8 +4,8 @@
    <extension
          point="org.eclipse.epsilon.common.dt.tool">
       <tool
-            class="org.sew569.transform_tools.CodeGenHelper"
-            defaultName="CodeGenHelper">
+            class="org.sew569.ranking.LibraryRanker"
+            defaultName="LibraryRanker">
       </tool>
    </extension>
 

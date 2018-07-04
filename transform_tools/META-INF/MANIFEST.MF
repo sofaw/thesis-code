@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: transform_tools
-Bundle-SymbolicName: transform_tools;singleton:=true
-Bundle-Version: 1.0.0.qualifier
-Export-Package: org.sew569.transform_tools
-Require-Bundle: org.eclipse.epsilon.common.dt;bundle-version="1.4.0"
-Import-Package: org.apache.commons.lang3
