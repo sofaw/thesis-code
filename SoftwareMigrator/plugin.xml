@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin	
+	name="Software Migrator"
+	id="org.sew569.softwaremigrator"
+	version="0.0.0"
+	provider-name="OTI">
+	
+    <requires>
+	<import plugin="org.eclipse.core.resources"/>
+        <import plugin="org.eclipse.ui"/>
+    </requires>
+
+    <runtime>
+	<library name="helloworld.jar"/>
+    </runtime>
+	
+    <extension point = "org.eclipse.ui.actionSets">
+        <actionSet
+            id="org.sew569.softwaremigrator.HelloWorldActionSet"
+            label="Hello World"
+	    visible="true"
+	    description="The action set for the Eclipse Hello World example">
+	    <menu
+		id="org.sew569.softwaremigrator.HelloWorldMenu"
+		label="Samples">
+		<separator name="samples"/>
+	    </menu>
+	    <action id="org.sew569.softwaremigrator.HelloWorldAction"
+		menubarPath="org.sew569.softwaremigrator.HelloWorldMenu/samples"
+		toolbarPath="Normal"			
+		label="Hello World"
+		tooltip="Press to see a message"
+		icon="icons/helloworld.gif"
+		class="org.sew569.softwaremigrator.HelloWorldAction"/>
+        </actionSet>
+    </extension>
+</plugin>
