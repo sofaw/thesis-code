@@ -1,0 +1,246 @@
+operation updateConfigFile(part : String, libChoice : String) {
+  // Find corresponding part element
+  var elem = getConfigElemFromPartName(part);
+ 
+  // If lib has been previously chosen, update count
+  // Otherwise add new library child element
+  var libs = elem.children.select(a | a.tagName == "library");
+  var libElem = libs.selectOne(l | l.a_name == libChoice);
+  if(libElem <> null) {
+    libElem.a_count = libElem.a_count.asInteger() + 1;
+  } else {
+    var newLibElem = new X!t_library;
+    newLibElem.a_name = libChoice;
+    newLibElem.a_count = 1;
+    elem.appendChild(newLibElem);
+  }
+}
+
+operation getConfigElemFromPartName(partName : String) : X!t_part {
+  partName.println();
+  var elems = X!t_part.all.select(p | p.a_title.isSubstringOf(partName.toLowerCase()));
+  if(elems.size() > 1) {
+    "ambiguous config element".println();
+    return null;
+  } 
+  if(elems.size() <= 0) {
+    "unable to update config".println();
+    return null;
+  }
+  return elems.first();
+}
+
+
+operation getIoParts() : Set<String> {
+  var results : Set<String>;
+  for(p in Part.all) {
+    if(p.type == Type#Input or p.type == Type#Output) {
+      results.add(p.title);
+    }
+  }
+  return results;
+}
+
+operation suggestLibraries(partName : String) : OrderedSet<String> {
+  var ranks = getLibraryRanks(partName, getLibraryNames());
+  
+  var suggestions : OrderedSet<String>;
+  
+  // First use config file to provide suggestions
+  var configElem = getConfigElemFromPartName(partName);
+  var chosenLibs = configElem.children.select(a | a.tagName == "library").collect(l | l.a_name);
+  suggestions.addAll(chosenLibs);
+
+  
+  // Add all highly weighted libraries
+  for(lib in ranks.keySet()) {
+    if(ranks.get(lib) > 1) {
+      suggestions.add(lib);
+    }
+  }
+  
+  // If suggestions is still empty, add all libraries
+  if(suggestions.size() == 0) {
+    suggestions.addAll(ranks.keySet());
+  }
+  return suggestions;
+}
+
+operation getLibraryRanks(partName : String, libraryFiles : Set<String>) : Map<String, Real> {
+  var results : Map<String, Real>();
+  
+  var ranker = new Native("org.sew569.ranking.LibraryRanker");
+  ranker.setFilesToIndex(new Native("java.util.ArrayList")(libraryFiles));
+  
+  for(lib in libraryFiles) {
+    var totalWeight : Real = 0.0;
+    var tokenisedPartName = new Native("java.lang.String")(partName).split("\\s+");
+    
+    for(token in tokenisedPartName) {
+      totalWeight = totalWeight + ranker.calculateTfIdfWeight(token, lib); 
+    }
+    
+    var fileName = lib.split("/").last();
+    results.put(fileName, totalWeight);
+  }
+  
+  return results;
+}
+
+operation getLibraryNames() : Set<String> {
+  // /Applications/Eclipse.app/Contents/Eclipse/arduinoPlugin/libraries
+  // TODO: change to relative path
+  var libDirPath = "/Applications/Eclipse.app/Contents/Eclipse/arduinoPlugin/libraries";
+
+  var headerFiles = dfsHeaderFiles(libDirPath);
+  return headerFiles;
+}
+
+operation dfsHeaderFiles(dirPath : String) : Set<String> {
+  // check not null
+  // add all *.h files to result
+  // dfs all subdirs and add to result
+  // return result
+  
+  var dir = new Native("java.io.File")(dirPath);
+  
+  var results : Set<String>;
+  for(l in dir.list()) {
+    var fileOrDir = new Native("java.io.File")(dir.getAbsolutePath() + "/" + l);
+    var path = fileOrDir.getAbsolutePath();
+    
+    if(fileOrDir.isFile()) {     // If header file, add to result
+      var fileName = fileOrDir.getName();
+      var i = fileName.lastIndexOf('.');
+
+      if (i > 0) {
+        var extension = fileName.substring(i+1);
+        if(extension.equals("h") and not (path.contains("extras") or path.contains("utility"))) {
+          results.add(path);
+        }
+      } 
+    } else {	// Dfs dir and add to results
+      results.addAll(dfsHeaderFiles(path));
+    }
+  }
+  
+  return results;
+}
+
+operation generatePinVariables() : Map<String, Integer> {
+  var connections = getBoardConnections();
+  
+  var pinVariables : Map<String, Integer>;
+  
+  // Map part titles mapping of ID -> integer
+  var usedComponentNames : Map<String, Map<Integer, Integer>>;
+  
+  for(boardCon in connections.keySet()) {
+    var boardPin = new Native("java.lang.String")(boardCon.name);
+    
+    // Check it's not ground or volts
+    if(not ("V".isSubstringOf(boardPin) or "GND".isSubstringOf(boardPin))) {
+      boardPin = boardPin.replaceAll("\\D+",""); // Remove non-numeric characters
+      if(not boardPin.isEmpty()) {
+        var component = connections.get(boardCon).parent;
+        var componentStr = new Native("java.lang.String")(component.title);
+        
+        componentStr = componentStr.replaceAll("\\s",""); // Remove spaces
+        componentStr = componentStr.replaceAll("[^a-zA-Z0-9]", ""); // Remove non-alphabetic characters
+        componentStr = componentStr.replaceAll("^\\d+", ""); // Remove any numbers from start so it is a valid c++ var name
+        // Start var name w. lowercase
+        var split = componentStr.split("(?<=^[A-Z]+)");
+        componentStr = split.get(0).toLowerCase() + split.get(1);
+        
+        var id : Integer;
+        // Handle case of multiple same component
+        if(usedComponentNames.keySet().includes(componentStr)) {
+          var idMappings = usedComponentNames.get(componentStr);
+          if(idMappings.keySet().includes(component.partId)) {
+            id = idMappings.get(component.partId);
+          } else {
+            id = idMappings.keySet().size() + 1;
+            idMappings.put(component.partId, id);
+          }
+        } else {
+          id = 1;
+          var idMappings : Map<Integer, Integer>;
+          idMappings.put(component.partId, id);
+          
+          usedComponentNames.put(componentStr, idMappings);
+        }
+        
+        componentStr = componentStr.concat(id.asString());
+        
+        if(component.type == Type#Input) {
+          componentStr = componentStr.concat("ReadPin");
+        } else {
+          componentStr = componentStr.concat("WritePin");
+        }
+        
+        // Deal w multiple inputs/outputs to same component
+        componentStr = handleMultiIO(componentStr, pinVariables.keySet());
+        
+        pinVariables.put(componentStr, boardPin.asInteger());
+      }
+    }
+
+  }
+  return pinVariables;
+}
+
+operation handleMultiIO(str : String, names : Set<String>) : String {
+  var counter = 1;
+  var tempStr = str.concat(counter.asString());
+  
+  while(names.includes(tempStr)) {
+    counter = counter + 1;
+    tempStr = str.concat(counter.asString());
+  }
+  
+  return tempStr;
+}
+
+operation getBoardConnections() : Map<Connector, Connector> {
+  var board = Part.all.selectOne(p | p.type == Type#Board);
+
+  var connections : Map<Connector, Connector>;
+
+  for (connector in board.connectors) {
+    var sensors = bfsSensors(connector);
+    for(s in sensors) {
+     connections.put(connector, s);
+    }
+  }
+  
+  return connections;
+}
+
+operation bfsSensors(start : Connector) : Set<Connector> {
+  var queue = new Native("java.util.LinkedList");
+  queue.add(start);
+  var visited : Set<Connector>;
+  
+  var connectors : Set<Connector>;
+  
+  while(not queue.isEmpty()) {
+    var con = queue.removeFirst();
+    if(not visited.includes(con)) {
+      visited.add(con);
+      
+      if(con.parent.type == Type#Input or con.parent.type == Type#Output) {
+        connectors.add(con);
+      } else {
+        queue.add(con.connectedTo);
+      
+        if(not (con.parent.type == Type#Board)) {
+          for(c in con.parent.connectors) {
+            queue.add(c);
+          }
+        }
+      }
+    }
+  }
+  
+  return connectors;
+}
