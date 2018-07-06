@@ -4,9 +4,13 @@ import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
@@ -21,79 +25,79 @@ public class MigrationWizardPageOne extends WizardPage {
 		setTitle("Configure Migration");
 	    setDescription("Migration Wizard: Configure Migration");
 	}
+	
+	private void addBrowseButton(Text textField, String description, String[] fileExtensions) {
+        Button button = new Button(container, SWT.PUSH);
+        button.setText("Browse");
+        button.addSelectionListener(new SelectionListener() {
+
+            @Override
+            public void widgetSelected(SelectionEvent arg0) {
+
+               FileDialog fileDialog = new FileDialog(container.getShell(), SWT.OPEN);         
+               fileDialog.setText(description);
+               fileDialog.setFilterExtensions(fileExtensions);
+               String path = fileDialog.open();
+
+               String selectedFile = fileDialog.getFileName();
+               textField.setText(path);
+         }
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+     });
+	}
+	
+	private Text addTextField(String labelText) {
+        Label label = new Label(container, SWT.NONE);
+        label.setText(labelText);
+
+        Text text = new Text(container, SWT.BORDER | SWT.SINGLE);
+        text.setText("");
+        text.addKeyListener(new KeyListener() {
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (!netlistText.getText().isEmpty() 
+                		&& !configText.getText().isEmpty()
+                		&& !outputText.getText().isEmpty()) {
+                    setPageComplete(true);
+                }
+            }
+
+        });
+        return text;
+	}
 
 	@Override
 	public void createControl(Composite parent) {
-		// TODO: implement this based on design for wizard
 		container = new Composite(parent, SWT.NONE);
         GridLayout layout = new GridLayout();
         container.setLayout(layout);
-        layout.numColumns = 2;
-        Label netlistLabel = new Label(container, SWT.NONE);
-        netlistLabel.setText("Netlist:");
-
-        netlistText = new Text(container, SWT.BORDER | SWT.SINGLE);
-        netlistText.setText("");
-        netlistText.addKeyListener(new KeyListener() {
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                if (!netlistText.getText().isEmpty() 
-                		&& !configText.getText().isEmpty()
-                		&& !outputText.getText().isEmpty()) {
-                    setPageComplete(true);
-                }
-            }
-
-        });
+        layout.numColumns = 3;
         
-        Label configLabel = new Label(container, SWT.NONE);
-        configLabel.setText("Config:");
-
-        configText = new Text(container, SWT.BORDER | SWT.SINGLE);
-        configText.setText("");
-        configText.addKeyListener(new KeyListener() {
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                if (!netlistText.getText().isEmpty() 
-                		&& !configText.getText().isEmpty()
-                		&& !outputText.getText().isEmpty()) {
-                    setPageComplete(true);
-                }
-            }
-
-        });
+        netlistText = addTextField("Netlist:");
         
-        Label outputLabel = new Label(container, SWT.NONE);
-        outputLabel.setText("Output file:");
+        String[] xmlExtensions = new String[1];
+        xmlExtensions[0] = "*.xml";
+        addBrowseButton(netlistText, "Please select a netlist file (.xml)", xmlExtensions);
 
-        outputText = new Text(container, SWT.BORDER | SWT.SINGLE);
-        outputText.setText("");
-        outputText.addKeyListener(new KeyListener() {
+        configText = addTextField("Config:");
+        
+        addBrowseButton(configText, "Please select a config file (.xml)", xmlExtensions);
 
-            @Override
-            public void keyPressed(KeyEvent e) {
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                if (!netlistText.getText().isEmpty() 
-                		&& !configText.getText().isEmpty()
-                		&& !outputText.getText().isEmpty()) {
-                    setPageComplete(true);
-                }
-            }
-
-        });
+        outputText = addTextField("Output file:");
+        
+        String[] cppExtensions = new String[1];
+        cppExtensions[0] = "*.cpp";
+        addBrowseButton(outputText, "Please select an output file (.cpp)", cppExtensions);
         
         GridData gd = new GridData(GridData.FILL_HORIZONTAL);
         netlistText.setLayoutData(gd);
