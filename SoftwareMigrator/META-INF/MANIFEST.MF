@@ -3,7 +3,8 @@ Bundle-ManifestVersion: 2
 Bundle-Name: SoftwareMigrator
 Bundle-SymbolicName: SoftwareMigrator;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Import-Package: org.eclipse.jface.action,
+Import-Package: org.apache.tools.ant,
+ org.eclipse.jface.action,
  org.eclipse.jface.dialogs,
  org.eclipse.jface.viewers,
  org.eclipse.swt.widgets,

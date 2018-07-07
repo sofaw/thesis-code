@@ -41,6 +41,12 @@ public class MigrationWizardPageOne extends WizardPage {
 
                String selectedFile = fileDialog.getFileName();
                textField.setText(path);
+               
+               if (!netlistText.getText().isEmpty() 
+               		&& !configText.getText().isEmpty()
+               		&& !outputText.getText().isEmpty()) {
+                   setPageComplete(true);
+               }
          }
 
 			@Override
@@ -115,5 +121,9 @@ public class MigrationWizardPageOne extends WizardPage {
 
     public String getConfigText() {
         return configText.getText();
+    }
+    
+    public String getOutputText() {
+    	return outputText.getText();
     }
 }

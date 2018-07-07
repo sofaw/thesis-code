@@ -7,7 +7,7 @@
       <command
             defaultHandler="org.sew569.softwaremigrator.MigrationMenuHandler"
             id="org.sew569.softwaremigrator.command.MigrationCommand"
-            name="Migration">
+            name="New Migration...">
       </command>
    </extension>
    <extension
@@ -16,7 +16,7 @@
             locationURI="menu:org.eclipse.ui.main.menu?after=additions">
          <menu
                id="org.sew569.softwaremigrator.menu.MigrationMenu"
-               label="Migrate Software">
+               label="Software Migration">
                <command
                	  id="org.sew569.softwaremigrator.menus.MigrationCommand"
                   commandId="org.sew569.softwaremigrator.command.MigrationCommand" >
