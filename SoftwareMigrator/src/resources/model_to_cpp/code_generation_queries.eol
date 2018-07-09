@@ -1,3 +1,5 @@
+"Running etl".println();
+
 operation updateConfigFile(part : String, libChoice : String) {
   // Find corresponding part element
   var elem = getConfigElemFromPartName(part);

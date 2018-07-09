@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<parts>
+<!-- Output parts -->
+	<part title="led" type="OUTPUT">
+  <library count="1" name="&lt;none&gt;"/>
+  <library count="1" name=""/>
+  </part> <!-- Regular LED; RGB LED; Superflux LED; -->
+	<part title="prolight rgb 3 watt star" type="OUTPUT"/>
+	<part title="7 segment display" type="OUTPUT"/>
+	<part title="dot matrix" type="OUTPUT"/>
+	<part title="lcd" type="OUTPUT"/> <!-- Graphic LCD; LCD screen; -->
+	<part title="speaker" type="OUTPUT"/> <!-- Piezo speaker; Loudspeaker; -->
+	<part title="microphone" type="OUTPUT"/>
+	<part title="motor" type="OUTPUT"/> <!-- DC Motor; Stepper Motor; Motor driver; -->
+	<part title="edgy" type="OUTPUT"/>
+	<part title="servo" type="OUTPUT"/>
+	<part title="solenoid" type="OUTPUT"/>
+	<part title="relay" type="OUTPUT"/> <!-- Relay; DIP Relay; -->
+	<part title="peltier element" type="OUTPUT"/>
+	
+<!-- Input parts -->	
+	<part title="potentiometer" type="INPUT">
+  <library count="1" name="&lt;none&gt;"/>
+  <library count="1" name=""/>
+  </part> <!-- Digital potentiometer; Slide potentiometer; Rotary potentiometer; Trimmer potentiometer; -->
+	<part title="sensor" type="INPUT"/> <!-- Humidity and temp sensor; Barometric pressure sensor; Temp. sensor; Infrared proximity sensor; -->
+	<part title="rfid reader" type="INPUT"/>
+	<part title="antenna" type="INPUT"/>
+	<part title="switch" type="INPUT"/> <!-- Reed switch; Tilt switch; Mini toggle switch; Toggle switch; -->
+	<part title="lsm303c" type="INPUT"/>
+	<part title="accelerometer" type="INPUT"/>
+	<part title="photocell" type="INPUT"/>
+	<part title="basic flex resistor" type="INPUT"/>
+	<part title="basic force sensing resistor" type="INPUT"/>
+	<part title="pushbutton" type="INPUT"/>
+	<part title="rotary encoder" type="INPUT"/> <!-- Hexa rotary encoder; Rotary encoder; -->
+	<part title="variable capacitor" type="INPUT"/>
+	<part title="tsop312" type="INPUT"/> <!-- Not core part but required for case study -->
+	
+<!-- Boards -->	
+	<part title="arduino uno" type="BOARD"/>
+	<part title="arduino yun" type="BOARD"/>
+	<part title="ichigojam" type="BOARD"/>
+	<part title="udoo board" type="BOARD"/>
+	<part title="bare conductive touch board" type="BOARD"/>
+	<part title="dquidio board" type="BOARD"/>
+	<part title="adafruit atmega32u4" type="BOARD"/>
+	<part title="96boards consumer" type="BOARD"/>
+	<part title="gogoboard" type="BOARD"/>
+	<part title="mbili" type="BOARD"/>
+	<part title="chipkit wf32" type="BOARD"/>
+	<part title="raspberry pi" type="BOARD"/> <!-- Three; Zero; -->
+	<part title="wiring" type="BOARD"/> <!-- Wiring; Wiring USB Adapter; -->
+	<part title="linino" type="BOARD"/>
+	<part title="stepoko" type="BOARD"/>
+	<part title="microcontroller" type="BOARD"/>
+	<part title="picaxe-08" type="BOARD"/>
+	<part title="parallax propeller" type="BOARD"/>
+	<part title="basic stamp 2" type="BOARD"/>
+	<part title="mbed" type="BOARD"/>
+	<part title="raspio duino" type="BOARD"/>
+	<part title="blueiot core" type="BOARD"/>
+	<part title="teensy" type="BOARD"/>
+	<part title="pinocc.io scout" type="BOARD"/>
+	<part title="lightblue bean" type="BOARD"/>
+	<part title="msp430g2" type="BOARD"/>
+	<part title="galileo" type="BOARD"/>
+	<part title="netduino" type="BOARD"/>
+	<part title="spark core" type="BOARD"/>
+</parts>

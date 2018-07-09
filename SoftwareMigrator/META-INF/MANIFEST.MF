@@ -3,7 +3,21 @@ Bundle-ManifestVersion: 2
 Bundle-Name: SoftwareMigrator
 Bundle-SymbolicName: SoftwareMigrator;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Import-Package: org.apache.tools.ant,
+Import-Package: org.antlr.runtime,
+ org.apache.tools.ant,
+ org.eclipse.emf.common.notify,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.xmi.impl,
+ org.eclipse.epsilon.common.module,
+ org.eclipse.epsilon.common.parse.problem,
+ org.eclipse.epsilon.common.util,
+ org.eclipse.epsilon.emc.emf,
+ org.eclipse.epsilon.emc.plainxml,
+ org.eclipse.epsilon.eol,
+ org.eclipse.epsilon.eol.exceptions,
+ org.eclipse.epsilon.eol.exceptions.models,
+ org.eclipse.epsilon.eol.execute.context,
+ org.eclipse.epsilon.eol.models,
  org.eclipse.jface.action,
  org.eclipse.jface.dialogs,
  org.eclipse.jface.viewers,

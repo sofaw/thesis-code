@@ -27,17 +27,9 @@ public class Migrator {
 			throw new Exception("Output file not initialised");
 		}
 
-		// TODO: run ant task
-		// TODO: set variables in build file
-
-		File buildFile = new File("transform_resources/build.xml");
-		Project p = new Project();
-		p.setUserProperty("ant.file", buildFile.getAbsolutePath());
-		p.init();
-		ProjectHelper helper = ProjectHelper.getProjectHelper();
-		p.addReference("ant.projectHelper", helper);
-		helper.parse(p, buildFile);
-		p.executeTarget(p.getDefaultTarget());
+		// TODO: convert xml to model
+		// TODO: use model to generate cpp
+		
 	}
 	
 	public static void main(String args[]) {
