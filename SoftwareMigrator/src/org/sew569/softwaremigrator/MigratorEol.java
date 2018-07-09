@@ -7,7 +7,7 @@ import org.eclipse.epsilon.eol.EolModule;
 import org.eclipse.epsilon.eol.IEolModule;
 import org.eclipse.epsilon.eol.models.IModel;
 
-public class MigratorEol extends EolRunner {
+public class MigratorEol extends EpsilonRunner {
 
 	@Override
 	public IEolModule createModule() {

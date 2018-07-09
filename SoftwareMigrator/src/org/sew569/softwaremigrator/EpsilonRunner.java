@@ -17,7 +17,7 @@ import org.eclipse.epsilon.eol.execute.context.Variable;
 import org.eclipse.epsilon.eol.models.IModel;
 import org.eclipse.epsilon.eol.models.IRelativePathResolver;
 
-public abstract class EolRunner {
+public abstract class EpsilonRunner {
 
 	protected IEolModule module;
 	protected List<Variable> parameters = new ArrayList<Variable>();

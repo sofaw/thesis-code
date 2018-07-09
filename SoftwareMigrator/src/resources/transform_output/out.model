@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ASCII"?>
+<Circuit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="sew569_v2" xsi:schemaLocation="sew569_v2 ../metamodel/metamodel_v2.ecore">
+  <parts partId="18683060" title="Arduino Uno (Rev3)">
+    <connectors name="D7" connectedTo="//@parts.1/@connectors.0"/>
+    <connectors name="D6 PWM" connectedTo="//@parts.2/@connectors.0"/>
+    <connectors name="GND" connectedTo="//@parts.0/@connectors.3"/>
+    <connectors name="GND" connectedTo="//@parts.0/@connectors.2"/>
+    <connectors name="GND" connectedTo="//@parts.0/@connectors.5"/>
+    <connectors name="GND" connectedTo="//@parts.0/@connectors.4"/>
+    <connectors name="GND" connectedTo="//@parts.4/@connectors.0"/>
+    <connectors name="5V" connectedTo="//@parts.2/@connectors.2"/>
+    <connectors name="D2" connectedTo="//@parts.9/@connectors.0"/>
+    <connectors name="D3 PWM" connectedTo="//@parts.10/@connectors.0"/>
+    <connectors name="D9 PWM" connectedTo="//@parts.11/@connectors.0"/>
+    <connectors name="D10 PWM/SS" connectedTo="//@parts.12/@connectors.0"/>
+    <connectors name="A5/SCL" connectedTo="//@parts.0/@connectors.13"/>
+    <connectors name="A5/SCL" connectedTo="//@parts.0/@connectors.12"/>
+    <connectors name="A4/SDA" connectedTo="//@parts.0/@connectors.15"/>
+    <connectors name="A4/SDA" connectedTo="//@parts.0/@connectors.14"/>
+  </parts>
+  <parts partId="18688300" title="220&#x3a9; Resistor" type="Other">
+    <connectors name="Pin 1" connectedTo="//@parts.0/@connectors.0"/>
+    <connectors name="Pin 0" connectedTo="//@parts.4/@connectors.2"/>
+  </parts>
+  <parts partId="18686700" title="10k&#x3a9; Resistor" type="Other">
+    <connectors name="Pin 0" connectedTo="//@parts.0/@connectors.1"/>
+    <connectors name="Pin 0" connectedTo="//@parts.3/@connectors.0"/>
+    <connectors name="Pin 1" connectedTo="//@parts.0/@connectors.7"/>
+    <connectors name="Pin 1" connectedTo="//@parts.3/@connectors.3"/>
+  </parts>
+  <parts partId="18686670" title="Humidity and Temperature Sensor RHT03" type="Input">
+    <connectors name="Data-signal" connectedTo="//@parts.2/@connectors.1"/>
+    <connectors name="GND 2" connectedTo="//@parts.5/@connectors.1"/>
+    <connectors name="GND 2" connectedTo="//@parts.6/@connectors.0"/>
+    <connectors name="Vcc" connectedTo="//@parts.2/@connectors.3"/>
+    <connectors name="Vcc" connectedTo="//@parts.8/@connectors.2"/>
+  </parts>
+  <parts partId="18687990" title="Red (633nm) LED" type="Output">
+    <connectors name="cathode" connectedTo="//@parts.0/@connectors.6"/>
+    <connectors name="cathode" connectedTo="//@parts.5/@connectors.0"/>
+    <connectors name="anode" connectedTo="//@parts.1/@connectors.1"/>
+  </parts>
+  <parts partId="18684330" title="Infrared (850nm) LED" type="Output">
+    <connectors name="cathode" connectedTo="//@parts.4/@connectors.1"/>
+    <connectors name="cathode" connectedTo="//@parts.3/@connectors.1"/>
+    <connectors name="anode" connectedTo="//@parts.9/@connectors.1"/>
+  </parts>
+  <parts partId="18684100" title="TSOP312.., 314.." type="Input">
+    <connectors name="GND" connectedTo="//@parts.3/@connectors.2"/>
+    <connectors name="GND" connectedTo="//@parts.7/@connectors.0"/>
+    <connectors name="Vs" connectedTo="//@parts.8/@connectors.1"/>
+    <connectors name="Data" connectedTo="//@parts.10/@connectors.1"/>
+  </parts>
+  <parts partId="18683090" title="Infrared (850nm) LED" type="Output">
+    <connectors name="cathode" connectedTo="//@parts.6/@connectors.1"/>
+    <connectors name="cathode" connectedTo="//@parts.8/@connectors.0"/>
+    <connectors name="anode" connectedTo="//@parts.11/@connectors.1"/>
+  </parts>
+  <parts partId="18683180" title="TSOP312.., 314.." type="Input">
+    <connectors name="GND" connectedTo="//@parts.7/@connectors.1"/>
+    <connectors name="GND" connectedTo="//@parts.6/@connectors.2"/>
+    <connectors name="Vs" connectedTo="//@parts.3/@connectors.4"/>
+    <connectors name="Data" connectedTo="//@parts.12/@connectors.1"/>
+  </parts>
+  <parts partId="18684550" title="2k&#x3a9; Resistor" type="Other">
+    <connectors name="Pin 0" connectedTo="//@parts.0/@connectors.8"/>
+    <connectors name="Pin 1" connectedTo="//@parts.5/@connectors.2"/>
+  </parts>
+  <parts partId="18685040" title="220&#x3a9; Resistor" type="Other">
+    <connectors name="Pin 0" connectedTo="//@parts.0/@connectors.9"/>
+    <connectors name="Pin 1" connectedTo="//@parts.6/@connectors.3"/>
+  </parts>
+  <parts partId="18683560" title="2k&#x3a9; Resistor" type="Other">
+    <connectors name="Pin 0" connectedTo="//@parts.0/@connectors.10"/>
+    <connectors name="Pin 1" connectedTo="//@parts.7/@connectors.2"/>
+  </parts>
+  <parts partId="18684890" title="220&#x3a9; Resistor" type="Other">
+    <connectors name="Pin 0" connectedTo="//@parts.0/@connectors.11"/>
+    <connectors name="Pin 1" connectedTo="//@parts.8/@connectors.3"/>
+  </parts>
+</Circuit>
