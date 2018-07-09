@@ -1,5 +1,6 @@
 package org.sew569.softwaremigrator;
 
+import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import org.eclipse.epsilon.eol.execute.context.Variable;
 import org.eclipse.epsilon.eol.models.IModel;
 import org.eclipse.epsilon.eol.models.IRelativePathResolver;
 
-public abstract class EolRunner {
+public abstract class ModelLoader {
 
 	protected IEolModule module;
 	protected List<Variable> parameters = new ArrayList<Variable>();
@@ -84,17 +85,6 @@ public abstract class EolRunner {
 		return emfModel;
 	}
 
-	/*protected PlainXmlModel createXmlModel(String name, String file, boolean readOnLoad, boolean storeOnDisposal) throws EolModelLoadingException, URISyntaxException {
-		PlainXmlModel xmlModel = new PlainXmlModel();
-		StringProperties properties = new StringProperties();
-		properties.put(PlainXmlModel.PROPERTY_NAME, name);
-		properties.put(PlainXmlModel.PROPERTY_FILE, getFileURI(file).toString());
-		properties.put(PlainXmlModel.PROPERTY_READONLOAD, readOnLoad + "");
-		properties.put(PlainXmlModel.PROPERTY_STOREONDISPOSAL, storeOnDisposal + "");
-		xmlModel.load(properties, (IRelativePathResolver) null);
-		return xmlModel;
-	}*/
-
 	protected EmfModel createEmfModelByURI(String name, String model, String metamodel, boolean readOnLoad,
 			boolean storeOnDisposal) throws EolModelLoadingException, URISyntaxException {
 		EmfModel emfModel = new EmfModel();
@@ -108,9 +98,21 @@ public abstract class EolRunner {
 		return emfModel;
 	}
 
+	protected PlainXmlModel createXmlModel(String name, String file, boolean readOnLoad, boolean storeOnDisposal)
+			throws EolModelLoadingException, URISyntaxException {
+		PlainXmlModel xmlModel = new PlainXmlModel();
+		// TODO: how to use relative path for this??
+	    xmlModel.setFile(new File(file));
+	    xmlModel.setName(name);
+	    xmlModel.setReadOnLoad(readOnLoad);
+	    xmlModel.setStoredOnDisposal(storeOnDisposal);
+	    xmlModel.load();
+	    return xmlModel;
+	}
+
 	protected URI getFileURI(String fileName) throws URISyntaxException {
 
-		URI binUri = EolRunner.class.getClassLoader().getResource(fileName).toURI();
+		URI binUri = ModelLoader.class.getClassLoader().getResource(fileName).toURI();
 		URI uri = null;
 
 		if (binUri.toString().indexOf("bin") > -1) {

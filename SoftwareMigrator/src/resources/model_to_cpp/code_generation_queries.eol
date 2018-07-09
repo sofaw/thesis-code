@@ -1,4 +1,5 @@
 "Running etl".println();
+getIoParts().println();
 
 operation updateConfigFile(part : String, libChoice : String) {
   // Find corresponding part element
