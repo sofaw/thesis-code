@@ -17,88 +17,34 @@ import org.eclipse.epsilon.eol.execute.context.Variable;
 import org.eclipse.epsilon.eol.models.IModel;
 import org.eclipse.epsilon.eol.models.IRelativePathResolver;
 
-public abstract class ModelLoader {
-
-	protected IEolModule module;
-	protected List<Variable> parameters = new ArrayList<Variable>();
-
-	protected Object result;
-
-	public abstract IEolModule createModule();
-
-	public abstract String getSource() throws Exception;
-
-	public abstract List<IModel> getModels() throws Exception;
-
-	public void postProcess() {
-	};
-
-	public void preProcess() {
-	};
-
-	public void execute() throws Exception {
-
-		module = createModule();
-		module.parse(getFileURI(getSource()));
-
-		if (module.getParseProblems().size() > 0) {
-			System.err.println("Parse errors occured...");
-			for (ParseProblem problem : module.getParseProblems()) {
-				System.err.println(problem.toString());
-			}
-			return;
-		}
-
-		for (IModel model : getModels()) {
-			module.getContext().getModelRepository().addModel(model);
-		}
-
-		for (Variable parameter : parameters) {
-			module.getContext().getFrameStack().put(parameter);
-		}
-
-		preProcess();
-		result = execute(module);
-		postProcess();
-
-		module.getContext().getModelRepository().dispose();
-	}
-
-	public List<Variable> getParameters() {
-		return parameters;
-	}
-
-	protected Object execute(IEolModule module) throws EolRuntimeException {
-		return module.execute();
-	}
-
-	protected EmfModel createEmfModel(String name, String model, String metamodel, boolean readOnLoad,
+public class ModelLoader {
+	protected static EmfModel createEmfModel(String name, String model, String metamodel, boolean readOnLoad,
 			boolean storeOnDisposal) throws EolModelLoadingException, URISyntaxException {
 		EmfModel emfModel = new EmfModel();
 		StringProperties properties = new StringProperties();
 		properties.put(EmfModel.PROPERTY_NAME, name);
-		properties.put(EmfModel.PROPERTY_FILE_BASED_METAMODEL_URI, getFileURI(metamodel).toString());
-		properties.put(EmfModel.PROPERTY_MODEL_URI, getFileURI(model).toString());
+		properties.put(EmfModel.PROPERTY_FILE_BASED_METAMODEL_URI, Helper.getFileURI(metamodel).toString());
+		properties.put(EmfModel.PROPERTY_MODEL_URI, Helper.getFileURI(model).toString());
 		properties.put(EmfModel.PROPERTY_READONLOAD, readOnLoad + "");
 		properties.put(EmfModel.PROPERTY_STOREONDISPOSAL, storeOnDisposal + "");
 		emfModel.load(properties, (IRelativePathResolver) null);
 		return emfModel;
 	}
 
-	protected EmfModel createEmfModelByURI(String name, String model, String metamodel, boolean readOnLoad,
+	protected static EmfModel createEmfModelByURI(String name, String model, String metamodel, boolean readOnLoad,
 			boolean storeOnDisposal) throws EolModelLoadingException, URISyntaxException {
 		EmfModel emfModel = new EmfModel();
 		StringProperties properties = new StringProperties();
 		properties.put(EmfModel.PROPERTY_NAME, name);
 		properties.put(EmfModel.PROPERTY_METAMODEL_URI, metamodel);
-		properties.put(EmfModel.PROPERTY_MODEL_URI, getFileURI(model).toString());
+		properties.put(EmfModel.PROPERTY_MODEL_URI, Helper.getFileURI(model).toString());
 		properties.put(EmfModel.PROPERTY_READONLOAD, readOnLoad + "");
 		properties.put(EmfModel.PROPERTY_STOREONDISPOSAL, storeOnDisposal + "");
 		emfModel.load(properties, (IRelativePathResolver) null);
 		return emfModel;
 	}
 
-	protected PlainXmlModel createXmlModel(String name, String file, boolean readOnLoad, boolean storeOnDisposal)
+	protected static PlainXmlModel createXmlModel(String name, String file, boolean readOnLoad, boolean storeOnDisposal)
 			throws EolModelLoadingException, URISyntaxException {
 		PlainXmlModel xmlModel = new PlainXmlModel();
 		// TODO: how to use relative path for this??
@@ -108,19 +54,5 @@ public abstract class ModelLoader {
 	    xmlModel.setStoredOnDisposal(storeOnDisposal);
 	    xmlModel.load();
 	    return xmlModel;
-	}
-
-	protected URI getFileURI(String fileName) throws URISyntaxException {
-
-		URI binUri = ModelLoader.class.getClassLoader().getResource(fileName).toURI();
-		URI uri = null;
-
-		if (binUri.toString().indexOf("bin") > -1) {
-			uri = new URI(binUri.toString().replaceAll("bin", "src"));
-		} else {
-			uri = binUri;
-		}
-
-		return uri;
 	}
 }

@@ -1,4 +1,4 @@
-"Running etl".println();
+"Running eol".println();
 getIoParts().println();
 
 operation updateConfigFile(part : String, libChoice : String) {
