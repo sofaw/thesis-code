@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<Circuit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="sew569_v2" xsi:schemaLocation="sew569_v2 ../metamodel/metamodel_v2.ecore">
+<Circuit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="sew569_v2" xsi:schemaLocation="sew569_v2 file:/Users/sophie/eclipse-projects/thesis/SoftwareMigrator/src/resources/metamodel/metamodel_v2.ecore">
   <parts partId="18683060" title="Arduino Uno (Rev3)">
     <connectors name="D7" connectedTo="//@parts.1/@connectors.0"/>
     <connectors name="D6 PWM" connectedTo="//@parts.2/@connectors.0"/>

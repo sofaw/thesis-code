@@ -27,13 +27,18 @@ public class Migrator {
 			throw new Exception("Output file not initialised");
 		}
 
-		// TODO: convert xml to model
 		// TODO: use model to generate cpp
-		
+		// Convert xml to model
+		new EtlRunner(inputFile, outputFile, configFile).execute();
+
 	}
-	
+
+	// TODO: delete this
 	public static void main(String args[]) {
-		Migrator m = new Migrator("a","a","a");
+		Migrator m = new Migrator(
+				"/Users/sophie/eclipse-projects/thesis/SoftwareMigrator/src/resources/test_models/case_study_arduino_netlist.xml",
+				"/Users/sophie/eclipse-projects/thesis/SoftwareMigrator/src/resources/test_models/config.xml",
+				"/Users/sophie/eclipse-projects/thesis/SoftwareMigrator/src/resources/transform_output/out.model");
 		try {
 			m.runTransform();
 		} catch (Exception e) {

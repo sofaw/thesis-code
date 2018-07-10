@@ -7,11 +7,12 @@ public class MigrationWizard extends Wizard {
 	
 	@Override
 	public boolean performFinish() {
-		// TODO implement code generation here and close window
-		System.out.println(one.getNetlistText());
-		System.out.println(one.getConfigText());
-		System.out.println(one.getOutputText());
-		System.out.println("wizard finished");
+		Migrator m = new Migrator(one.getNetlistText(), one.getConfigText(), one.getOutputText());
+		try {
+			m.runTransform();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		this.getShell().close();
 		return false;
 	}
