@@ -29,7 +29,7 @@ public class Migrator {
 
 		// TODO: use model to generate cpp
 		// Convert xml to model
-		new EtlRunner(inputFile, outputFile, configFile).execute();
+		new EtlRunner(inputFile, configFile).execute();
 
 	}
 

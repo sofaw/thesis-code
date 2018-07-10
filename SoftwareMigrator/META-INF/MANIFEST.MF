@@ -13,6 +13,7 @@ Import-Package: org.antlr.runtime,
  org.eclipse.epsilon.common.module,
  org.eclipse.epsilon.common.parse.problem,
  org.eclipse.epsilon.common.util,
+ org.eclipse.epsilon.egl,
  org.eclipse.epsilon.emc.emf,
  org.eclipse.epsilon.emc.plainxml,
  org.eclipse.epsilon.eol,
@@ -30,4 +31,5 @@ Import-Package: org.antlr.runtime,
  org.eclipse.ui.commands,
  org.osgi.framework;version="1.8.0"
 Require-Bundle: org.eclipse.ui,
- org.eclipse.swt
+ org.eclipse.swt,
+ ranking;bundle-version="1.0.0"

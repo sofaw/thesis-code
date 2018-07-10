@@ -4,49 +4,50 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.epsilon.common.parse.problem.ParseProblem;
+import org.eclipse.epsilon.egl.EglTemplateFactory;
+import org.eclipse.epsilon.egl.EglTemplateFactoryModuleAdapter;
 import org.eclipse.epsilon.eol.exceptions.EolRuntimeException;
 import org.eclipse.epsilon.eol.execute.context.Variable;
 import org.eclipse.epsilon.eol.models.IModel;
-import org.eclipse.epsilon.etl.EtlModule;
 
-public class EtlRunner {
-	private String inputXml;
+public class EglRunner {
 	private String configXml;
-
-	protected EtlModule module;
+	private String outputFile;
+	
+	protected EglTemplateFactoryModuleAdapter module;
 	protected List<Variable> parameters = new ArrayList<Variable>();
 
 	protected Object result;
 
-	public EtlRunner(String inputXml, String configXml) {
-		this.inputXml = inputXml;
+	public EglRunner(String outputFile, String configXml) {
+		this.outputFile = outputFile;
 		this.configXml = configXml;
 	}
 
-	public EtlModule createModule() {
-		return new EtlModule();
+	public EglTemplateFactoryModuleAdapter createModule() {
+		return new EglTemplateFactoryModuleAdapter(new EglTemplateFactory());
+	}
+
+	public String getSource() throws Exception {
+		return "resources/model_to_cpp/generate_skeleton.egl";
 	}
 
 	public List<IModel> getModels() throws Exception {
 		List<IModel> models = new ArrayList<IModel>();
-		models.add(
-				ModelLoader.createEmfModel("OUT", "resources/transform_output/out.model", "resources/metamodel/metamodel_v2.ecore", false, true));
-		models.add(ModelLoader.createXmlModel("CONFIG", configXml, true, true));
-		models.add(ModelLoader.createXmlModel("XML", inputXml, true, false));
+		models.add(ModelLoader.createEmfModel("M", "resources/transform_output/out.model",
+				"resources/metamodel/metamodel_v2.ecore", true, false));
+		models.add(ModelLoader.createXmlModel("X", configXml, true, true));
 
 		return models;
 	}
-
-	public String getSource() throws Exception {
-		return "resources/xml_to_model/xml_to_model.etl";
-	}
-
+	
 	public void preProcess() {
 	};
-
+	
 	public void postProcess() {
-	};
-
+		System.out.println(result);
+	}
+	
 	public void execute() throws Exception {
 
 		module = createModule();
@@ -79,7 +80,13 @@ public class EtlRunner {
 		return parameters;
 	}
 
-	protected Object execute(EtlModule module) throws EolRuntimeException {
+	protected Object execute(EglTemplateFactoryModuleAdapter module) throws EolRuntimeException {
 		return module.execute();
+	}
+
+	public static void main(String[] args) throws Exception {
+		new EglRunner("/Users/sophie/eclipse-projects/thesis/SoftwareMigrator/src/resources/test_models/output.cpp",
+				"/Users/sophie/eclipse-projects/thesis/SoftwareMigrator/src/resources/test_models/config.xml")
+						.execute();
 	}
 }

@@ -16,7 +16,7 @@ public class ModelLoader {
 		StringProperties properties = new StringProperties();
 		properties.put(EmfModel.PROPERTY_NAME, name);
 		properties.put(EmfModel.PROPERTY_FILE_BASED_METAMODEL_URI, Helper.getFileURI(metamodel).toString());
-		properties.put(EmfModel.PROPERTY_MODEL_URI, model);
+		properties.put(EmfModel.PROPERTY_MODEL_URI, Helper.getFileURI(model).toString());
 		properties.put(EmfModel.PROPERTY_READONLOAD, readOnLoad + "");
 		properties.put(EmfModel.PROPERTY_STOREONDISPOSAL, storeOnDisposal + "");
 		emfModel.load(properties, (IRelativePathResolver) null);
