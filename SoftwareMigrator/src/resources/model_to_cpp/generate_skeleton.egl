@@ -6,6 +6,7 @@
 [%choices.add("<none>"); %]
 [%choices.addAll(suggestLibraries(part)); %]
 [*[%var libChoice = System.user.choose("Suggested libraries for " + part, choices, "");%]*]
+[*TODO: fix user choices *]
 [%var libChoice = "<none>";%]
 [%if(libChoice <> "<none>" and libChoice <> "") {%]
 #include "[%=libChoice%]"

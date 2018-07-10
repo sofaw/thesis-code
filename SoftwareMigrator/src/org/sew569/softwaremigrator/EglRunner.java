@@ -1,5 +1,8 @@
 package org.sew569.softwaremigrator;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +48,15 @@ public class EglRunner {
 	};
 	
 	public void postProcess() {
-		System.out.println(result);
+		// Write result to output file
+		BufferedWriter writer;
+	    try {
+	    	writer = new BufferedWriter(new FileWriter(outputFile));
+			writer.write((String) result);
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void execute() throws Exception {

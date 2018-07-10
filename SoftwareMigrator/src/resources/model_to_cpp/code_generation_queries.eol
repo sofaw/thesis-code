@@ -1,6 +1,3 @@
-"Running eol".println();
-getIoParts().println();
-
 operation updateConfigFile(part : String, libChoice : String) {
   // Find corresponding part element
   var elem = getConfigElemFromPartName(part);
@@ -20,7 +17,6 @@ operation updateConfigFile(part : String, libChoice : String) {
 }
 
 operation getConfigElemFromPartName(partName : String) : X!t_part {
-  partName.println();
   var elems = X!t_part.all.select(p | p.a_title.isSubstringOf(partName.toLowerCase()));
   if(elems.size() > 1) {
     "ambiguous config element".println();
