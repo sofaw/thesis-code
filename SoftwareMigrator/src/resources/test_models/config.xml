@@ -2,7 +2,7 @@
 <parts>
 <!-- Output parts -->
 	<part title="led" type="OUTPUT">
-  <library count="19" name="&lt;none&gt;"/>
+  <library count="21" name="&lt;none&gt;"/>
   <library count="1" name=""/>
   </part> <!-- Regular LED; RGB LED; Superflux LED; -->
 	<part title="prolight rgb 3 watt star" type="OUTPUT"/>
@@ -24,7 +24,7 @@
   <library count="1" name=""/>
   </part> <!-- Digital potentiometer; Slide potentiometer; Rotary potentiometer; Trimmer potentiometer; -->
 	<part title="sensor" type="INPUT">
-    <library count="9" name="&lt;none&gt;"/>
+    <library count="10" name="&lt;none&gt;"/>
   </part> <!-- Humidity and temp sensor; Barometric pressure sensor; Temp. sensor; Infrared proximity sensor; -->
 	<part title="rfid reader" type="INPUT"/>
 	<part title="antenna" type="INPUT"/>
@@ -38,7 +38,7 @@
 	<part title="rotary encoder" type="INPUT"/> <!-- Hexa rotary encoder; Rotary encoder; -->
 	<part title="variable capacitor" type="INPUT"/>
 	<part title="tsop312" type="INPUT">
-    <library count="9" name="&lt;none&gt;"/>
+    <library count="10" name="&lt;none&gt;"/>
   </part> <!-- Not core part but required for case study -->
 	
 <!-- Boards -->	
