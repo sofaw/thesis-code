@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.epsilon.common.parse.problem.ParseProblem;
+import org.eclipse.epsilon.eol.dt.ExtensionPointToolNativeTypeDelegate;
 import org.eclipse.epsilon.eol.exceptions.EolRuntimeException;
 import org.eclipse.epsilon.eol.execute.context.Variable;
 import org.eclipse.epsilon.eol.models.IModel;
@@ -42,13 +43,13 @@ public class EtlRunner {
 	}
 
 	public void preProcess() {
-	};
+		module.getContext().getNativeTypeDelegates().add(new ExtensionPointToolNativeTypeDelegate());
+	}
 
 	public void postProcess() {
-	};
+	}
 
 	public void execute() throws Exception {
-
 		module = createModule();
 		module.parse(Helper.getFileURI(getSource()));
 
@@ -72,7 +73,9 @@ public class EtlRunner {
 		result = execute(module);
 		postProcess();
 
-		module.getContext().getModelRepository().dispose();
+
+		//module.getContext().getModelRepository().dispose();
+
 	}
 
 	public List<Variable> getParameters() {

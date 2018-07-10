@@ -9,6 +9,7 @@ import java.util.List;
 import org.eclipse.epsilon.common.parse.problem.ParseProblem;
 import org.eclipse.epsilon.egl.EglTemplateFactory;
 import org.eclipse.epsilon.egl.EglTemplateFactoryModuleAdapter;
+import org.eclipse.epsilon.eol.dt.ExtensionPointToolNativeTypeDelegate;
 import org.eclipse.epsilon.eol.exceptions.EolRuntimeException;
 import org.eclipse.epsilon.eol.execute.context.Variable;
 import org.eclipse.epsilon.eol.models.IModel;
@@ -45,7 +46,8 @@ public class EglRunner {
 	}
 	
 	public void preProcess() {
-	};
+		module.getContext().getNativeTypeDelegates().add(new ExtensionPointToolNativeTypeDelegate());
+	}
 	
 	public void postProcess() {
 		// Write result to output file
@@ -60,7 +62,6 @@ public class EglRunner {
 	}
 	
 	public void execute() throws Exception {
-
 		module = createModule();
 		module.parse(Helper.getFileURI(getSource()));
 
@@ -84,7 +85,7 @@ public class EglRunner {
 		result = execute(module);
 		postProcess();
 
-		module.getContext().getModelRepository().dispose();
+		//module.getContext().getModelRepository().dispose();
 	}
 
 	public List<Variable> getParameters() {

@@ -33,18 +33,4 @@ public class Migrator {
 		new EglRunner(outputFile, configFile).execute();
 
 	}
-
-	// TODO: delete this
-	public static void main(String args[]) {
-		Migrator m = new Migrator(
-				"/Users/sophie/eclipse-projects/thesis/SoftwareMigrator/src/resources/test_models/case_study_arduino_netlist.xml",
-				"/Users/sophie/eclipse-projects/thesis/SoftwareMigrator/src/resources/test_models/config.xml",
-				"/Users/sophie/eclipse-projects/thesis/SoftwareMigrator/src/resources/test_models/output.cpp");
-		try {
-			m.runTransform();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }
