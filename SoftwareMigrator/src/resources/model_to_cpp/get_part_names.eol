@@ -1,0 +1,11 @@
+return getIoParts();
+
+operation getIoParts() : Set<String> {
+  var results : Set<String>;
+  for(p in Part.all) {
+    if(p.type == Type#Input or p.type == Type#Output) {
+      results.add(p.title);
+    }
+  }
+  return results;
+}

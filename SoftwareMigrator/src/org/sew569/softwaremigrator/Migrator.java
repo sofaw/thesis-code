@@ -1,9 +1,6 @@
 package org.sew569.softwaremigrator;
 
-import java.io.File;
-
-import org.apache.tools.ant.Project;
-import org.apache.tools.ant.ProjectHelper;
+import java.util.Set;
 
 public class Migrator {
 	private String inputFile;
@@ -29,8 +26,30 @@ public class Migrator {
 
 		// Convert xml to model
 		new EtlRunner(inputFile, configFile).execute();
+		// TODO: Generate library choices here
+		// First get partNames
+		/*Set<String> partNames = (Set<String>) new EolRunner(configFile).execute();
+		for(String s : partNames) {
+			System.out.println(s);
+		}*/
+		// Second launch ui to allow users to choose libraries
+
 		// Generate cpp from model
-		new EglRunner(outputFile, configFile).execute();
+		new EglExtendsRunner(outputFile, configFile).execute();
+
+	}
+
+	public static void main(String[] args) {
+		Migrator m = new Migrator(
+				"/Users/sophie/eclipse-projects/thesis/transform_v2/test/input_xml/case_study_arduino_netlist.xml",
+				"/Users/sophie/eclipse-projects/thesis/transform_v2/test/test_config.xml",
+				"/Users/sophie/eclipse-projects/thesis/transform_v2/output.cpp");
+		try {
+			m.runTransform();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 }
