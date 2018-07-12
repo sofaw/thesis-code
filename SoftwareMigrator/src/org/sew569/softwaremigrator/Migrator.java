@@ -35,7 +35,7 @@ public class Migrator {
 		// Second launch ui to allow users to choose libraries
 
 		// Generate cpp from model
-		new EglExtendsRunner(outputFile, configFile).execute();
+		new EglRunner(outputFile, configFile).execute();
 
 	}
 
