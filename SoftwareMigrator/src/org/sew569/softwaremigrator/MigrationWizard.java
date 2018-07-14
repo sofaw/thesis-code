@@ -4,11 +4,14 @@ import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.Wizard;
 
 public class MigrationWizard extends Wizard {
-    protected MigrationWizardPageOne one;
-    protected MigrationWizardPageTwo two;
-	
+	protected MigrationWizardPageOne one;
+	protected MigrationWizardPageTwo two;
+	protected MigrationData md;
+
 	@Override
 	public boolean performFinish() {
+		// TODO: add libraries to output
+		// TODO: update config file
 		Migrator m = new Migrator(one.getNetlistText(), one.getConfigText(), one.getOutputText());
 		try {
 			m.runTransform();
@@ -20,18 +23,25 @@ public class MigrationWizard extends Wizard {
 	}
 
 	@Override
-    public void addPages() {
-        one = new MigrationWizardPageOne();
-        two = new MigrationWizardPageTwo();
-        addPage(one);
-        addPage(two);
-    }
-	
+	public void addPages() {
+		md = new MigrationData();
+		one = new MigrationWizardPageOne(md);
+		addPage(one);
+	}
+
 	@Override
 	public IWizardPage getNextPage(IWizardPage currentPage) {
-	    if (currentPage == one && one.isPageComplete()) {
-	        return two;
-	    }
-	    return null;
+		IWizardPage next = null;
+		if (currentPage == one && one.isPageComplete()) {
+			two = new MigrationWizardPageTwo(md);
+			next = two;
+			addPage(next);
+		}
+		return next;
+	}
+
+	@Override
+	public boolean canFinish() {
+		return getContainer().getCurrentPage() != one && two != null && two.isPageComplete();
 	}
 }

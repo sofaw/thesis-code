@@ -19,11 +19,20 @@ public class MigrationWizardPageOne extends WizardPage {
     private Text configText;
     private Text outputText;
     private Composite container;
+    private MigrationData md;
 	
-	public MigrationWizardPageOne() {
+	public MigrationWizardPageOne(MigrationData md) {
 		super("Configure Migration");
 		setTitle("Configure Migration");
 	    setDescription("Migration Wizard: Configure Migration");
+	    this.md = md;
+	}
+	
+	private void completePage() {
+		md.setInputFile(getNetlistText());
+		md.setConfigFile(getConfigText());
+		md.setOutputFile(getOutputText());
+		setPageComplete(true);
 	}
 	
 	private void addBrowseButton(Text textField, String description, String[] fileExtensions) {
@@ -45,7 +54,7 @@ public class MigrationWizardPageOne extends WizardPage {
                if (!netlistText.getText().isEmpty() 
                		&& !configText.getText().isEmpty()
                		&& !outputText.getText().isEmpty()) {
-                   setPageComplete(true);
+                   completePage();
                }
          }
 
@@ -74,7 +83,7 @@ public class MigrationWizardPageOne extends WizardPage {
                 if (!netlistText.getText().isEmpty() 
                 		&& !configText.getText().isEmpty()
                 		&& !outputText.getText().isEmpty()) {
-                    setPageComplete(true);
+                    completePage();
                 }
             }
 

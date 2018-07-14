@@ -1,8 +1,8 @@
   
 const int humidityandTemperatureSensorRHT031ReadPin1 = 6;  
-const int tS2ReadPin1 = 10;  
+const int tS2ReadPin1 = 3;  
 const int infrared850nmLED1WritePin1 = 2;  
-const int tS1ReadPin1 = 3;  
+const int tS1ReadPin1 = 10;  
 const int infrared850nmLED2WritePin1 = 9;  
 const int red633nmLED1WritePin1 = 7;  
 

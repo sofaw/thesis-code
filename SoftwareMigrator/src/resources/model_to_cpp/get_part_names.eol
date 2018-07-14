@@ -1,11 +1,25 @@
 return getIoParts();
 
+operation getPartType(partName : String) : String {
+  var elems = CONFIG!t_part.all.select(p | p.a_title.isSubstringOf(partName.toLowerCase()));
+  if(elems.size() > 1) {
+    "ambiguous config element".println();
+    return null;
+  } 
+  if(elems.size() <= 0) {
+    return "OTHER";
+  }
+  return elems.first().a_type;
+}
+
 operation getIoParts() : Set<String> {
   var results : Set<String>;
-  for(p in Part.all) {
-    if(p.type == Type#Input or p.type == Type#Output) {
-      results.add(p.title);
-    }
+  var allPartsInNetlist = X!t_part.all.collect(p | p.a_title).asSet();
+  for(part in allPartsInNetlist) {
+	var type = getPartType(part);
+	if(type == "INPUT" or type == "OUTPUT") {
+		results.add(part);
+	}
   }
   return results;
 }

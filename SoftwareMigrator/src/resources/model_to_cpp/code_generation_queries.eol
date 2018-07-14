@@ -29,7 +29,6 @@ operation getConfigElemFromPartName(partName : String) : X!t_part {
   return elems.first();
 }
 
-
 operation getIoParts() : Set<String> {
   var results : Set<String>;
   for(p in Part.all) {
@@ -37,92 +36,6 @@ operation getIoParts() : Set<String> {
       results.add(p.title);
     }
   }
-  return results;
-}
-
-operation suggestLibraries(partName : String) : OrderedSet<String> {
-  var ranks = getLibraryRanks(partName, getLibraryNames());
-  
-  var suggestions : OrderedSet<String>;
-  
-  // First use config file to provide suggestions
-  var configElem = getConfigElemFromPartName(partName);
-  var chosenLibs = configElem.children.select(a | a.tagName == "library").collect(l | l.a_name);
-  suggestions.addAll(chosenLibs);
-
-  
-  // Add all highly weighted libraries
-  for(lib in ranks.keySet()) {
-    if(ranks.get(lib) > 1) {
-      suggestions.add(lib);
-    }
-  }
-  
-  // If suggestions is still empty, add all libraries
-  if(suggestions.size() == 0) {
-    suggestions.addAll(ranks.keySet());
-  }
-  return suggestions;
-}
-
-operation getLibraryRanks(partName : String, libraryFiles : Set<String>) : Map<String, Real> {
-  var results : Map<String, Real>();
-  
-  var ranker = new Native("org.sew569.ranking.LibraryRanker");
-  ranker.setFilesToIndex(new Native("java.util.ArrayList")(libraryFiles));
-  
-  for(lib in libraryFiles) {
-    var totalWeight : Real = 0.0;
-    var tokenisedPartName = new Native("java.lang.String")(partName).split("\\s+");
-    
-    for(token in tokenisedPartName) {
-      totalWeight = totalWeight + ranker.calculateTfIdfWeight(token, lib); 
-    }
-    
-    var fileName = lib.split("/").last();
-    results.put(fileName, totalWeight);
-  }
-  
-  return results;
-}
-
-operation getLibraryNames() : Set<String> {
-  // /Applications/Eclipse.app/Contents/Eclipse/arduinoPlugin/libraries
-  // TODO: change to relative path
-  var libDirPath = "/Applications/Eclipse.app/Contents/Eclipse/arduinoPlugin/libraries";
-
-  var headerFiles = dfsHeaderFiles(libDirPath);
-  return headerFiles;
-}
-
-operation dfsHeaderFiles(dirPath : String) : Set<String> {
-  // check not null
-  // add all *.h files to result
-  // dfs all subdirs and add to result
-  // return result
-  
-  var dir = new Native("java.io.File")(dirPath);
-  
-  var results : Set<String>;
-  for(l in dir.list()) {
-    var fileOrDir = new Native("java.io.File")(dir.getAbsolutePath() + "/" + l);
-    var path = fileOrDir.getAbsolutePath();
-    
-    if(fileOrDir.isFile()) {     // If header file, add to result
-      var fileName = fileOrDir.getName();
-      var i = fileName.lastIndexOf('.');
-
-      if (i > 0) {
-        var extension = fileName.substring(i+1);
-        if(extension.equals("h") and not (path.contains("extras") or path.contains("utility"))) {
-          results.add(path);
-        }
-      } 
-    } else {	// Dfs dir and add to results
-      results.addAll(dfsHeaderFiles(path));
-    }
-  }
-  
   return results;
 }
 

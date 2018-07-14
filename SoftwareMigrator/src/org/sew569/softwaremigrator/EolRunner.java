@@ -2,16 +2,19 @@ package org.sew569.softwaremigrator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.epsilon.eol.EolModule;
 import org.eclipse.epsilon.eol.models.IModel;
 
 public class EolRunner extends EpsilonRunner {
-	private String configXml;
+	private String inputFile;
+	private String configFile;
 
-	public EolRunner(String configXml) {
+	public EolRunner(String inputFile, String configFile) {
 		super();
-		this.configXml = configXml;
+		this.inputFile = inputFile;
+		this.configFile = configFile;
 	}
 
 	@Override
@@ -22,15 +25,18 @@ public class EolRunner extends EpsilonRunner {
 	@Override
 	public List<IModel> getModels() throws Exception {
 		List<IModel> models = new ArrayList<IModel>();
-		models.add(createEmfModel("M", "resources/transform_output/out.model", "resources/metamodel/metamodel_v2.ecore",
-				true, false));
-		models.add(createXmlModel("X", configXml, true, true));
-
+		models.add(createXmlModel("X", inputFile, true, false));
+		models.add(createXmlModel("CONFIG", configFile, true, false));
 		return models;
 	}
 
 	@Override
 	public String getSource() throws Exception {
 		return "resources/model_to_cpp/get_part_names.eol";
+	}
+
+	public Set<String> getPartNames() throws Exception {
+		execute();
+		return (Set<String>) result;
 	}
 }
