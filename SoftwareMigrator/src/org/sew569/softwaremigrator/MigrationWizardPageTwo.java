@@ -1,6 +1,7 @@
 package org.sew569.softwaremigrator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -15,27 +16,29 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableItem;
 import org.sew569.ranking.LibraryRanker;
 import com.google.common.collect.ArrayListMultimap;
 
 public class MigrationWizardPageTwo extends WizardPage {
 	private Composite c;
 	private MigrationData md;
-	private ArrayList<Combo> selections;
+	//private ArrayList<Combo> selections;
 
 	public MigrationWizardPageTwo(MigrationData md) {
 		super("Select libraries");
 		setTitle("Select libraries");
 		setDescription("Migration Wizard: Select libraries");
-		selections = new ArrayList<Combo>();
+		//selections = new ArrayList<Combo>();
 		this.md = md;
 	}
 
 	public void createLibrarySelectionList(String partName) {
 		Label label = new Label(c, SWT.NONE);
 		label.setText(partName);
-
-		Combo libraryList = new Combo(c, SWT.DROP_DOWN);
+		
+		/*Combo libraryList = new Combo(c, SWT.DROP_DOWN);
 		libraryList.add("<none>");
 		libraryList.select(0); // Set default selection to <none>
 		selections.add(libraryList);
@@ -57,8 +60,55 @@ public class MigrationWizardPageTwo extends WizardPage {
 			public void widgetDefaultSelected(SelectionEvent e) {
 				// TODO Auto-generated method stub
 				
-			}});
+			}});*/
 		
+		List<String> libs = getOrderedLibraries(partName);
+		
+		Table table = new Table(c, SWT.CHECK | SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL);
+	    for (String l : libs) {
+	      TableItem item = new TableItem(table, SWT.NONE);
+	      item.setText(l);
+	    }
+	    GridData gd_table = new GridData(300, 100);
+	    table.setLayoutData(gd_table);
+	    
+	    table.getItem(0).setChecked(true);
+	    table.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				ArrayList<TableItem> selected = new ArrayList<TableItem>();
+				for(TableItem t : table.getItems()) {
+					if(t.getChecked()) {
+						selected.add(t);
+					}
+				}
+				if(selected.size() == 1) {
+					// do nothing
+				} else if(selected.size() > 1) {
+					// Deselect <none> if it is selected
+					table.getItem(0).setChecked(false);
+				} else {
+					// Zero selected, check default value of <none>
+					table.getItem(0).setChecked(true);
+				}
+				
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+	    	
+	    });
+
+	}
+	
+	private List<String> getOrderedLibraries(String partName) {
+		// TODO: also read config file to find out previously chosen libraries
+		ArrayList<String> orderedLibs = new ArrayList<String>();
+		orderedLibs.add("<none>");
 		LibraryRanker l = new LibraryRanker();
 		// TODO: update this based on user input
 		l.init("/Applications/Eclipse.app/Contents/Eclipse/arduinoPlugin/libraries");
@@ -68,7 +118,7 @@ public class MigrationWizardPageTwo extends WizardPage {
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-		System.out.println(partName);
+
 		ArrayListMultimap<Double, String> rankings = ArrayListMultimap.create();
 		for(String h : headerFiles) {
 			double tfidf = 0;
@@ -88,11 +138,10 @@ public class MigrationWizardPageTwo extends WizardPage {
 		Collections.sort(order, Collections.reverseOrder());
 		for(double o : order) {
 			for(String s : rankings.get(o)) {
-				libraryList.add(s);
-				System.out.println("Value for " + s + " = " + o);
+				orderedLibs.add(s);
 			}
-
 		}
+		return orderedLibs;
 	}
 	
 	public void populateParts() {
