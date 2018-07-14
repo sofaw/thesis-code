@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.epsilon.egl.EglTemplateFactory;
 import org.eclipse.epsilon.egl.EglTemplateFactoryModuleAdapter;
@@ -13,11 +14,13 @@ import org.eclipse.epsilon.eol.models.IModel;
 public class EglRunner extends EpsilonRunner {
 	private String configXml;
 	private String outputFile;
+	private Set<String> libraries;
 
-	public EglRunner(String outputFile, String configXml) {
+	public EglRunner(String outputFile, String configXml, Set<String> libraries) {
 		super();
 		this.outputFile = outputFile;
 		this.configXml = configXml;
+		this.libraries = libraries;
 	}
 
 	@Override
@@ -46,6 +49,11 @@ public class EglRunner extends EpsilonRunner {
 		BufferedWriter writer;
 		try {
 			writer = new BufferedWriter(new FileWriter(outputFile));
+			for(String lib : libraries) {
+				if(lib != "<none>") {
+					writer.write("#include \"" + lib + "\"\n");
+				}
+			}
 			writer.write((String) result);
 			writer.close();
 		} catch (IOException e) {

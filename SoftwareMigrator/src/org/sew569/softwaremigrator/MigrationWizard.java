@@ -12,7 +12,7 @@ public class MigrationWizard extends Wizard {
 	public boolean performFinish() {
 		// TODO: add libraries to output
 		// TODO: update config file
-		Migrator m = new Migrator(one.getNetlistText(), one.getConfigText(), one.getOutputText());
+		Migrator m = new Migrator(one.getNetlistText(), one.getConfigText(), one.getOutputText(), two.getSelectedLibraries());
 		try {
 			m.runTransform();
 		} catch (Exception e) {

@@ -2,6 +2,7 @@ package org.sew569.softwaremigrator;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -23,12 +24,24 @@ import com.google.common.collect.ArrayListMultimap;
 public class MigrationWizardPageTwo extends WizardPage {
 	private Composite c;
 	private MigrationData md;
+	private ArrayList<TableItem> tableItems;
 
 	public MigrationWizardPageTwo(MigrationData md) {
 		super("Select libraries");
 		setTitle("Select libraries");
 		setDescription("Migration Wizard: Select libraries");
 		this.md = md;
+		tableItems = new ArrayList<TableItem>();
+	}
+	
+	public Set<String> getSelectedLibraries() {
+		Set<String> results = new HashSet<String>();
+		for(TableItem i : tableItems) {
+			if(i.getChecked()) {
+				results.add(i.getText());			
+			}
+		}
+		return results;
 	}
 
 	public void createLibrarySelectionList(String partName) {
@@ -40,7 +53,9 @@ public class MigrationWizardPageTwo extends WizardPage {
 		Table table = new Table(c, SWT.CHECK | SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL);
 		for (String l : libs) {
 			TableItem item = new TableItem(table, SWT.NONE);
-			item.setText(l);
+			tableItems.add(item);
+			String[] lsplit = l.split("/");
+			item.setText(lsplit[lsplit.length - 1]);
 		}
 		GridData gd_table = new GridData(300, 100);
 		table.setLayoutData(gd_table);

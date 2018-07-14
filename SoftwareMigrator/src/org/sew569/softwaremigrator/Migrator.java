@@ -6,11 +6,13 @@ public class Migrator {
 	private String inputFile;
 	private String configFile;
 	private String outputFile;
+	private Set<String> libraries;
 
-	public Migrator(String inputFile, String configFile, String outputFile) {
+	public Migrator(String inputFile, String configFile, String outputFile, Set<String> libraries) {
 		this.inputFile = inputFile;
 		this.configFile = configFile;
 		this.outputFile = outputFile;
+		this.libraries = libraries;
 	}
 
 	public void runTransform() throws Exception {
@@ -35,12 +37,13 @@ public class Migrator {
 		// Second launch ui to allow users to choose libraries
 
 		// Generate cpp from model
-		new EglRunner(outputFile, configFile).execute();
+		new EglRunner(outputFile, configFile, libraries).execute();
 
 	}
 
+	// TODO: delete
 	public static void main(String[] args) {
-		Migrator m = new Migrator(
+		/*Migrator m = new Migrator(
 				"/Users/sophie/eclipse-projects/thesis/transform_v2/test/input_xml/case_study_arduino_netlist.xml",
 				"/Users/sophie/eclipse-projects/thesis/transform_v2/test/test_config.xml",
 				"/Users/sophie/eclipse-projects/thesis/transform_v2/output.cpp");
@@ -49,7 +52,7 @@ public class Migrator {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
 	}
 }
