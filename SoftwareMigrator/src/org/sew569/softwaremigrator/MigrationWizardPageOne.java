@@ -10,6 +10,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
@@ -18,6 +19,7 @@ public class MigrationWizardPageOne extends WizardPage {
     private Text netlistText;
     private Text configText;
     private Text outputText;
+    private Text libsText;
     private Composite container;
     private MigrationData md;
 	
@@ -32,6 +34,7 @@ public class MigrationWizardPageOne extends WizardPage {
 		md.setInputFile(getNetlistText());
 		md.setConfigFile(getConfigText());
 		md.setOutputFile(getOutputText());
+		md.setLibsPath(getLibsText());
 		setPageComplete(true);
 	}
 	
@@ -53,7 +56,8 @@ public class MigrationWizardPageOne extends WizardPage {
                
                if (!netlistText.getText().isEmpty() 
                		&& !configText.getText().isEmpty()
-               		&& !outputText.getText().isEmpty()) {
+               		&& !outputText.getText().isEmpty()
+               		&& !libsText.getText().isEmpty()) {
                    completePage();
                }
          }
@@ -82,7 +86,8 @@ public class MigrationWizardPageOne extends WizardPage {
             public void keyReleased(KeyEvent e) {
                 if (!netlistText.getText().isEmpty() 
                 		&& !configText.getText().isEmpty()
-                		&& !outputText.getText().isEmpty()) {
+                		&& !outputText.getText().isEmpty()
+                		&& !libsText.getText().isEmpty()) {
                     completePage();
                 }
             }
@@ -114,10 +119,41 @@ public class MigrationWizardPageOne extends WizardPage {
         cppExtensions[0] = "*.cpp";
         addBrowseButton(outputText, "Please select an output file (.cpp)", cppExtensions);
         
+        libsText = addTextField("Root directory for libs: ");
+        
+        Button button = new Button(container, SWT.PUSH);
+        button.setText("Browse");
+        button.addSelectionListener(new SelectionListener() {
+
+            @Override
+            public void widgetSelected(SelectionEvent arg0) {
+
+               DirectoryDialog dd = new DirectoryDialog(container.getShell(), SWT.OPEN);         
+               dd.setText("Select the root folder for arduino libraries.");
+               String path = dd.open();
+
+               libsText.setText(path);
+               
+               if (!netlistText.getText().isEmpty() 
+               		&& !configText.getText().isEmpty()
+               		&& !outputText.getText().isEmpty() 
+               		&& !libsText.getText().isEmpty()) {
+                   completePage();
+               }
+         }
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+     });
+        
         GridData gd = new GridData(GridData.FILL_HORIZONTAL);
         netlistText.setLayoutData(gd);
         configText.setLayoutData(gd);
         outputText.setLayoutData(gd);
+        libsText.setLayoutData(gd);
         // required to avoid an error in the system
         setControl(container);
         
@@ -144,5 +180,9 @@ public class MigrationWizardPageOne extends WizardPage {
     
     public String getOutputText() {
     	return outputText.getText();
+    }
+    
+    public String getLibsText() {
+    	return libsText.getText();
     }
 }

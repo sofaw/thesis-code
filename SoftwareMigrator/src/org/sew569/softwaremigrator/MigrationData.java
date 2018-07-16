@@ -4,6 +4,7 @@ public class MigrationData {
 	private String inputFile;
 	private String configFile;
 	private String outputFile;
+	private String libsPath;
 	
 	public String getInputFile() {
 		return inputFile;
@@ -24,5 +25,12 @@ public class MigrationData {
 	}
 	public void setOutputFile(String outputFile) {
 		this.outputFile = outputFile;
+	}
+	
+	public String getLibsPath() {
+		return libsPath;
+	}
+	public void setLibsPath(String libsPath) {
+		this.libsPath = libsPath;
 	}	
 }
