@@ -2,18 +2,22 @@ package org.sew569.softwaremigrator;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
@@ -33,20 +37,28 @@ public class MigrationWizardPageTwo extends WizardPage {
 		this.md = md;
 		tableItems = new ArrayList<TableItem>();
 	}
-	
-	public Set<String> getSelectedLibraries() {
-		Set<String> results = new HashSet<String>();
-		for(TableItem i : tableItems) {
-			if(i.getChecked()) {
-				results.add(i.getText());			
+
+	public ArrayListMultimap<String, String> getSelectedLibraries() throws Exception {
+		ArrayListMultimap<String, String> results = ArrayListMultimap.create();
+		for (TableItem i : tableItems) {
+			if (i.getChecked()) {
+				if (i.getData() != null && i.getData() instanceof String) {
+					results.put((String) i.getData(), i.getText());
+				} else {
+					throw new Exception("Could not update config file.");
+				}
 			}
 		}
 		return results;
 	}
 
-	public void createLibrarySelectionList(String partName) {
+	private void createLibrarySelectionList(String partName) {
 		Label label = new Label(c, SWT.NONE);
 		label.setText(partName);
+
+		ConfigHandler ch = new ConfigHandler(md.getConfigFile());
+		Map<String, Integer> libUses = ch.getLibrariesAndCount(partName);
+		Set<String> lowerCaseKeys = libUses.keySet().stream().map(s -> s.toLowerCase()).collect(Collectors.toSet());
 
 		List<String> libs = getOrderedLibraries(partName);
 
@@ -56,6 +68,15 @@ public class MigrationWizardPageTwo extends WizardPage {
 			tableItems.add(item);
 			String[] lsplit = l.split("/");
 			item.setText(lsplit[lsplit.length - 1]);
+
+			// If lib has previously been chosen, colour it green
+			if (lowerCaseKeys.contains(lsplit[lsplit.length - 1].toLowerCase())) {
+				item.setBackground(new Color(c.getDisplay(), new RGB(0, 220, 0)));
+			}
+
+			// Add partName as data so it can be used for updating the config
+			// file
+			item.setData(partName);
 		}
 		GridData gd_table = new GridData(300, 100);
 		table.setLayoutData(gd_table);
@@ -99,7 +120,7 @@ public class MigrationWizardPageTwo extends WizardPage {
 		orderedLibs.add("<none>");
 		LibraryRanker l = new LibraryRanker();
 		// TODO: update this based on user input
-		l.init("/Applications/Eclipse.app/Contents/Eclipse/arduinoPlugin/libraries");
+		l.init(md.getLibsPath());
 		List<String> headerFiles = null;
 		try {
 			headerFiles = l.getHeaderFiles();
@@ -155,7 +176,7 @@ public class MigrationWizardPageTwo extends WizardPage {
 
 		Set<String> partNames = null;
 		try {
-			partNames = new EolRunner(md.getInputFile(), md.getConfigFile()).getPartNames();
+			partNames = new EolRunnerGetPartNames(md.getInputFile(), md.getConfigFile()).getPartNames();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

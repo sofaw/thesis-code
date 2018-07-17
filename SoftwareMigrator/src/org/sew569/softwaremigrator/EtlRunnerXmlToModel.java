@@ -6,11 +6,11 @@ import java.util.List;
 import org.eclipse.epsilon.eol.models.IModel;
 import org.eclipse.epsilon.etl.EtlModule;
 
-public class EtlRunner extends EpsilonRunner {
+public class EtlRunnerXmlToModel extends EpsilonRunner {
 	private String inputXml;
 	private String configXml;
 
-	public EtlRunner(String inputXml, String configXml) {
+	public EtlRunnerXmlToModel(String inputXml, String configXml) {
 		super();
 		this.inputXml = inputXml;
 		this.configXml = configXml;

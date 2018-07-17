@@ -10,13 +10,12 @@ public class MigrationWizard extends Wizard {
 
 	@Override
 	public boolean performFinish() {
-		// TODO: add libraries to output
 		// TODO: update config file
-		Migrator m = new Migrator(one.getNetlistText(), one.getConfigText(), one.getOutputText(), two.getSelectedLibraries());
 		try {
+			Migrator m = new Migrator(one.getNetlistText(), one.getConfigText(), one.getOutputText(), two.getSelectedLibraries());
 			m.runTransform();
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception e1) {
+			e1.printStackTrace();
 		}
 		this.getShell().close();
 		return false;

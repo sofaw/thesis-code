@@ -7,11 +7,11 @@ import java.util.Set;
 import org.eclipse.epsilon.eol.EolModule;
 import org.eclipse.epsilon.eol.models.IModel;
 
-public class EolRunner extends EpsilonRunner {
+public class EolRunnerGetPartNames extends EpsilonRunner {
 	private String inputFile;
 	private String configFile;
 
-	public EolRunner(String inputFile, String configFile) {
+	public EolRunnerGetPartNames(String inputFile, String configFile) {
 		super();
 		this.inputFile = inputFile;
 		this.configFile = configFile;

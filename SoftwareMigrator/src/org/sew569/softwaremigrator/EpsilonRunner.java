@@ -55,7 +55,7 @@ public abstract class EpsilonRunner {
 		}
 
 		for (Variable parameter : parameters) {
-			module.getContext().getFrameStack().put(parameter);
+			module.getContext().getFrameStack().putGlobal(parameter);
 		}
 
 		preProcess();
@@ -67,6 +67,10 @@ public abstract class EpsilonRunner {
 
 	public List<Variable> getParameters() {
 		return parameters;
+	}
+	
+	public void setParameters(List<Variable> parameters) {
+		this.parameters = parameters;
 	}
 
 	protected Object execute(IEolExecutableModule module) throws EolRuntimeException {

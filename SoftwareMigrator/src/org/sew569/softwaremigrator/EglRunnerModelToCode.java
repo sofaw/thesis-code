@@ -11,12 +11,12 @@ import org.eclipse.epsilon.egl.EglTemplateFactory;
 import org.eclipse.epsilon.egl.EglTemplateFactoryModuleAdapter;
 import org.eclipse.epsilon.eol.models.IModel;
 
-public class EglRunner extends EpsilonRunner {
+public class EglRunnerModelToCode extends EpsilonRunner {
 	private String configXml;
 	private String outputFile;
 	private Set<String> libraries;
 
-	public EglRunner(String outputFile, String configXml, Set<String> libraries) {
+	public EglRunnerModelToCode(String outputFile, String configXml, Set<String> libraries) {
 		super();
 		this.outputFile = outputFile;
 		this.configXml = configXml;
