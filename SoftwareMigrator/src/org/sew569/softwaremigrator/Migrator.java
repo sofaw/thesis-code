@@ -40,25 +40,4 @@ public class Migrator {
 		ConfigHandler c = new ConfigHandler(configFile);
 		c.updateConfigFile(partToLibs);
 	}
-
-	
-
-	// TODO: delete
-	/*public static void main(String[] args) {
-		ArrayListMultimap<String, String> amm = ArrayListMultimap.create();
-		amm.put("led", "none");
-		amm.put("led", "val");
-		amm.put("humidity and temp sensor", "DHT.h");
-
-		Migrator m = new Migrator(
-				"/Users/sophie/eclipse-projects/thesis/transform_v2/test/input_xml/case_study_arduino_netlist.xml",
-				"/Users/sophie/eclipse-projects/thesis/transform_v2/test/test_config.xml",
-				"/Users/sophie/eclipse-projects/thesis/transform_v2/output.cpp", amm);
-		try {
-			m.runTransform();
-		} catch (Exception e) { // TODO Auto-generated
-			e.printStackTrace();
-		}
-
-	}*/
 }

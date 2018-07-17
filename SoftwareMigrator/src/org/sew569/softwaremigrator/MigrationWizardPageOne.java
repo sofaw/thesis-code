@@ -156,20 +156,8 @@ public class MigrationWizardPageOne extends WizardPage {
         libsText.setLayoutData(gd);
         // required to avoid an error in the system
         setControl(container);
-        
-        // TODO: change back to false
-        setPageComplete(true);
 
-        // TODO: delete this
-        netlistText.setText("/Users/sophie/eclipse-projects/thesis/transform_v2/test/input_xml/case_study_arduino_netlist.xml");
-        configText.setText("/Users/sophie/eclipse-projects/thesis/transform_v2/test/test_config.xml");
-        outputText.setText("/Users/sophie/eclipse-projects/thesis/transform_v2/output.cpp");
-        libsText.setText("/Applications/Eclipse.app/Contents/Eclipse/arduinoPlugin/libraries");
-        
-        md.setInputFile(getNetlistText());
-        md.setConfigFile(getConfigText());
-        md.setOutputFile(getOutputText());
-        md.setLibsPath(getLibsText());
+        setPageComplete(false);
     }
 
     public String getNetlistText() {
