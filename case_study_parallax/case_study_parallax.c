@@ -2,9 +2,9 @@
   Blank Simple Project.c
   http://learn.parallax.com/propeller-c-tutorials 
 */
-#include "simpletools.h"                        // Library includes
 #include "abdrive.h"
 #include "dht22.h"
+#include "simpletools.h"
 
 int irLeft, irRight;                            // IR variables
 

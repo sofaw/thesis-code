@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ASTVisitorSew569
+Bundle-SymbolicName: ASTVisitorSew569;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: ASTVisitorSew569.jar,
+ Eclipse.app/Contents/Eclipse/plugins/org.eclipse.cdt.core_6.3.1.201710130142.jar
+Export-Package: org.sew569.visitor
+Require-Bundle: org.eclipse.epsilon.common.dt;bundle-version="1.4.0",
+ org.eclipse.cdt.core;bundle-version="6.3.1"
