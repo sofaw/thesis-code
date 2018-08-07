@@ -1,5 +1,8 @@
 var files = ITranslationUnit.all();
 
+// TODO: generate empty method bodies to replace these platform dependent functions
+
+
 var mainFile = files.selectOne(f | f.getElementName == "case_study_parallax.c");
 
 var ast = mainFile.getAST();
@@ -8,13 +11,126 @@ var visitor = new Native("org.sew569.visitor.ASTVisitorSew569");
 ast.accept(visitor);
 
 var simpleDecls = visitor.getSimpleDeclarations();
-var functionCalls = visitor.getFunctionCalls(); // TODO: delete this from ASTVisitor?
+var funcCalls = visitor.getFunctionCalls();
 
 var libPath = "/Users/sophie/SimpleIDE/Learn/Simple Libraries/";
 
+generateArduinoCode(ast, funcCalls, simpleDecls, libPath).println();
+
+operation generateArduinoCode(ast : Any, funcCalls : Any, simpleDecls : Any, libPath : Any) : String {
+	// TODO: add indentation
+	var builder = new Native("java.lang.StringBuilder");
+	builder.append("void setup() {\n");
+	builder.append(getSetupCode(ast));
+	builder.append("\n}\n\nvoid loop() {\n");
+	builder.append(getLoopCode(ast));
+	builder.append("\n}");
+	
+	// TODO: add other functions from ast
+	for(decl in getPlatformDepDecls(funcCalls, simpleDecls, libPath)) {
+		builder.append("\n\n");
+		builder.append(generateMethodStub(decl));
+	}
+	
+	return builder.toString();
+}
+
+operation generateMethodStub(decl : Any) : String {
+	var builder = new Native("java.lang.StringBuilder");
+	builder.append(decl.getDeclSpecifier().getRawSignature());
+	builder.append(" ");
+	for(d in decl.getDeclarators()) {
+		builder.append(d.getRawSignature());
+	}
+	builder.append(" {\n\t// TODO: implement\n\treturn null;\n}");
+	return builder.toString();
+}
+
+operation getSetupCode(ast : Any) : String { // TODO: check that order is preserved
+	var setupSeq = getMainMethodCompoundStatement(ast).getChildren().reject(c | c.isWhileTrueLoop());
+	return convertDeclSeq(setupSeq);
+}
+
+operation getLoopCode(ast : Any) : String {
+	var loopSeq = getMainMethodCompoundStatement(ast).getChildren().selectOne(c | c.isWhileTrueLoop()).getChildren().selectOne(c | c.isInstanceOf("CASTCompoundStatement")).getChildren();
+	return convertDeclSeq(loopSeq);
+}
+
+operation convertDeclSeq(seq : Sequence<Any>) : String {
+	var builder = new Native("java.lang.StringBuilder");
+	for(decl in seq) {
+		builder.append(decl.getRawSignature());
+		builder.append("\n");
+	}
+	return builder.toString().trim();
+}
+
+operation Any isWhileTrueLoop() : Boolean {
+	if(self.isInstanceOf("CASTWhileStatement")) {
+		var expr = self.getChildren().select(c | c.isInstanceOf("CASTLiteralExpression"));
+		if(expr.size() == 1) {
+			var val = expr.first().toString();
+			if(val == "1" or val == "true") {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+operation getMainMethodCompoundStatement(ast : Any) : Any {
+	var functionDefs = ast.getChildren().select(c | c.isPartOfSourceFile()).select(c | c.isInstanceOf("CASTFunctionDefinition"));
+	for(f in functionDefs) {
+		var decl = f.getChildren().selectOne(c | c.isInstanceOf("CASTFunctionDeclarator"));
+		if(decl.getName().toString() == "main") {
+			return f.getChildren().selectOne(c | c.isInstanceOf("CASTCompoundStatement"));
+		}
+	}
+	return null;
+}
+
+operation getPlatformDepDecl(func : Any, decls : Sequence<Any>, libPath : String) {
+	var funcName = func.getFunctionNameExpression().getRawSignature();
+	
+	for(d in decls) {
+		var declarators = d.getDeclarators();
+		if(declarators.size() > 0) {
+			if(declarators.first().getName().toString() == funcName) {
+				var file = declarators.first().getContainingFilename();
+				if(file.startsWith(libPath)) {
+					return d;
+				} else {
+					return null;
+				}
+			}
+		}
+	}
+	
+	return null;
+}
+
+operation getPlatformDepDecls(funcCalls : Sequence<Any>, decls : Sequence<Any>, libPath : String) : Set<Any> {
+	var results : Set<Any>;
+	
+	for(f in funcCalls) {
+		// Makes assumption that there's only one function declaration with matching name
+		var d = getPlatformDepDecl(f, decls, libPath);
+		if(d <> null) {
+			results.add(d);
+		}
+	}
+	
+	return results;
+}
+
+operation Any isInstanceOf(class : String) {
+	var pkg = "org.eclipse.cdt.internal.core.dom.parser.c.";
+	return self.getClass().toString().split(" ").second() == pkg.concat(class);
+}
+
 // *** make assumption that main has setup and loop structure ***
-var setupCodeSeq = getSetupCode(ast);
-var loopCodeSeq = getLoopCode(ast);
+//var setupCodeSeq = getSetupCode(ast);
+//var loopCodeSeq = getLoopCode(ast);
 
 /*"setup code".println();
 transformCode(setupCodeSeq).println();
@@ -24,7 +140,7 @@ transformCode(loopCodeSeq).println();
 "myPrintf".println();
 transformCode(ast.getChildren().select(c | c.isInstanceOf("CASTFunctionDefinition")).selectOne(c | c.getDeclarator().getName().toString() == "myPrintf")).println();*/
 
-generateArduinoCode(ast).println();
+/*generateArduinoCode(ast).println();
 
 operation generateArduinoCode(ast : Any) : String {	
 	// TODO: handle includes
@@ -200,15 +316,7 @@ operation transformCode(ast : Any) : String {
 }
 
 
-operation getSetupCode(ast : Any) : Sequence<Any> { // TODO: check that order is preserved
-	var main = getMainMethodCompoundStatement(ast);
-	return main.getChildren().reject(c | c.isWhileTrueLoop());
-}
 
-operation getLoopCode(ast : Any) : Sequence<Any> {
-	var main = getMainMethodCompoundStatement(ast);
-	return main.getChildren().selectOne(c | c.isWhileTrueLoop()).getChildren().selectOne(c | c.isInstanceOf("CASTCompoundStatement")).getChildren();
-}
 
 operation Any isWhileTrueLoop() : Boolean {
 	if(self.isInstanceOf("CASTWhileStatement")) {
@@ -280,4 +388,5 @@ operation Any getStaticIntField(fieldName : String) : Integer{
 			}
 		}
 		return -1;
-}
+}*/
+
