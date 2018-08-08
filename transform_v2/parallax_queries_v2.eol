@@ -18,8 +18,20 @@ var libPath = "/Users/sophie/SimpleIDE/Learn/Simple Libraries/";
 generateArduinoCode(ast, funcCalls, simpleDecls, libPath).println();
 
 operation generateArduinoCode(ast : Any, funcCalls : Any, simpleDecls : Any, libPath : Any) : String {
+	// TODO: handle global variables
 	// TODO: add indentation
+
+	
 	var builder = new Native("java.lang.StringBuilder");
+	
+	// Only include non-Parallax libraries
+	for(inc in ast.getIncludeDirectives().select(c | c.isPartOfSourceFile())) {
+		if(not inc.getPath().startsWith(libPath)) {
+			builder.append(inc.getRawSignature());
+			builder.append("\n");
+		}
+	}
+	
 	builder.append("void setup() {\n");
 	builder.append(getSetupCode(ast));
 	builder.append("\n}\n\nvoid loop() {\n");
