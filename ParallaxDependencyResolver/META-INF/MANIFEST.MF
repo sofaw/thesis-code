@@ -6,6 +6,7 @@ Bundle-Version: 1.0.0.qualifier
 Export-Package: .,
  org.sew569
 Require-Bundle: org.eclipse.epsilon.common.dt;bundle-version="1.4.0",
- org.eclipse.cdt.core;bundle-version="6.3.1"
+ org.eclipse.cdt.core;bundle-version="6.3.1",
+ org.eclipse.core.resources
 Import-Package: org.eclipse.cdt.core.index,
  org.eclipse.cdt.core.model
