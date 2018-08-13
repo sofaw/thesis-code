@@ -1,43 +1,41 @@
 package org.sew569;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.eclipse.cdt.core.CCorePlugin;
 import org.eclipse.cdt.core.dom.ast.ASTVisitor;
-import org.eclipse.cdt.core.dom.ast.DOMException;
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
 import org.eclipse.cdt.core.dom.ast.IASTFieldReference;
-import org.eclipse.cdt.core.dom.ast.IASTFileLocation;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionCallExpression;
+import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTName;
 import org.eclipse.cdt.core.dom.ast.IASTNamedTypeSpecifier;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
-import org.eclipse.cdt.core.dom.ast.IASTParameterDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
+import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.eclipse.cdt.core.dom.ast.IBinding;
-import org.eclipse.cdt.core.dom.ast.IScope;
-import org.eclipse.cdt.core.dom.ast.cpp.ICPPNamespaceScope;
 import org.eclipse.cdt.core.index.IIndex;
 import org.eclipse.cdt.core.index.IIndexManager;
 import org.eclipse.cdt.core.index.IIndexName;
 import org.eclipse.cdt.core.model.CoreModel;
 import org.eclipse.cdt.core.model.ICProject;
-import org.eclipse.cdt.internal.core.dom.parser.cpp.ICPPUnknownBinding;
+import org.eclipse.cdt.core.model.ITranslationUnit;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.epsilon.emc.cdt.CdtUtilities;
 
 public class ParallaxDependencyResolver extends ASTVisitor {
 	private IIndex index;
 	private ICProject project;
 	private String libPath = "/Users/sophie/SimpleIDE/Learn/Simple Libraries/";
 	
-	private List<IASTNode> platformDependentNodes;
-	// TODO: delete
-	private List<IASTName> names;
-	private List<IASTNode> allNodes;
+	HashMap<ITranslationUnit, IASTTranslationUnit> projectASTCache;
+	
+	private Set<IASTNode> platformDependentDeclarations;
 
 	// static initializer: executed when the class is loaded
 	{
@@ -46,9 +44,9 @@ public class ParallaxDependencyResolver extends ASTVisitor {
 		shouldVisitParameterDeclarations	= true;
 		shouldVisitDeclarations 			= true;
 
-		platformDependentNodes = new ArrayList<IASTNode>();
-		names = new ArrayList<IASTName>();
-		allNodes = new ArrayList<IASTNode>();
+		projectASTCache = new HashMap<ITranslationUnit, IASTTranslationUnit>();
+		
+		platformDependentDeclarations = new HashSet<IASTNode>();
 	}
 	
 	public void init(String projectName, String libPath) {
@@ -63,16 +61,8 @@ public class ParallaxDependencyResolver extends ASTVisitor {
 		}
 	}
 	
-	public List<IASTNode> getPlatformDependentNodes() {
-		return this.platformDependentNodes;
-	}
-	
-	public List<IASTName> getNames() {
-		return this.names;
-	}
-	
-	public List<IASTNode> getAllNodes() {
-		return this.allNodes;
+	public Set<IASTNode> getPlatformDependentDeclarations() {
+		return this.platformDependentDeclarations;
 	}
 
 	@Override
@@ -84,26 +74,22 @@ public class ParallaxDependencyResolver extends ASTVisitor {
 		IASTExpression funcExpression = funcCallExp.getFunctionNameExpression();
 
 		IASTName name = null;
-		// TODO: delete
-		IASTNode node = null; 
 		
 		if (funcExpression instanceof IASTFieldReference) {
 			// get the field reference for this: e.g., xmlDoc.LoadFile
 			IASTFieldReference fieldRef = (IASTFieldReference) funcExpression;
 			// get the name
 			name = fieldRef.getFieldName();
-			node = fieldRef;
 		} else if (funcExpression instanceof IASTIdExpression) {
 			// get the function name: e.g., printf
 			IASTIdExpression idExp = (IASTIdExpression) funcExpression;
 			// get the name
 			name = idExp.getName();
-			node = idExp;
 		}
 
 		if (name != null) {
 			try {
-				checkIsPlatformDependent(exp, name, IIndex.FIND_DECLARATIONS_DEFINITIONS, libPath);
+				checkIsPlatformDependent(name, IIndex.FIND_DECLARATIONS_DEFINITIONS, libPath);
 			} catch (InterruptedException | CoreException e) {
 				e.printStackTrace();
 			}
@@ -111,7 +97,7 @@ public class ParallaxDependencyResolver extends ASTVisitor {
 		return PROCESS_CONTINUE;
 	}
 
-	@Override
+	/*@Override
 	public int visit(IASTParameterDeclaration pDecl) {
 		if (!(pDecl.getDeclSpecifier() instanceof IASTNamedTypeSpecifier))
 			return PROCESS_CONTINUE;
@@ -119,13 +105,13 @@ public class ParallaxDependencyResolver extends ASTVisitor {
 		IASTName declSpecifierName = ((IASTNamedTypeSpecifier) pDecl.getDeclSpecifier()).getName();
 
 		try {
-			checkIsPlatformDependent(pDecl, declSpecifierName, IIndex.FIND_DECLARATIONS_DEFINITIONS, libPath);
+			checkIsPlatformDependent(declSpecifierName, IIndex.FIND_DECLARATIONS_DEFINITIONS, libPath);
 		} catch (InterruptedException | CoreException e) {
 			e.printStackTrace();
 		}
 		
 		return PROCESS_CONTINUE;
-	}
+	}*/
 
 	@Override
 	public int visit(IASTDeclaration decl) {
@@ -141,17 +127,14 @@ public class ParallaxDependencyResolver extends ASTVisitor {
 		IASTName declSpecifierName = ((IASTNamedTypeSpecifier) simpleDecl.getDeclSpecifier()).getName();
 
 		try {
-			checkIsPlatformDependent(decl, declSpecifierName, IIndex.FIND_DECLARATIONS_DEFINITIONS, libPath);
+			checkIsPlatformDependent(declSpecifierName, IIndex.FIND_DECLARATIONS_DEFINITIONS, libPath);
 		} catch (InterruptedException | CoreException e) {
 			e.printStackTrace();
 		}
 		return PROCESS_CONTINUE;
 	}
 	
-	private void checkIsPlatformDependent(IASTNode node, IASTName name, int indexFlags, String libPath) throws InterruptedException, CoreException {
-		names.add(name);
-		allNodes.add(node);
-		
+	private void checkIsPlatformDependent(IASTName name, int indexFlags, String libPath) throws InterruptedException, CoreException {
 		IBinding binding = name.resolveBinding();
 		
 		index.acquireReadLock();
@@ -160,10 +143,58 @@ public class ParallaxDependencyResolver extends ASTVisitor {
 		if(defs.length > 0) {
 			String originFile = defs[0].getFileLocation().getFileName();
 			if(originFile.startsWith(libPath)) {
-				platformDependentNodes.add(node);
+				IASTNode node = null;
+				if(defs[0].isDeclaration()) {
+					node = findNodeFromIndex(defs[0], IASTSimpleDeclaration.class);
+				} else {
+					node = findNodeFromIndex(defs[0], IASTFunctionDefinition.class);
+				}
+				platformDependentDeclarations.add(node);
 			}
 		}
 
 		index.releaseReadLock();
+	}
+	
+	//https://github.com/gerasimou/SoftwareObsolescence/blob/master/org.spg.refactoring/src/org/spg/refactoring/RefactoringProject.java#L313
+	@SuppressWarnings("rawtypes")
+	protected IASTNode findNodeFromIndex(IIndexName indexName, Class...classes){
+		try {
+			//find translation unit & corresponding ast, cache ast if necessary
+			ITranslationUnit tu;
+			tu = CdtUtilities.getTranslationUnitFromIndexName(indexName);
+			IASTTranslationUnit ast = tu.getAST();
+			if (projectASTCache.containsKey(tu)){
+				ast = projectASTCache.get(tu);
+			} else{//then it's a native library (e.g., stdio.h); do we need it in the AST?
+				//if (locked)
+				//	return null;
+				ast = tu.getAST(index, ITranslationUnit.AST_SKIP_INDEXED_HEADERS);
+				projectASTCache.put(tu, ast);
+			}
+			
+			//find 
+			IASTNode node = ast.getNodeSelector(null).findEnclosingNode(indexName.getNodeOffset(), indexName.getNodeLength());
+//			IASTName name = (IASTName)node;
+			
+			while ( (node != null) && !(nodeIsInstance(classes, node)) ){
+				node =  node.getParent();
+			}
+			assert (nodeIsInstance(classes, node));
+			return node;
+		} 
+		catch (CoreException e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	private boolean nodeIsInstance (Class [] classes, IASTNode node){
+		for (Class clazz: classes){
+			if (clazz.isInstance(node))
+				return true;
+		}
+		return false;
 	}
 }
