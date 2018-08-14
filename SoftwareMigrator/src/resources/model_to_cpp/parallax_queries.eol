@@ -1,0 +1,418 @@
+var libPath = "/Users/sophie/SimpleIDE/Learn/Simple Libraries/";
+
+var files = ITranslationUnit.all();
+var mainFile = files.selectOne(f | f.getElementName == "case_study_parallax.c");
+
+//var ast = mainFile.getAST();
+
+
+var dependencyResolver = new Native("org.sew569.ParallaxDependencyResolver");
+dependencyResolver.init("case_study_parallax", libPath);
+ast.accept(dependencyResolver);
+
+"***".println();
+dependencyResolver.getPlatformDependentDeclarations().println();
+for(decl in dependencyResolver.getPlatformDependentDeclarations()) {
+	decl.println();
+	decl.getRawSignature().println();
+}
+"***".println();
+
+//var visitor = new Native("org.sew569.visitor.ASTVisitorSew569");
+//ast.accept(visitor);
+
+//var simpleDecls = visitor.getSimpleDeclarations();
+//var funcCalls = visitor.getFunctionCalls();
+
+//generateArduinoCode(ast, funcCalls, simpleDecls, libPath).println();
+
+operation test() : String {
+	return "WORKING!!!";
+}
+
+operation generateArduinoCode(ast : Any, funcCalls : Any, simpleDecls : Any, libPath : Any) : String {
+	// TODO: handle global variables
+	// TODO: add indentation
+
+	var builder = new Native("java.lang.StringBuilder");
+	
+	// Only include non-Parallax libraries
+	for(inc in ast.getIncludeDirectives().select(c | c.isPartOfSourceFile())) {
+		if(not inc.getPath().startsWith(libPath)) {
+			builder.append(inc.getRawSignature());
+			builder.append("\n");
+		}
+	}
+	
+	builder.append("void setup() {\n");
+	builder.append(getSetupCode(ast));
+	builder.append("\n}\n\nvoid loop() {\n");
+	builder.append(getLoopCode(ast));
+	builder.append("\n}");
+	
+	// TODO: add other functions from ast
+	for(decl in getPlatformDepDecls(funcCalls, simpleDecls, libPath)) {
+		builder.append("\n\n");
+		builder.append(generateMethodStub(decl));
+	}
+	
+	// TODO: add "typedef struct { } NAME;" or "class NAME {NAME();};" for platform-dep types -> or identify decls to determine whether typedef or class
+	
+	return builder.toString();
+}
+
+operation generateMethodStub(decl : Any) : String {
+	var builder = new Native("java.lang.StringBuilder");
+	builder.append(decl.getDeclSpecifier().getRawSignature());
+	builder.append(" ");
+	for(d in decl.getDeclarators()) {
+		builder.append(d.getRawSignature());
+	}
+	builder.append(" {\n\t// TODO: implement\n\treturn null;\n}");
+	return builder.toString();
+}
+
+operation getSetupCode(ast : Any) : String { // TODO: check that order is preserved
+	var setupSeq = getMainMethodCompoundStatement(ast).getChildren().reject(c | c.isWhileTrueLoop());
+	return convertDeclSeq(setupSeq);
+}
+
+operation getLoopCode(ast : Any) : String {
+	var loopSeq = getMainMethodCompoundStatement(ast).getChildren().selectOne(c | c.isWhileTrueLoop()).getChildren().selectOne(c | c.isInstanceOf("CASTCompoundStatement")).getChildren();
+	return convertDeclSeq(loopSeq);
+}
+
+operation convertDeclSeq(seq : Sequence<Any>) : String {
+	var builder = new Native("java.lang.StringBuilder");
+	for(decl in seq) {
+		builder.append(decl.getRawSignature());
+		builder.append("\n");
+	}
+	return builder.toString().trim();
+}
+
+operation Any isWhileTrueLoop() : Boolean {
+	if(self.isInstanceOf("CASTWhileStatement")) {
+		var expr = self.getChildren().select(c | c.isInstanceOf("CASTLiteralExpression"));
+		if(expr.size() == 1) {
+			var val = expr.first().toString();
+			if(val == "1" or val == "true") {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+operation getMainMethodCompoundStatement(ast : Any) : Any {
+	var functionDefs = ast.getChildren().select(c | c.isPartOfSourceFile()).select(c | c.isInstanceOf("CASTFunctionDefinition"));
+	for(f in functionDefs) {
+		var decl = f.getChildren().selectOne(c | c.isInstanceOf("CASTFunctionDeclarator"));
+		if(decl.getName().toString() == "main") {
+			return f.getChildren().selectOne(c | c.isInstanceOf("CASTCompoundStatement"));
+		}
+	}
+	return null;
+}
+
+operation getPlatformDepDecl(func : Any, decls : Sequence<Any>, libPath : String) {
+	var funcName = func.getFunctionNameExpression().getRawSignature();
+	
+	for(d in decls) {
+		var declarators = d.getDeclarators();
+		if(declarators.size() > 0) {
+			if(declarators.first().getName().toString() == funcName) {
+				var file = declarators.first().getContainingFilename();
+				if(file.startsWith(libPath)) {
+					return d;
+				} else {
+					return null;
+				}
+			}
+		}
+	}
+	
+	return null;
+}
+
+operation getPlatformDepDecls(funcCalls : Sequence<Any>, decls : Sequence<Any>, libPath : String) : Set<Any> {
+	var results : Set<Any>;
+	
+	for(f in funcCalls) {
+		// Makes assumption that there's only one function declaration with matching name
+		var d = getPlatformDepDecl(f, decls, libPath);
+		if(d <> null) {
+			results.add(d);
+		}
+	}
+	
+	return results;
+}
+
+operation Any isInstanceOf(class : String) {
+	var pkg = "org.eclipse.cdt.internal.core.dom.parser.c.";
+	return self.getClass().toString().split(" ").second() == pkg.concat(class);
+}
+
+// *** make assumption that main has setup and loop structure ***
+//var setupCodeSeq = getSetupCode(ast);
+//var loopCodeSeq = getLoopCode(ast);
+
+/*"setup code".println();
+transformCode(setupCodeSeq).println();
+"".println();
+"loop code".println();
+transformCode(loopCodeSeq).println();
+"myPrintf".println();
+transformCode(ast.getChildren().select(c | c.isInstanceOf("CASTFunctionDefinition")).selectOne(c | c.getDeclarator().getName().toString() == "myPrintf")).println();*/
+
+/*generateArduinoCode(ast).println();
+
+operation generateArduinoCode(ast : Any) : String {	
+	// TODO: handle includes
+	// TODO: handle global variables
+	// TODO: transform function defs
+	// TODO: update return val
+	
+	var builder = new Native("java.lang.StringBuilder");
+	builder.append("void setup() {\n");
+	builder.append(indent(formatCode(transformCode(getSetupCode(ast)))));
+	builder.append("\n}\n\nvoid loop() {\n");
+	builder.append(indent(formatCode(transformCode(getLoopCode(ast)))));
+	builder.append("\n}");
+	
+	for(f in getFunctionDefs(ast)) {
+		builder.append("\n\n");
+		builder.append(f.getDeclSpecifier().getRawSignature());
+		builder.append(" ");
+		builder.append(f.getDeclarator().getRawSignature());
+		builder.append(" {\n");
+		builder.append(indent(formatCode(transformCode(f.getBody()))));
+		builder.append("\n}");
+	}
+	
+	return builder.toString();
+}
+
+operation formatCode(code : String) : String {
+	var lines = code.split("\n");
+	var formattedLines : Sequence<String>;
+	var builder = new Native("java.lang.StringBuilder");
+	
+	// Add semicolons and remove whitespace
+	for(line in lines) {
+		if(not (line.trim().startsWith("//") or line.trim().startsWith("for") or 
+			line.trim().startsWith("if") or line.trim().startsWith("}") or
+			line.trim().startsWith("while") or line.isEmpty()) 
+			and not line.trim().endsWith(";")) {
+			line = line.concat(";");
+		}
+		if(not line.isEmpty()) {
+			formattedLines.add(line);
+		}
+	}
+	
+	for(line in formattedLines) {
+		builder.append(line);
+		builder.append("\n");
+	}
+	
+	var formattedCode = builder.toString().trim();
+	formattedCode = formattedCode.replaceAll("\nwhile", "\n\nwhile");
+	formattedCode = formattedCode.replaceAll("\nfor", "\n\nfor");
+	formattedCode = formattedCode.replaceAll("\nif", "\n\nif");
+	
+	return formattedCode;
+}
+
+operation indent(code : String) : String {
+	var nativeStr = new Native("java.lang.String")(code);
+	return "\t" + nativeStr.replaceAll("\n", "\n\t");
+}
+
+// TODO: handle missing semicolons
+// TODO: sort out indentation -> could run a formatter on the code?
+// TODO: add includes
+// TODO: handle order - e.g. '{' has been swapped with low(26) etc.
+operation transformCode(ast : Any) : String {
+	if(ast.isKindOf(Sequence)) {
+		var result = "";
+		for(c in ast) {
+			var transformedCode = transformCode(c);
+			result = result.concat(transformedCode);
+			result = result.concat("\n"); // TODO: remove this? don't want too many new lines
+		}
+		return result;
+	}
+	
+	if(ast.isInstanceOf("CASTFunctionCallExpression")) {
+		var funcComponents = ast.getChildren();
+		var funcName = funcComponents.selectOne(c | c.isInstanceOf("CASTIdExpression")).getChildren().first().toString();
+		if(funcName.isPlatformDependentFunc(visitor.getSimpleDeclarations(), libPath)) {
+			return "// TODO: replace usage of " + ast.getRawSignature() + " with Arduino lib function";
+		}
+	}
+	
+	if(ast.isInstanceOf("CASTBinaryExpression")) {
+		var op1 = transformCode(ast.getOperand1());
+		var op2 = transformCode(ast.getOperand2());
+		
+		if(op1.startsWith("// TODO") or op2.startsWith("// TODO")) {
+			var platformDepFunction = "";
+			if(op1.startsWith("// TODO")) {
+				platformDepFunction = ast.getOperand1().getRawSignature();
+			} else {
+				platformDepFunction = ast.getOperand2().getRawSignature();
+			}
+			return "// TODO replace usage of " + platformDepFunction + " in " + ast.getRawSignature() + " with Arduino lib function";
+		}
+	}
+	
+	if(ast.isInstanceOf("CASTDeclarationStatement")) {
+		var simpleDecl = ast.getChildren().selectOne(c | c.isInstanceOf("CASTSimpleDeclaration"));
+		if(simpleDecl <> null) {
+			var declarator = simpleDecl.getChildren().selectOne(c | c.isInstanceOf("CASTDeclarator"));
+			if(declarator <> null) {
+				var equalsInit = declarator.getChildren().selectOne(c | c.isInstanceOf("CASTEqualsInitializer"));
+				if(equalsInit <> null) {
+					var transformedCode = transformCode(equalsInit.getChildren());
+					// TODO: extract "//TODO" string as const
+					if(transformedCode.startsWith("// TODO")) {
+						var declSpecifier = simpleDecl.getChildren().select(c | c.isInstanceOf("CASTSimpleDeclSpecifier"));
+						var varName = declarator.getChildren().selectOne(c | c.isInstanceOf("CASTName")).getRawSignature();
+						var result = "";
+						for(ds in declSpecifier) {
+							result = result.concat(ds.getRawSignature());
+							result = result.concat(" ");
+						}
+						result = result.concat(varName);
+						result = result.concat(";\n"); // TODO: assign some default values (?)
+						var functionToReplace = transformedCode.split("[)]").first();
+						result = result.concat(functionToReplace + ") in " + simpleDecl.getRawSignature() + " with Arduino lib function");
+						return result;
+					}
+				}
+			}
+		}
+	}
+	
+	// TODO: handle expressions w/n conditions of if/for/while loops
+	
+	if(ast.isInstanceOf("CASTIfStatement")) {
+		var exp = ast.getConditionExpression(); // TODO: handle the case where this relies on platform dep. function
+		var thenClause = ast.getThenClause();
+		var elseClause = ast.getElseClause();
+		if(elseClause <> null) {
+			if(elseClause.isInstanceOf("CASTIfStatement")) {
+				return "if(" + exp.getRawSignature() + ") {\n" + transformCode(thenClause) 
+					+ "} else " + transformCode(elseClause);
+			} else {
+				return "if(" + exp.getRawSignature() + ") {\n" + transformCode(thenClause) 
+					+ "} else {\n" + transformCode(elseClause) + "\n}";
+			}	
+		}
+		return "if(" + exp.getRawSignature() + ") {\n" + transformCode(thenClause) + "\n}";
+	}
+	
+	if(ast.isInstanceOf("CASTForStatement")) {
+		var body = transformCode(ast.getBody());
+		var initStmt = ast.getInitializerStatement().getRawSignature().split(";").first(); // TODO: handle where these exp/stmt rely on platform dep. functions
+		var condStmt = ast.getConditionExpression().getRawSignature().split(";").first();
+		var iterStmt = ast.getIterationExpression().getRawSignature().split(";").first();
+		
+		return "for(" + initStmt + "; " + condStmt + "; " + iterStmt + ") {\n" + body + "\n}";
+	}
+	
+	if(ast.isInstanceOf("CASTWhileStatement")) {
+		var body = transformCode(ast.getBody());
+		var cond = ast.getCondition().getRawSignature(); // TODO: handle when this relies on platform dep functions
+		
+		return "while(" + cond + ") {\n" + body + "}";
+	}
+	
+	if(ast.isInstanceOf("CASTExpressionStatement") or ast.isInstanceOf("CASTTranslationUnit") or ast.isInstanceOf("CASTCompoundStatement") or ast.isInstanceOf("CASTFunctionDefinition")) {
+		return transformCode(ast.getChildren());
+	}
+	
+	if(ast.isPartOfSourceFile()) {	// TODO: might not be necessary if we check for this elsewhere when generating code
+		return ast.getRawSignature();
+	}
+
+	return "";
+}
+
+
+
+
+operation Any isWhileTrueLoop() : Boolean {
+	if(self.isInstanceOf("CASTWhileStatement")) {
+		var expr = self.getChildren().select(c | c.isInstanceOf("CASTLiteralExpression"));
+		if(expr.size() == 1) {
+			var val = expr.first().toString();
+			if(val == "1" or val == "true") {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+operation getMainMethodCompoundStatement(ast : Any) : Any {
+	var functionDefs = ast.getChildren().select(c | c.isPartOfSourceFile()).select(c | c.isInstanceOf("CASTFunctionDefinition"));
+	for(f in functionDefs) {
+		var decl = f.getChildren().selectOne(c | c.isInstanceOf("CASTFunctionDeclarator"));
+		if(decl.getName().toString() == "main") {
+			return f.getChildren().selectOne(c | c.isInstanceOf("CASTCompoundStatement"));
+		}
+	}
+	return null;
+}
+
+operation getFunctionDefs(ast : Any) : Sequence<Any> {
+	var result : Sequence<Any>;
+	var functionDefs = ast.getChildren().select(c | c.isPartOfSourceFile()).select(c | c.isInstanceOf("CASTFunctionDefinition"));
+	for(f in functionDefs) {
+		var decl = f.getChildren().selectOne(c | c.isInstanceOf("CASTFunctionDeclarator"));
+		if(decl.getName().toString() <> "main") {
+			result.add(f);
+		}
+	}
+	return result;
+}
+
+operation String isPlatformDependentFunc(allDecl : Sequence<Any>, libPath : String) : Boolean {
+	// TODO: need to handle scope: collect all occurrences of func in allDecl and choose based on matching sig/scope
+	for(d in allDecl) {
+		var declarators = d.getDeclarators();
+		if(declarators.size() > 0) {
+			if(declarators.first().getName().toString() == self) {
+				var file = declarators.first().getContainingFilename();
+				if(file.startsWith(libPath)) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}
+	}
+	
+	return false;
+}
+
+// TODO: better way to check type of element
+operation Any isInstanceOf(class : String) {
+	var pkg = "org.eclipse.cdt.internal.core.dom.parser.c.";
+	return self.getClass().toString().split(" ").second() == pkg.concat(class);
+}
+
+// TODO: better way to just get field value?
+operation Any getStaticIntField(fieldName : String) : Integer{
+		var fields = self.getClass().getFields();
+		for(field in fields) {
+			if(field.getName() == fieldName) {
+				return field.getInt(self);
+			}
+		}
+		return -1;
+}*/
+

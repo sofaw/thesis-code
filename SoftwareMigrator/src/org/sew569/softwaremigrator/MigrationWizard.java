@@ -6,13 +6,16 @@ import org.eclipse.jface.wizard.Wizard;
 public class MigrationWizard extends Wizard {
 	protected MigrationWizardPageOne one;
 	protected MigrationWizardPageTwo two;
+	protected MigrationWizardPageThree three;
 	protected MigrationData md;
 
 	@Override
 	public boolean performFinish() {
 		// TODO: update config file
 		try {
-			Migrator m = new Migrator(one.getNetlistText(), one.getConfigText(), one.getOutputText(), two.getSelectedLibraries());
+			Migrator m = new Migrator(one.getNetlistText(), one.getConfigText(), 
+					one.getOutputText(), two.getSelectedLibraries(),
+					three.getProjectText(), three.getLibsText());
 			m.runTransform();
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -35,12 +38,17 @@ public class MigrationWizard extends Wizard {
 			two = new MigrationWizardPageTwo(md);
 			next = two;
 			addPage(next);
+		} else if(currentPage == two && two.isPageComplete()) {
+			three = new MigrationWizardPageThree(md);
+			next = three;
+			addPage(next);
 		}
 		return next;
 	}
 
 	@Override
 	public boolean canFinish() {
-		return getContainer().getCurrentPage() != one && two != null && two.isPageComplete();
+		return getContainer().getCurrentPage() != one && getContainer().getCurrentPage() != two
+				&& three != null && three.isPageComplete();
 	}
 }

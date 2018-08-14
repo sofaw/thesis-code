@@ -1,9 +1,12 @@
 [%import "code_generation_queries.eol";%]
+[%import "parallax_queries.eol";%]
 [*Init pin variables*]
 [%var pinVariables = generatePinVariables();%]  
 [%for(pinName in pinVariables.keySet()) {%]
 const int [%=pinName%] = [%=pinVariables.get(pinName)%];  
 [%}%]
+
+[%=test()%]
 
 void setup() {
   // TODO: Complete setup code

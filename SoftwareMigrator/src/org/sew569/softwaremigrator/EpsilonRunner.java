@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.eclipse.epsilon.common.parse.problem.ParseProblem;
 import org.eclipse.epsilon.common.util.StringProperties;
+import org.eclipse.epsilon.emc.cdt.CdtModel;
 import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.epsilon.emc.plainxml.PlainXmlModel;
 import org.eclipse.epsilon.eol.IEolExecutableModule;
@@ -112,6 +113,19 @@ public abstract class EpsilonRunner {
 		xmlModel.setStoredOnDisposal(storeOnDisposal);
 		xmlModel.load();
 		return xmlModel;
+	}
+	
+	protected static CdtModel createCdtModel(String name, String alias, String project, boolean resolveBindings, boolean readOnLoad, boolean storeOnDisposal) throws EolModelLoadingException {
+		CdtModel cdtModel = new CdtModel();
+		StringProperties properties = new StringProperties();
+		properties.put(CdtModel.PROPERTY_NAME, name);
+		properties.put(CdtModel.PROPERTY_ALIASES, alias);
+		properties.put(CdtModel.PROPERTY_PROJECT, project);
+		properties.put(CdtModel.PROPERTY_RESOLVE_BINDINGS, resolveBindings);
+		properties.put(CdtModel.PROPERTY_READONLOAD, readOnLoad);
+		properties.put(CdtModel.PROPERTY_STOREONDISPOSAL, storeOnDisposal);
+		cdtModel.load(properties, (IRelativePathResolver) null);
+		return cdtModel;
 	}
 
 	protected URI getFileURI(String fileName) throws URISyntaxException {

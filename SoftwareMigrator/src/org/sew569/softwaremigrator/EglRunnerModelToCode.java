@@ -15,12 +15,16 @@ public class EglRunnerModelToCode extends EpsilonRunner {
 	private String configXml;
 	private String outputFile;
 	private Set<String> libraries;
+	private String projectFolder;
+	private String parallaxLibs;
 
-	public EglRunnerModelToCode(String outputFile, String configXml, Set<String> libraries) {
+	public EglRunnerModelToCode(String outputFile, String configXml, Set<String> libraries, String projectFolder, String parallaxLibs) {
 		super();
 		this.outputFile = outputFile;
 		this.configXml = configXml;
 		this.libraries = libraries;
+		this.projectFolder = projectFolder;
+		this.parallaxLibs = parallaxLibs;
 	}
 
 	@Override
@@ -39,6 +43,7 @@ public class EglRunnerModelToCode extends EpsilonRunner {
 		models.add(createEmfModel("M", "resources/transform_output/out.model", "resources/metamodel/metamodel_v2.ecore",
 				true, false));
 		models.add(createXmlModel("X", configXml, true, true));
+		models.add(createCdtModel("Source", "S", "case_study_parallax", true, true, false)); // TODO: update to use value from wizard
 
 		return models;
 	}
