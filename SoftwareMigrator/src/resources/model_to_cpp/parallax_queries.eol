@@ -98,47 +98,8 @@ operation getFunctionDefs() : Sequence<Any> {
 	return result;
 }
 
-// *** make assumption that main has setup and loop structure ***
-//var setupCodeSeq = getSetupCode(ast);
-//var loopCodeSeq = getLoopCode(ast);
-
-/*"setup code".println();
-
-
-
-operation String isPlatformDependentFunc(allDecl : Sequence<Any>, libPath : String) : Boolean {
-	// TODO: need to handle scope: collect all occurrences of func in allDecl and choose based on matching sig/scope
-	for(d in allDecl) {
-		var declarators = d.getDeclarators();
-		if(declarators.size() > 0) {
-			if(declarators.first().getName().toString() == self) {
-				var file = declarators.first().getContainingFilename();
-				if(file.startsWith(libPath)) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-		}
-	}
-	
-	return false;
+operation getPlatformIndependentIncludes() : Sequence<Any> {
+	var includeStmts =  getAst().getIncludeDirectives().select(s | s.isPartOfSourceFile());
+	return includeStmts.reject(s | s.getPath().startsWith("/Users/sophie/SimpleIDE/Learn/Simple Libraries/")).collect(s | s.getRawSignature()); // // TODO: update w user entered params
 }
-
-// TODO: better way to check type of element
-operation Any isInstanceOf(class : String) {
-	var pkg = "org.eclipse.cdt.internal.core.dom.parser.c.";
-	return self.getClass().toString().split(" ").second() == pkg.concat(class);
-}
-
-// TODO: better way to just get field value?
-operation Any getStaticIntField(fieldName : String) : Integer{
-		var fields = self.getClass().getFields();
-		for(field in fields) {
-			if(field.getName() == fieldName) {
-				return field.getInt(self);
-			}
-		}
-		return -1;
-}*/
 
