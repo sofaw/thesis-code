@@ -10,20 +10,28 @@ var dependencyResolver = new Native("org.sew569.ParallaxDependencyResolver");
 dependencyResolver.init("case_study_parallax", libPath);
 ast.accept(dependencyResolver);
 
+operation getAst() : Any {
+	var files = Source!ITranslationUnit.all();
+	var mainFile = files.selectOne(f | f.getElementName == "case_study_parallax.c"); // TODO: update w user entered params
+	var ast = mainFile.getAST();
+	return ast;
+}
+
 operation getSetupCode() : String { // TODO: check that order is preserved
-	var setupSeq = getMainMethodCompoundStatement(ast).getChildren().reject(c | c.isWhileTrueLoop());
-	return convertDeclSeq(setupSeq);
+	var setupSeq = getMainMethodCompoundStatement(getAst()).getChildren().reject(c | c.isWhileTrueLoop());
+	var builder = new Native("java.lang.StringBuilder");
+	for(decl in setupSeq) {
+		builder.append(decl.getRawSignature());
+		builder.append("\n");
+	}
+	return builder.toString().trim();
 }
 
 operation getLoopCode() : String {
-	var loopSeq = getMainMethodCompoundStatement(ast).getChildren().selectOne(c | c.isWhileTrueLoop()).getChildren().selectOne(c | c.isInstanceOf("CASTCompoundStatement")).getChildren();
-	return convertDeclSeq(loopSeq);
-}
-
-operation convertDeclSeq(seq : Sequence<Any>) : String {
+	var loopStatements = getMainMethodCompoundStatement(getAst()).getChildren().selectOne(c | c.isWhileTrueLoop()).getChildren().selectOne(c | c.isInstanceOf("CASTCompoundStatement")).getStatements();
 	var builder = new Native("java.lang.StringBuilder");
-	for(decl in seq) {
-		builder.append(decl.getRawSignature());
+	for(s in loopStatements) {
+		builder.append(s.getRawSignature());
 		builder.append("\n");
 	}
 	return builder.toString().trim();
