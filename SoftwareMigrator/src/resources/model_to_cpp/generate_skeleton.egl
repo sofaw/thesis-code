@@ -14,6 +14,10 @@ void loop() {
   [%=getLoopCode()%]
 }
 
+[%for(def in getFunctionDefs()) {%]
+[%=def.getRawSignature()%]
+
+[%}%]
 [%for(decl in getPlatformDependentDeclarations()) {%]
 [%=generateMethodStub(decl)%]
 
