@@ -64,7 +64,7 @@ operation Any isInstanceOf(class : String) {
 
 operation getPlatformDependentDeclarations() : Set<Any> {
 	var dependencyResolver = new Native("org.sew569.ParallaxDependencyResolver");
-	dependencyResolver.init("case_study_parallax", "/Users/sophie/SimpleIDE/Learn/Simple Libraries/"); // TODO: update w. user entered params
+	dependencyResolver.init(getProjectVar(), getLibsVar());
 	
 	var ast = getAst();
 	ast.accept(dependencyResolver);
@@ -108,6 +108,6 @@ operation getFunctionDefs() : Sequence<Any> {
 
 operation getPlatformIndependentIncludes() : Sequence<Any> {
 	var includeStmts =  getAst().getIncludeDirectives().select(s | s.isPartOfSourceFile());
-	return includeStmts.reject(s | s.getPath().startsWith("/Users/sophie/SimpleIDE/Learn/Simple Libraries/")).collect(s | s.getRawSignature()); // // TODO: update w user entered params
+	return includeStmts.reject(s | s.getPath().startsWith(getLibsVar())).collect(s | s.getRawSignature());
 }
 

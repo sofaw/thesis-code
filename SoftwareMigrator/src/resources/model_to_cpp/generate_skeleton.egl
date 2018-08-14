@@ -1,9 +1,5 @@
 [%import "code_generation_queries.eol";%]
 [%import "parallax_queries.eol";%]
-
-[%=getProjectVar()%]
-[%=getLibsVar()%]
-
 [*Add platform-independent include*]
 [%for(i in getPlatformIndependentIncludes()) {%]
 [%=i%]
