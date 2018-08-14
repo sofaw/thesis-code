@@ -1,6 +1,12 @@
 package org.sew569.softwaremigrator;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+
+import org.eclipse.epsilon.eol.execute.context.Variable;
+import org.eclipse.epsilon.eol.types.EolPrimitiveType;
+import org.eclipse.epsilon.eol.types.EolType;
 
 import com.google.common.collect.ArrayListMultimap;
 
@@ -46,7 +52,9 @@ public class Migrator {
 		new EtlRunnerXmlToModel(inputFile, configFile).execute();
 
 		// Generate cpp from model
-		new EglRunnerModelToCode(outputFile, configFile, new HashSet<String>(partToLibs.values()), projectFolder, parallaxLibs).execute();
+		EglRunnerModelToCode cppGenerator = new EglRunnerModelToCode(outputFile, configFile, new HashSet<String>(partToLibs.values()), projectFolder, parallaxLibs);
+
+		cppGenerator.execute();
 		
 		
 		ConfigHandler c = new ConfigHandler(configFile);

@@ -9,7 +9,9 @@ import java.util.Set;
 
 import org.eclipse.epsilon.egl.EglTemplateFactory;
 import org.eclipse.epsilon.egl.EglTemplateFactoryModuleAdapter;
+import org.eclipse.epsilon.eol.execute.context.Variable;
 import org.eclipse.epsilon.eol.models.IModel;
+import org.eclipse.epsilon.eol.types.EolPrimitiveType;
 
 public class EglRunnerModelToCode extends EpsilonRunner {
 	private String configXml;
@@ -25,6 +27,15 @@ public class EglRunnerModelToCode extends EpsilonRunner {
 		this.libraries = libraries;
 		this.projectFolder = projectFolder;
 		this.parallaxLibs = parallaxLibs;
+		
+		List<Variable> params = new ArrayList<Variable>();
+		// Only want last part of projectFolder path
+		String[] projectFolderSplit = projectFolder.split("/");	
+		Variable projectVar = new Variable("project", projectFolderSplit[projectFolderSplit.length - 1], EolPrimitiveType.String);
+		Variable parallaxLibsVar = new Variable("libs", parallaxLibs, EolPrimitiveType.String);
+		params.add(projectVar);
+		params.add(parallaxLibsVar);
+		setParameters(params);
 	}
 
 	@Override

@@ -44,4 +44,5 @@ Import-Package: org.antlr.runtime,
 Require-Bundle: org.eclipse.ui,
  org.eclipse.swt,
  ranking;bundle-version="1.0.0",
- ParallaxDependencyResolver;bundle-version="1.0.0"
+ ParallaxDependencyResolver;bundle-version="1.0.0",
+ org.eclipse.cdt.core

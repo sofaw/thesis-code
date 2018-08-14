@@ -1,3 +1,11 @@
+operation getProjectVar() : String {
+	return project;
+}
+
+operation getLibsVar() : String {
+	return libs;
+}
+
 operation getAst() : Any {
 	var files = Source!ITranslationUnit.all();
 	var mainFile = files.selectOne(f | f.getElementName == "case_study_parallax.c"); // TODO: update w user entered params
