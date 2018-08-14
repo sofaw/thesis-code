@@ -13,3 +13,8 @@ void setup() {
 void loop() {
   [%=getLoopCode()%]
 }
+
+[%for(decl in getPlatformDependentDeclarations()) {%]
+[%=generateMethodStub(decl)%]
+
+[%}%]

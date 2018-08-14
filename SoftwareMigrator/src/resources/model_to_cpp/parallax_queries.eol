@@ -1,14 +1,14 @@
 // TODO: update these to use user entered params
-var libPath = "/Users/sophie/SimpleIDE/Learn/Simple Libraries/";
-var mainFileStr = "case_study_parallax.c";
+//var libPath = "/Users/sophie/SimpleIDE/Learn/Simple Libraries/";
+//var mainFileStr = "case_study_parallax.c";
 
-var files = ITranslationUnit.all();
+/*var files = ITranslationUnit.all();
 var mainFile = files.selectOne(f | f.getElementName == mainFileStr);
 var ast = mainFile.getAST();
 
 var dependencyResolver = new Native("org.sew569.ParallaxDependencyResolver");
 dependencyResolver.init("case_study_parallax", libPath);
-ast.accept(dependencyResolver);
+ast.accept(dependencyResolver);*/
 
 operation getAst() : Any {
 	var files = Source!ITranslationUnit.all();
@@ -64,6 +64,38 @@ operation getMainMethodCompoundStatement(ast : Any) : Any {
 operation Any isInstanceOf(class : String) {
 	var pkg = "org.eclipse.cdt.internal.core.dom.parser.c.";
 	return self.getClass().toString().split(" ").second() == pkg.concat(class);
+}
+
+operation getPlatformDependentDeclarations() : Set<Any> {
+	var dependencyResolver = new Native("org.sew569.ParallaxDependencyResolver");
+	dependencyResolver.init("case_study_parallax", "/Users/sophie/SimpleIDE/Learn/Simple Libraries/"); // TODO: update w. user entered params
+	
+	var ast = getAst();
+	ast.accept(dependencyResolver);
+	
+	return dependencyResolver.getPlatformDependentDeclarations().println();
+}
+
+operation generateMethodStub(decl : Any) : String {
+	var builder = new Native("java.lang.StringBuilder");
+	builder.append(decl.getDeclSpecifier());
+	builder.append(" ");
+
+	if(decl.isInstanceOf("CASTFunctionDefinition") or decl.isInstanceOf("CPPASTFunctionDefinition")) {
+		builder.append(decl.getDeclarator().getRawSignature());
+	} else { // Instance of CASTSimpleDeclaration
+		var i = 0;
+		for(d in decl.getDeclarators()) {
+			if(i > 0) {
+				builder.append(" ");
+			}
+			builder.append(d.getRawSignature());
+			i = i + 1;
+		}
+	}
+	builder.append(" {\n\t// TODO: complete method\n}");
+	
+	return builder.toString();
 }
 
 /*"***".println();
