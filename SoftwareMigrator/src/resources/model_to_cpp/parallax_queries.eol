@@ -1,22 +1,70 @@
+// TODO: update these to use user entered params
 var libPath = "/Users/sophie/SimpleIDE/Learn/Simple Libraries/";
+var mainFileStr = "case_study_parallax.c";
 
 var files = ITranslationUnit.all();
-var mainFile = files.selectOne(f | f.getElementName == "case_study_parallax.c");
-
-//var ast = mainFile.getAST();
-
+var mainFile = files.selectOne(f | f.getElementName == mainFileStr);
+var ast = mainFile.getAST();
 
 var dependencyResolver = new Native("org.sew569.ParallaxDependencyResolver");
 dependencyResolver.init("case_study_parallax", libPath);
 ast.accept(dependencyResolver);
 
-"***".println();
+operation getSetupCode() : String { // TODO: check that order is preserved
+	var setupSeq = getMainMethodCompoundStatement(ast).getChildren().reject(c | c.isWhileTrueLoop());
+	return convertDeclSeq(setupSeq);
+}
+
+operation getLoopCode() : String {
+	var loopSeq = getMainMethodCompoundStatement(ast).getChildren().selectOne(c | c.isWhileTrueLoop()).getChildren().selectOne(c | c.isInstanceOf("CASTCompoundStatement")).getChildren();
+	return convertDeclSeq(loopSeq);
+}
+
+operation convertDeclSeq(seq : Sequence<Any>) : String {
+	var builder = new Native("java.lang.StringBuilder");
+	for(decl in seq) {
+		builder.append(decl.getRawSignature());
+		builder.append("\n");
+	}
+	return builder.toString().trim();
+}
+
+operation Any isWhileTrueLoop() : Boolean {
+	if(self.isInstanceOf("CASTWhileStatement")) {
+		var expr = self.getChildren().select(c | c.isInstanceOf("CASTLiteralExpression"));
+		if(expr.size() == 1) {
+			var val = expr.first().toString();
+			if(val == "1" or val == "true") {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+operation getMainMethodCompoundStatement(ast : Any) : Any {
+	var functionDefs = ast.getChildren().select(c | c.isPartOfSourceFile()).select(c | c.isInstanceOf("CASTFunctionDefinition"));
+	for(f in functionDefs) {
+		var decl = f.getChildren().selectOne(c | c.isInstanceOf("CASTFunctionDeclarator"));
+		if(decl.getName().toString() == "main") {
+			return f.getChildren().selectOne(c | c.isInstanceOf("CASTCompoundStatement"));
+		}
+	}
+	return null;
+}
+
+operation Any isInstanceOf(class : String) {
+	var pkg = "org.eclipse.cdt.internal.core.dom.parser.c.";
+	return self.getClass().toString().split(" ").second() == pkg.concat(class);
+}
+
+/*"***".println();
 dependencyResolver.getPlatformDependentDeclarations().println();
 for(decl in dependencyResolver.getPlatformDependentDeclarations()) {
 	decl.println();
 	decl.getRawSignature().println();
 }
-"***".println();
+"***".println();*/
 
 //var visitor = new Native("org.sew569.visitor.ASTVisitorSew569");
 //ast.accept(visitor);
@@ -26,7 +74,7 @@ for(decl in dependencyResolver.getPlatformDependentDeclarations()) {
 
 //generateArduinoCode(ast, funcCalls, simpleDecls, libPath).println();
 
-operation test() : String {
+/*operation test() : String {
 	return "WORKING!!!";
 }
 
@@ -72,49 +120,6 @@ operation generateMethodStub(decl : Any) : String {
 	return builder.toString();
 }
 
-operation getSetupCode(ast : Any) : String { // TODO: check that order is preserved
-	var setupSeq = getMainMethodCompoundStatement(ast).getChildren().reject(c | c.isWhileTrueLoop());
-	return convertDeclSeq(setupSeq);
-}
-
-operation getLoopCode(ast : Any) : String {
-	var loopSeq = getMainMethodCompoundStatement(ast).getChildren().selectOne(c | c.isWhileTrueLoop()).getChildren().selectOne(c | c.isInstanceOf("CASTCompoundStatement")).getChildren();
-	return convertDeclSeq(loopSeq);
-}
-
-operation convertDeclSeq(seq : Sequence<Any>) : String {
-	var builder = new Native("java.lang.StringBuilder");
-	for(decl in seq) {
-		builder.append(decl.getRawSignature());
-		builder.append("\n");
-	}
-	return builder.toString().trim();
-}
-
-operation Any isWhileTrueLoop() : Boolean {
-	if(self.isInstanceOf("CASTWhileStatement")) {
-		var expr = self.getChildren().select(c | c.isInstanceOf("CASTLiteralExpression"));
-		if(expr.size() == 1) {
-			var val = expr.first().toString();
-			if(val == "1" or val == "true") {
-				return true;
-			}
-		}
-	}
-	return false;
-}
-
-operation getMainMethodCompoundStatement(ast : Any) : Any {
-	var functionDefs = ast.getChildren().select(c | c.isPartOfSourceFile()).select(c | c.isInstanceOf("CASTFunctionDefinition"));
-	for(f in functionDefs) {
-		var decl = f.getChildren().selectOne(c | c.isInstanceOf("CASTFunctionDeclarator"));
-		if(decl.getName().toString() == "main") {
-			return f.getChildren().selectOne(c | c.isInstanceOf("CASTCompoundStatement"));
-		}
-	}
-	return null;
-}
-
 operation getPlatformDepDecl(func : Any, decls : Sequence<Any>, libPath : String) {
 	var funcName = func.getFunctionNameExpression().getRawSignature();
 	
@@ -147,12 +152,7 @@ operation getPlatformDepDecls(funcCalls : Sequence<Any>, decls : Sequence<Any>, 
 	}
 	
 	return results;
-}
-
-operation Any isInstanceOf(class : String) {
-	var pkg = "org.eclipse.cdt.internal.core.dom.parser.c.";
-	return self.getClass().toString().split(" ").second() == pkg.concat(class);
-}
+}*/
 
 // *** make assumption that main has setup and loop structure ***
 //var setupCodeSeq = getSetupCode(ast);

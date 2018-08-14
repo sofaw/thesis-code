@@ -157,7 +157,14 @@ public class MigrationWizardPageOne extends WizardPage {
         // required to avoid an error in the system
         setControl(container);
 
-        setPageComplete(false);
+	    // TODO: delete this
+		netlistText.setText("/Users/sophie/eclipse-projects/thesis/transform_v2/test/input_xml/case_study_arduino_netlist.xml");
+		configText.setText("/Users/sophie/eclipse-projects/thesis/transform_v2/test/test_config.xml");
+		outputText.setText("/Users/sophie/eclipse-projects/thesis/transform_v2/output.cpp");
+		libsText.setText("/Applications/Eclipse.app/Contents/Eclipse/arduinoPlugin/libraries");
+        completePage();
+        
+        //setPageComplete(false);
     }
 
     public String getNetlistText() {

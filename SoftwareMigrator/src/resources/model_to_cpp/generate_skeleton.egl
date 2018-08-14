@@ -6,12 +6,10 @@
 const int [%=pinName%] = [%=pinVariables.get(pinName)%];  
 [%}%]
 
-[%=test()%]
-
 void setup() {
-  // TODO: Complete setup code
+  [%=getSetupCode()%]
 }
 
 void loop() {
-  // TODO: Complete main code
+  [%=getLoopCode()%]
 }

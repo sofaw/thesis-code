@@ -11,7 +11,7 @@ public class MigrationWizard extends Wizard {
 
 	@Override
 	public boolean performFinish() {
-		// TODO: update config file
+		// TODO: delete hardcoded vals
 		try {
 			Migrator m = new Migrator(one.getNetlistText(), one.getConfigText(), 
 					one.getOutputText(), two.getSelectedLibraries(),

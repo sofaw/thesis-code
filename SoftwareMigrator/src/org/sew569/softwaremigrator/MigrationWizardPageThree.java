@@ -111,7 +111,12 @@ public class MigrationWizardPageThree extends WizardPage {
         // required to avoid an error in the system
         setControl(container);
 
-        setPageComplete(false);
+	    
+	    libsText.setText("/Users/sophie/SimpleIDE/Learn/Simple Libraries");
+	    projectText.setText("/Users/sophie/eclipse-projects/thesis/case_study_parallax");
+	    completePage();
+        
+        //setPageComplete(false);
     }
 
     public String getProjectText() {
