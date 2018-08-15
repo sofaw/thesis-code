@@ -16,16 +16,19 @@ public class Migrator {
 	private String outputFile;
 	private String projectFolder;
 	private String parallaxLibs;
+	private String mainFile;
 	private ArrayListMultimap<String, String> partToLibs;
 
 	public Migrator(String inputFile, String configFile, String outputFile,
-			ArrayListMultimap<String, String> partToLibs, String projectFolder, String parallaxLibs) {
+			ArrayListMultimap<String, String> partToLibs, String projectFolder, 
+			String parallaxLibs, String mainFile) {
 		this.inputFile = inputFile;
 		this.configFile = configFile;
 		this.outputFile = outputFile;
 		this.partToLibs = partToLibs;
 		this.projectFolder = projectFolder;
 		this.parallaxLibs = parallaxLibs;
+		this.mainFile = mainFile;
 	}
 
 	public void runTransform() throws Exception {
@@ -47,12 +50,17 @@ public class Migrator {
 		if(parallaxLibs == null || parallaxLibs.isEmpty()) {
 			throw new Exception("Source platform libraries could not be accessed");
 		}
+		if(mainFile == null || mainFile.isEmpty()) {
+			throw new Exception("No source file for refactoring has been provided");
+		}
 
 		// Convert xml to model
 		new EtlRunnerXmlToModel(inputFile, configFile).execute();
 
 		// Generate cpp from model
-		EglRunnerModelToCode cppGenerator = new EglRunnerModelToCode(outputFile, configFile, new HashSet<String>(partToLibs.values()), projectFolder, parallaxLibs);
+		EglRunnerModelToCode cppGenerator = new EglRunnerModelToCode(outputFile, configFile, 
+				new HashSet<String>(partToLibs.values()), projectFolder, parallaxLibs,
+				mainFile);
 
 		cppGenerator.execute();
 		

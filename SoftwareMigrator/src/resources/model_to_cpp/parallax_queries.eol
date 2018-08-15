@@ -6,9 +6,13 @@ operation getLibsVar() : String {
 	return libs;
 }
 
+operation getMainFileVar() : String {
+	return mainFile;
+}
+
 operation getAst() : Any {
 	var files = Source!ITranslationUnit.all();
-	var mainFile = files.selectOne(f | f.getElementName == "case_study_parallax.c"); // TODO: update w user entered params
+	var mainFile = files.selectOne(f | f.getElementName == getMainFileVar());
 	var ast = mainFile.getAST();
 	return ast;
 }

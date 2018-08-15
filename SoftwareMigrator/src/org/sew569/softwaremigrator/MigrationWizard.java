@@ -15,7 +15,7 @@ public class MigrationWizard extends Wizard {
 		try {
 			Migrator m = new Migrator(one.getNetlistText(), one.getConfigText(), 
 					one.getOutputText(), two.getSelectedLibraries(),
-					three.getProjectText(), three.getLibsText());
+					three.getProjectText(), three.getLibsText(), three.getMainFileText());
 			m.runTransform();
 		} catch (Exception e1) {
 			e1.printStackTrace();

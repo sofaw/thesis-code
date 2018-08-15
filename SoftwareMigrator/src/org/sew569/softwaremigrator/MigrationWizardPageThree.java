@@ -18,6 +18,7 @@ import org.eclipse.swt.widgets.Text;
 public class MigrationWizardPageThree extends WizardPage {
 	private Text libsText;
     private Text projectText;
+    private Text mainFileText;
     private Composite container;
     private MigrationData md;
 	
@@ -50,13 +51,42 @@ public class MigrationWizardPageThree extends WizardPage {
                directoryDialog.setText(description);
                String path = directoryDialog.open();
 
-               // TODO: delete?
-               //String selectedFile = fileDialog.getFileName();
                textField.setText(path);
                
                if (!libsText.getText().isEmpty() 
+            		&& !mainFileText.getText().isEmpty()
                		&& !projectText.getText().isEmpty()) {
                    completePage();
+               }
+         }
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+     });
+	}
+	
+	private void addFileBrowseButton(Text textField, String description, String[] fileExtensions) {
+        Button button = new Button(container, SWT.PUSH);
+        button.setText("Browse");
+        button.addSelectionListener(new SelectionListener() {
+
+            @Override
+            public void widgetSelected(SelectionEvent arg0) {
+
+               FileDialog fileDialog = new FileDialog(container.getShell(), SWT.OPEN);         
+               fileDialog.setText(description);
+               fileDialog.setFilterExtensions(fileExtensions);
+               String path = fileDialog.open();
+
+               textField.setText(path);
+               
+               if (!libsText.getText().isEmpty() 
+               		&& !mainFileText.getText().isEmpty()
+                  		&& !projectText.getText().isEmpty()) {
+                      completePage();
                }
          }
 
@@ -83,6 +113,7 @@ public class MigrationWizardPageThree extends WizardPage {
             @Override
             public void keyReleased(KeyEvent e) {
                 if (!libsText.getText().isEmpty() 
+                		&& !mainFileText.getText().isEmpty()
                 		&& !projectText.getText().isEmpty()) {
                     completePage();
                 }
@@ -101,6 +132,12 @@ public class MigrationWizardPageThree extends WizardPage {
         
         projectText = addTextField("Parallax Project:");
         addBrowseButton(projectText, "Please select the Parallax project to refactor");
+        
+        mainFileText = addTextField("Source File to Transform: ");
+        String[] cppExtensions = new String[2];
+        cppExtensions[0] = "*.cpp";
+        cppExtensions[1] = "*.c";
+        addFileBrowseButton(mainFileText, "Please select the .c/.cpp file to refactor", cppExtensions);
 
         libsText = addTextField("Parallax Library Root:");
         addBrowseButton(libsText, "Please select the root directory for the Parallax libraries");
@@ -108,12 +145,14 @@ public class MigrationWizardPageThree extends WizardPage {
         GridData gd = new GridData(GridData.FILL_HORIZONTAL);
         projectText.setLayoutData(gd);
         libsText.setLayoutData(gd);
+        mainFileText.setLayoutData(gd);
         // required to avoid an error in the system
         setControl(container);
 
 	    
 	    libsText.setText("/Users/sophie/SimpleIDE/Learn/Simple Libraries");
 	    projectText.setText("/Users/sophie/eclipse-projects/thesis/case_study_parallax");
+	    mainFileText.setText("/Users/sophie/eclipse-projects/thesis/case_study_parallax/case_study_parallax.c");
 	    completePage();
         
         //setPageComplete(false);
@@ -125,5 +164,9 @@ public class MigrationWizardPageThree extends WizardPage {
     
     public String getLibsText() {
     	return libsText.getText();
+    }
+    
+    public String getMainFileText() {
+    	return mainFileText.getText();
     }
 }

@@ -51,7 +51,6 @@ public class MigrationWizardPageOne extends WizardPage {
                fileDialog.setFilterExtensions(fileExtensions);
                String path = fileDialog.open();
 
-               String selectedFile = fileDialog.getFileName();
                textField.setText(path);
                
                if (!netlistText.getText().isEmpty() 

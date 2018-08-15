@@ -19,22 +19,29 @@ public class EglRunnerModelToCode extends EpsilonRunner {
 	private Set<String> libraries;
 	private String projectFolder;
 	private String parallaxLibs;
+	private String mainFile;
 
-	public EglRunnerModelToCode(String outputFile, String configXml, Set<String> libraries, String projectFolder, String parallaxLibs) {
+	public EglRunnerModelToCode(String outputFile, String configXml, Set<String> libraries, 
+			String projectFolder, String parallaxLibs, String mainFile) {
 		super();
 		this.outputFile = outputFile;
 		this.configXml = configXml;
 		this.libraries = libraries;
 		this.projectFolder = projectFolder;
 		this.parallaxLibs = parallaxLibs;
+		this.mainFile = mainFile;
 		
 		List<Variable> params = new ArrayList<Variable>();
 		// Only want last part of projectFolder path
 		String[] projectFolderSplit = projectFolder.split("/");	
 		Variable projectVar = new Variable("project", projectFolderSplit[projectFolderSplit.length - 1], EolPrimitiveType.String);
 		Variable parallaxLibsVar = new Variable("libs", parallaxLibs, EolPrimitiveType.String);
+		// Only want filename of mainFile path
+		String[] mainFileSplit = mainFile.split("/");
+		Variable mainFileVar = new Variable("mainFile", mainFileSplit[mainFileSplit.length - 1], EolPrimitiveType.String);
 		params.add(projectVar);
 		params.add(parallaxLibsVar);
+		params.add(mainFileVar);
 		setParameters(params);
 	}
 
