@@ -5,7 +5,7 @@
 [%=i%]
 [%}%]
 [*Add user selected libs*]
-[%for(lib in getLibraries()) {%]
+[%for(lib in libraries.select(l | l <> "<none>")) {%]
 #include "[%=lib%]"
 [%}%]
 [*Init pin variables*]

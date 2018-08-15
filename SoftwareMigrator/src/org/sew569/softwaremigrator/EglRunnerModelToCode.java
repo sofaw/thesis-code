@@ -63,7 +63,6 @@ public class EglRunnerModelToCode extends EpsilonRunner {
 		List<IModel> models = new ArrayList<IModel>();
 		models.add(createEmfModel("M", "resources/transform_output/out.model", "resources/metamodel/metamodel_v2.ecore",
 				true, false));
-		models.add(createXmlModel("X", configXml, true, true));
 		models.add(createCdtModel("Source", "S", "case_study_parallax", true, true, false)); // TODO: update to use value from wizard
 
 		return models;

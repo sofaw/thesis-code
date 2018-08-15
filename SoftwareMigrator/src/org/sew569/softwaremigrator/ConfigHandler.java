@@ -28,6 +28,7 @@ public class ConfigHandler {
 		this.configFile = configFile;
 	}
 
+	// note that a library entry will only exist if it has been previously chosen
 	public Map<String, Integer> getLibrariesAndCount(String partName) {
 		Map<String, Integer> results = new HashMap<String, Integer>();
 		try {

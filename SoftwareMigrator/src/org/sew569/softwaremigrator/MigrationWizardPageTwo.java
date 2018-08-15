@@ -58,6 +58,7 @@ public class MigrationWizardPageTwo extends WizardPage {
 
 		ConfigHandler ch = new ConfigHandler(md.getConfigFile());
 		Map<String, Integer> libUses = ch.getLibrariesAndCount(partName);
+		// List of libs that have previously been used
 		Set<String> lowerCaseKeys = libUses.keySet().stream().map(s -> s.toLowerCase()).collect(Collectors.toSet());
 
 		List<String> libs = getOrderedLibraries(partName);
@@ -115,11 +116,9 @@ public class MigrationWizardPageTwo extends WizardPage {
 	}
 
 	private List<String> getOrderedLibraries(String partName) {
-		// TODO: also read config file to find out previously chosen libraries
 		ArrayList<String> orderedLibs = new ArrayList<String>();
 		orderedLibs.add("<none>");
 		LibraryRanker l = new LibraryRanker();
-		// TODO: update this based on user input
 		l.init(md.getLibsPath());
 		List<String> headerFiles = null;
 		try {
@@ -151,10 +150,6 @@ public class MigrationWizardPageTwo extends WizardPage {
 			}
 		}
 		return orderedLibs;
-	}
-
-	public void populateParts() {
-
 	}
 
 	@Override
