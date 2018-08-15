@@ -11,6 +11,7 @@ import org.eclipse.epsilon.egl.EglTemplateFactory;
 import org.eclipse.epsilon.egl.EglTemplateFactoryModuleAdapter;
 import org.eclipse.epsilon.eol.execute.context.Variable;
 import org.eclipse.epsilon.eol.models.IModel;
+import org.eclipse.epsilon.eol.types.EolCollectionType;
 import org.eclipse.epsilon.eol.types.EolPrimitiveType;
 
 public class EglRunnerModelToCode extends EpsilonRunner {
@@ -39,9 +40,11 @@ public class EglRunnerModelToCode extends EpsilonRunner {
 		// Only want filename of mainFile path
 		String[] mainFileSplit = mainFile.split("/");
 		Variable mainFileVar = new Variable("mainFile", mainFileSplit[mainFileSplit.length - 1], EolPrimitiveType.String);
+		Variable librariesVar = new Variable("libraries", libraries, EolCollectionType.Set);
 		params.add(projectVar);
 		params.add(parallaxLibsVar);
 		params.add(mainFileVar);
+		params.add(librariesVar);
 		setParameters(params);
 	}
 
@@ -72,11 +75,6 @@ public class EglRunnerModelToCode extends EpsilonRunner {
 		BufferedWriter writer;
 		try {
 			writer = new BufferedWriter(new FileWriter(outputFile));
-			for(String lib : libraries) {
-				if(lib != "<none>") {
-					writer.write("#include \"" + lib + "\"\n");
-				}
-			}
 			writer.write((String) result);
 			writer.close();
 		} catch (IOException e) {
