@@ -1,5 +1,5 @@
 #include <Servo.h>                           // Include servo library
-#include <Wire.h>
+//#include <Wire.h>
 //#include "Adafruit_HTU21DF.h"
 #include "DHT.h"
 

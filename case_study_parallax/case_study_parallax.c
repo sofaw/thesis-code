@@ -1,30 +1,26 @@
-/*
-  Blank Simple Project.c
-  http://learn.parallax.com/propeller-c-tutorials 
-*/
 #include "abdrive.h"
 #include "dht22.h"
 #include "simpletools.h"
 
-int irLeft, irRight;                            // IR variables
+int irLeft, irRight;
 
 int humPin = 6;
 int ledPin = 8;
 float humThresh = 25.0;
 
-int main()                                      // main function
+int main()
 {
-  low(26);                                      // D/A0 & D/A1 to 0 V
+  low(26);
   low(27);
 
-  drive_setRampStep(12);                        // Max step 12 ticks/s every 20 ms
+  drive_setRampStep(12);
 
   while(1)
   {
     
     dht22_read(humPin);
-    float humidity = dht22_getHumidity() / 10.0; // Humidity returned in tenths of a percent
-    float temp = dht22_getTemp(CELSIUS) / 10.0; // Temp returned in tenths of degrees
+    float humidity = dht22_getHumidity() / 10.0;
+    float temp = dht22_getTemp(CELSIUS) / 10.0;
     myPrintf(humidity);
     putchar('\n');
     myPrintf(temp);
@@ -36,20 +32,20 @@ int main()                                      // main function
       low(ledPin);
     }           
     
-    freqout(11, 1, 38000);                      // Check left & right objects
+    freqout(11, 1, 38000);
     irLeft = input(10);
 
     freqout(1, 1, 38000);
     irRight = input(2);
 
-    if(irRight == 1 && irLeft == 1)             // No obstacles?
-      drive_rampStep(128, 128);                 // ...full speed ahead
-    else if(irLeft == 0 && irRight == 0)        // Left & right obstacles?
-      drive_rampStep(-128, -128);               // ...full speed reverse
-    else if(irRight == 0)                       // Just right obstacle?
-      drive_rampStep(-128, 128);                // ...rotate left
-    else if(irLeft == 0)                        // Just left obstacle?
-      drive_rampStep(128, -128);                // ...rotate right
+    if(irRight == 1 && irLeft == 1)
+      drive_rampStep(128, 128);
+    else if(irLeft == 0 && irRight == 0)
+      drive_rampStep(-128, -128);
+    else if(irRight == 0)
+      drive_rampStep(-128, 128);
+    else if(irLeft == 0)
+      drive_rampStep(128, -128);
   }
 }
 
@@ -59,7 +55,7 @@ void myPrintf(float fVal)
     char result[100];
     int dVal, dec, i;
 
-    fVal += 0.005;   // added after a comment from Matt McNabb, see below.
+    fVal += 0.005;
 
     dVal = fVal;
     dec = (int)(fVal * 100) % 100;

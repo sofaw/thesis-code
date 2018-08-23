@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><parts>
 <!-- Output parts -->
 	<part title="led" type="OUTPUT">
-  <library count="120" name="&lt;none&gt;"/>
+  <library count="226" name="&lt;none&gt;"/>
  <library count="2" name="none"/><library count="2" name="val"/></part> <!-- Regular LED; RGB LED; Superflux LED; -->
 	<part title="prolight rgb 3 watt star" type="OUTPUT"/>
 	<part title="7 segment display" type="OUTPUT">
@@ -13,7 +13,7 @@
 	<part title="microphone" type="OUTPUT"/>
 	<part title="motor" type="OUTPUT"/> <!-- DC Motor; Stepper Motor; Motor driver; -->
 	<part title="edgy" type="OUTPUT"/>
-	<part title="servo" type="OUTPUT"/>
+	<part title="servo" type="OUTPUT"><library count="5" name="Servo.h"/></part>
 	<part title="solenoid" type="OUTPUT"/>
 	<part title="relay" type="OUTPUT"/> <!-- Relay; DIP Relay; -->
 	<part title="peltier element" type="OUTPUT"/>
@@ -23,8 +23,7 @@
   <library count="21" name="&lt;none&gt;"/>
   </part> <!-- Digital potentiometer; Slide potentiometer; Rotary potentiometer; Trimmer potentiometer; -->
 	<part title="sensor" type="INPUT">
-    <library count="38" name="&lt;none&gt;"/>
-    <library count="5" name="DHT.h"/><library count="1" name="Adafruit_Sensor.h"/><library count="1" name="Adafruit_HTU21DF.h"/></part> <!-- Humidity and temp sensor; Barometric pressure sensor; Temp. sensor; Infrared proximity sensor; -->
+    <library count="25" name="DHT.h"/></part> <!-- Humidity and temp sensor; Barometric pressure sensor; Temp. sensor; Infrared proximity sensor; -->
 	<part title="rfid reader" type="INPUT"/>
 	<part title="antenna" type="INPUT"/>
 	<part title="switch" type="INPUT"/> <!-- Reed switch; Tilt switch; Mini toggle switch; Toggle switch; -->
@@ -39,8 +38,8 @@
 	<part title="rotary encoder" type="INPUT"/> <!-- Hexa rotary encoder; Rotary encoder; -->
 	<part title="variable capacitor" type="INPUT"/>
 	<part title="tsop312" type="INPUT">
-    <library count="23" name="&lt;none&gt;"/>
-  </part> <!-- Not core part but required for case study -->
+    <library count="75" name="&lt;none&gt;"/>
+  <library count="1" name="Adafruit_HTU21DF.h"/></part> <!-- Not core part but required for case study -->
 	
 <!-- Boards -->	
 	<part title="arduino uno" type="BOARD"/>

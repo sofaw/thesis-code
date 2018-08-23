@@ -12,8 +12,6 @@ sloeber.ino.cpp.o: ../sloeber.ino.cpp \
  /Applications/Eclipse.app/Contents/Eclipse/arduinoPlugin/packages/arduino/hardware/avr/1.6.21/variants/standard/pins_arduino.h \
  /Applications/Eclipse.app/Contents/Eclipse/arduinoPlugin/libraries/Servo/1.1.2/src/Servo.h \
  /Applications/Eclipse.app/Contents/Eclipse/arduinoPlugin/libraries/Servo/1.1.2/src/avr/ServoTimers.h \
- /Applications/Eclipse.app/Contents/Eclipse/arduinoPlugin/packages/arduino/hardware/avr/1.6.21/libraries/Wire/src/Wire.h \
- /Applications/Eclipse.app/Contents/Eclipse/arduinoPlugin/packages/arduino/hardware/avr/1.6.21/cores/arduino/Stream.h \
  /Applications/Eclipse.app/Contents/Eclipse/arduinoPlugin/libraries/DHT_sensor_library/1.3.0/DHT.h \
  ../case_study_arduino.ino
 
@@ -42,10 +40,6 @@ sloeber.ino.cpp.o: ../sloeber.ino.cpp \
 /Applications/Eclipse.app/Contents/Eclipse/arduinoPlugin/libraries/Servo/1.1.2/src/Servo.h:
 
 /Applications/Eclipse.app/Contents/Eclipse/arduinoPlugin/libraries/Servo/1.1.2/src/avr/ServoTimers.h:
-
-/Applications/Eclipse.app/Contents/Eclipse/arduinoPlugin/packages/arduino/hardware/avr/1.6.21/libraries/Wire/src/Wire.h:
-
-/Applications/Eclipse.app/Contents/Eclipse/arduinoPlugin/packages/arduino/hardware/avr/1.6.21/cores/arduino/Stream.h:
 
 /Applications/Eclipse.app/Contents/Eclipse/arduinoPlugin/libraries/DHT_sensor_library/1.3.0/DHT.h:
 

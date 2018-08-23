@@ -1,10 +1,13 @@
 @namespace(uri="sew569_v2", prefix="")
+@gmf
 package sew569_v2;
 
+@gmf.diagram
 class Circuit {
 	val Part[*] parts;
 }
 
+@gmf.node(label = "title")
 class Part {
     attr String partId;
     attr String title;
@@ -19,8 +22,10 @@ enum Type {
 	Other;
 }
 
+@gmf.node(label = "name")
 class Connector {
     attr String name;
+    @gmf.link(source.decoration = "arrow", target.decoration = "arrow")
 	ref Connector connectedTo;
 	ref Part#connectors parent;
 }

@@ -110,6 +110,10 @@ operation getFunctionDefs() : Sequence<Any> {
 	return result;
 }
 
+operation getDeclarations() : Sequence<Any> {
+	return getAst().getChildren().select(c | c.isPartOfSourceFile()).select(c | c.isInstanceOf("CASTSimpleDeclaration")).collect(c | c.getRawSignature());
+}
+
 operation getPlatformIndependentIncludes() : Sequence<Any> {
 	var includeStmts =  getAst().getIncludeDirectives().select(s | s.isPartOfSourceFile());
 	return includeStmts.reject(s | s.getPath().startsWith(getLibsVar())).collect(s | s.getRawSignature());

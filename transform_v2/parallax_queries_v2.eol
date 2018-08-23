@@ -1,27 +1,35 @@
+var libPath = "/Users/sophie/SimpleIDE/Learn/Simple Libraries/";
+
 var files = ITranslationUnit.all();
-
-// TODO: generate empty method bodies to replace these platform dependent functions
-
-
 var mainFile = files.selectOne(f | f.getElementName == "case_study_parallax.c");
 
 var ast = mainFile.getAST();
 
-var visitor = new Native("org.sew569.visitor.ASTVisitorSew569");
-ast.accept(visitor);
 
-var simpleDecls = visitor.getSimpleDeclarations();
-var funcCalls = visitor.getFunctionCalls();
+var dependencyResolver = new Native("org.sew569.ParallaxDependencyResolver");
+dependencyResolver.init("case_study_parallax", libPath);
+ast.accept(dependencyResolver);
 
-var libPath = "/Users/sophie/SimpleIDE/Learn/Simple Libraries/";
+"***".println();
+dependencyResolver.getPlatformDependentDeclarations().println();
+for(decl in dependencyResolver.getPlatformDependentDeclarations()) {
+	decl.println();
+	decl.getRawSignature().println();
+}
+"***".println();
 
-generateArduinoCode(ast, funcCalls, simpleDecls, libPath).println();
+//var visitor = new Native("org.sew569.visitor.ASTVisitorSew569");
+//ast.accept(visitor);
+
+//var simpleDecls = visitor.getSimpleDeclarations();
+//var funcCalls = visitor.getFunctionCalls();
+
+//generateArduinoCode(ast, funcCalls, simpleDecls, libPath).println();
 
 operation generateArduinoCode(ast : Any, funcCalls : Any, simpleDecls : Any, libPath : Any) : String {
 	// TODO: handle global variables
 	// TODO: add indentation
 
-	
 	var builder = new Native("java.lang.StringBuilder");
 	
 	// Only include non-Parallax libraries
@@ -43,6 +51,8 @@ operation generateArduinoCode(ast : Any, funcCalls : Any, simpleDecls : Any, lib
 		builder.append("\n\n");
 		builder.append(generateMethodStub(decl));
 	}
+	
+	// TODO: add "typedef struct { } NAME;" or "class NAME {NAME();};" for platform-dep types -> or identify decls to determine whether typedef or class
 	
 	return builder.toString();
 }

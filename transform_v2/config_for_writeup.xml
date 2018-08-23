@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<parts>
+<!-- Output parts -->
+	<part title="led" type="OUTPUT"/>
+	<part title="7 segment display" type="OUTPUT"/>
+	<part title="lcd" type="OUTPUT"/>
+	...
+
+<!-- Input parts -->	
+	<part title="potentiometer" type="INPUT"/>
+	<part title="humidity and temperature sensor" type="INPUT">
+		<library count="2" name="DHT.h"/>
+	</part>
+	<part title="rfid reader" type="INPUT"/>
+	...
+	
+<!-- Boards -->	
+	<part title="arduino uno" type="BOARD"/>
+	...
+</parts>
+

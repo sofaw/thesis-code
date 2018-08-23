@@ -115,8 +115,8 @@ public class MigrationWizardPageOne extends WizardPage {
         outputText = addTextField("Output file:");
         
         String[] cppExtensions = new String[1];
-        cppExtensions[0] = "*.cpp";
-        addBrowseButton(outputText, "Please select an output file (.cpp)", cppExtensions);
+        cppExtensions[0] = "*.c";
+        addBrowseButton(outputText, "Please select an output file (.)", cppExtensions);
         
         libsText = addTextField("Root directory for libs: ");
         
@@ -157,9 +157,9 @@ public class MigrationWizardPageOne extends WizardPage {
         setControl(container);
 
 	    // TODO: delete this
-		netlistText.setText("/Users/sophie/eclipse-projects/thesis/transform_v2/test/input_xml/case_study_arduino_netlist.xml");
+		netlistText.setText("/Users/sophie/eclipse-projects/thesis/transform_v2/test/input_xml/ir_humidity_sensors.xml");
 		configText.setText("/Users/sophie/eclipse-projects/thesis/transform_v2/test/test_config.xml");
-		outputText.setText("/Users/sophie/eclipse-projects/thesis/transform_v2/output.cpp");
+		outputText.setText("/Users/sophie/eclipse-projects/thesis/transform_v2/output.c");
 		libsText.setText("/Applications/Eclipse.app/Contents/Eclipse/arduinoPlugin/libraries");
         completePage();
         

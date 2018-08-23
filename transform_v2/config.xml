@@ -3,7 +3,6 @@
 <!-- Output parts -->
 	<part title="led" type="OUTPUT">
   <library count="6" name="&lt;none&gt;"/>
-  <library count="1" name=""/>
   </part> <!-- Regular LED; RGB LED; Superflux LED; -->
 	<part title="prolight rgb 3 watt star" type="OUTPUT"/>
 	<part title="7 segment display" type="OUTPUT"/>
@@ -21,7 +20,6 @@
 <!-- Input parts -->	
 	<part title="potentiometer" type="INPUT">
   <library count="2" name="&lt;none&gt;"/>
-  <library count="1" name=""/>
   </part> <!-- Digital potentiometer; Slide potentiometer; Rotary potentiometer; Trimmer potentiometer; -->
 	<part title="sensor" type="INPUT">
     <library count="2" name="DHT.h"/>
