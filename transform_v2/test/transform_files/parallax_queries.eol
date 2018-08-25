@@ -1,0 +1,121 @@
+operation getProjectVar() : String {
+	return project;
+}
+
+operation getLibsVar() : String {
+	return libs;
+}
+
+operation getMainFileVar() : String {
+	return mainFile;
+}
+
+operation getAst() : Any {
+	var files = Source!ITranslationUnit.all();
+	var mainFile = files.selectOne(f | f.getElementName == getMainFileVar());
+	var ast = mainFile.getAST();
+	return ast;
+}
+
+operation getSetupCode() : String { // TODO: check that order is preserved
+	var setupSeq = getMainMethodCompoundStatement(getAst()).getChildren().reject(c | c.isWhileTrueLoop());
+	var builder = new Native("java.lang.StringBuilder");
+	for(decl in setupSeq) {
+		builder.append(decl.getRawSignature());
+		builder.append("\n");
+	}
+	return builder.toString().trim();
+}
+
+operation getLoopCode() : String {
+	var loopStatements = getMainMethodCompoundStatement(getAst()).getChildren().selectOne(c | c.isWhileTrueLoop()).getChildren().selectOne(c | c.isInstanceOf("CASTCompoundStatement")).getStatements();
+	var builder = new Native("java.lang.StringBuilder");
+	for(s in loopStatements) {
+		builder.append(s.getRawSignature());
+		builder.append("\n");
+	}
+	return builder.toString().trim();
+}
+
+operation Any isWhileTrueLoop() : Boolean {
+	if(self.isInstanceOf("CASTWhileStatement")) {
+		var expr = self.getChildren().select(c | c.isInstanceOf("CASTLiteralExpression"));
+		if(expr.size() == 1) {
+			var val = expr.first().toString();
+			if(val == "1" or val == "true") {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+operation getMainMethodCompoundStatement(ast : Any) : Any {
+	var functionDefs = ast.getChildren().select(c | c.isPartOfSourceFile()).select(c | c.isInstanceOf("CASTFunctionDefinition"));
+	for(f in functionDefs) {
+		var decl = f.getChildren().selectOne(c | c.isInstanceOf("CASTFunctionDeclarator"));
+		if(decl.getName().toString() == "main") {
+			return f.getChildren().selectOne(c | c.isInstanceOf("CASTCompoundStatement"));
+		}
+	}
+	return null;
+}
+
+operation Any isInstanceOf(class : String) {
+	var pkg = "org.eclipse.cdt.internal.core.dom.parser.c.";
+	return self.getClass().toString().split(" ").second() == pkg.concat(class);
+}
+
+operation getPlatformDependentDeclarations() : Set<Any> {
+	var dependencyResolver = new Native("org.sew569.ParallaxDependencyResolver");
+	dependencyResolver.init(getProjectVar(), getLibsVar());
+	
+	var ast = getAst();
+	ast.accept(dependencyResolver);
+	
+	return dependencyResolver.getPlatformDependentDeclarations().println();
+}
+
+operation generateMethodStub(decl : Any) : String {
+	var builder = new Native("java.lang.StringBuilder");
+	builder.append(decl.getDeclSpecifier());
+	builder.append(" ");
+
+	if(decl.isInstanceOf("CASTFunctionDefinition") or decl.isInstanceOf("CPPASTFunctionDefinition")) {
+		builder.append(decl.getDeclarator().getRawSignature());
+	} else { // Instance of CASTSimpleDeclaration
+		var i = 0;
+		for(d in decl.getDeclarators()) {
+			if(i > 0) {
+				builder.append(" ");
+			}
+			builder.append(d.getRawSignature());
+			i = i + 1;
+		}
+	}
+	builder.append(" {\n\t// TODO: complete method\n}");
+	
+	return builder.toString();
+}
+
+operation getFunctionDefs() : Sequence<Any> {
+	var result : Sequence<Any>;
+	var functionDefs = getAst().getChildren().select(c | c.isPartOfSourceFile()).select(c | c.isInstanceOf("CASTFunctionDefinition"));
+	for(f in functionDefs) {
+		var decl = f.getChildren().selectOne(c | c.isInstanceOf("CASTFunctionDeclarator"));
+		if(decl.getName().toString() <> "main") {
+			result.add(f);
+		}
+	}
+	return result;
+}
+
+operation getDeclarations() : Sequence<Any> {
+	return getAst().getChildren().select(c | c.isPartOfSourceFile()).select(c | c.isInstanceOf("CASTSimpleDeclaration")).collect(c | c.getRawSignature());
+}
+
+operation getPlatformIndependentIncludes() : Sequence<Any> {
+	var includeStmts =  getAst().getIncludeDirectives().select(s | s.isPartOfSourceFile());
+	return includeStmts.reject(s | s.getPath().startsWith(getLibsVar())).collect(s | s.getRawSignature());
+}
+

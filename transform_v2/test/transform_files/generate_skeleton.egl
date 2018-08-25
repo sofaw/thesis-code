@@ -1,0 +1,36 @@
+[%import "pin_generation_queries.eol";%]
+[*TODO: fix ant file to [%import "parallax_queries.eol";%]*] 
+[*Add platform-independent include*]
+[*[%for(i in getPlatformIndependentIncludes()) {%]*]
+[*[%=i%]*]
+[*[%}%]*]
+[*Add user selected libs*]
+[*[%for(lib in libraries.select(l | l <> "<none>")) {%]*]
+[*#include "[%=lib%]"*]
+[*[%}%]*]
+[*Init pin variables*]
+[%var pinVariables = generatePinVariables();%]  
+[%for(pinName in pinVariables.keySet()) {%]
+const int [%=pinName%] = [%=pinVariables.get(pinName)%];  
+[%}%]
+
+[*[%for(decl in getDeclarations()) {%]*]
+[*[%=decl%]*]
+[*[%}%]*]
+
+void setup() {
+  [*[%=getSetupCode()%]*]
+}
+
+void loop() {
+  [*[%=getLoopCode()%]*]
+}
+
+[*[%for(def in getFunctionDefs()) {%]*]
+[*[%=def.getRawSignature()%]*]
+
+[*[%}%]*]
+[*[%for(decl in getPlatformDependentDeclarations()) {%]*]
+[*[%=generateMethodStub(decl)%]*]
+
+[*[%}%]*]

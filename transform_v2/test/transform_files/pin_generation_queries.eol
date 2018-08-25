@@ -1,0 +1,118 @@
+operation generatePinVariables() : Map<String, Integer> {
+  var connections = getBoardConnections();
+  
+  var pinVariables : Map<String, Integer>;
+  
+  // Map part titles mapping of ID -> integer
+  var usedComponentNames : Map<String, Map<Integer, Integer>>;
+  
+  for(boardCon in connections.keySet()) {
+    var boardPin = new Native("java.lang.String")(boardCon.name);
+    
+    // Check it's not ground or volts
+    if(not ("V".isSubstringOf(boardPin) or "GND".isSubstringOf(boardPin))) {
+      boardPin = boardPin.replaceAll("\\D+",""); // Remove non-numeric characters
+      if(not boardPin.isEmpty()) {
+        var component = connections.get(boardCon).parent;
+        var componentStr = new Native("java.lang.String")(component.title);
+        
+        componentStr = componentStr.replaceAll("\\s",""); // Remove spaces
+        componentStr = componentStr.replaceAll("[^a-zA-Z0-9]", ""); // Remove non-alphabetic characters
+        componentStr = componentStr.replaceAll("^\\d+", ""); // Remove any numbers from start so it is a valid c++ var name
+        // Start var name w. lowercase
+        var split = componentStr.split("(?<=^[A-Z]+)");
+        componentStr = split.get(0).toLowerCase() + split.get(1);
+        
+        var id : Integer;
+        // Handle case of multiple same component
+        if(usedComponentNames.keySet().includes(componentStr)) {
+          var idMappings = usedComponentNames.get(componentStr);
+          if(idMappings.keySet().includes(component.partId)) {
+            id = idMappings.get(component.partId);
+          } else {
+            id = idMappings.keySet().size() + 1;
+            idMappings.put(component.partId, id);
+          }
+        } else {
+          id = 1;
+          var idMappings : Map<Integer, Integer>;
+          idMappings.put(component.partId, id);
+          
+          usedComponentNames.put(componentStr, idMappings);
+        }
+        
+        componentStr = componentStr.concat(id.asString());
+        
+        if(component.type == Type#Input) {
+          componentStr = componentStr.concat("ReadPin");
+        } else {
+          componentStr = componentStr.concat("WritePin");
+        }
+        
+        // Deal w multiple inputs/outputs to same component
+        componentStr = handleMultiIO(componentStr, pinVariables.keySet());
+        
+        pinVariables.put(componentStr, boardPin.asInteger());
+      }
+    }
+
+  }
+  return pinVariables;
+}
+
+operation handleMultiIO(str : String, names : Set<String>) : String {
+  var counter = 1;
+  var tempStr = str.concat(counter.asString());
+  
+  while(names.includes(tempStr)) {
+    counter = counter + 1;
+    tempStr = str.concat(counter.asString());
+  }
+  
+  return tempStr;
+}
+
+operation getBoardConnections() : Map<Connector, Connector> {
+  var board = Part.all.selectOne(p | p.type == Type#Board);
+
+  var connections : Map<Connector, Connector>;
+
+  for (connector in board.connectors) {
+    var sensors = bfsSensors(connector);
+    for(s in sensors) {
+     connections.put(connector, s);
+    }
+  }
+  
+  return connections;
+}
+
+operation bfsSensors(start : Connector) : Set<Connector> {
+  var queue = new Native("java.util.LinkedList");
+  queue.add(start);
+  var visited : Set<Connector>;
+  
+  var connectors : Set<Connector>;
+  
+  while(not queue.isEmpty()) {
+    var con = queue.removeFirst();
+    if(not visited.includes(con)) {
+      visited.add(con);
+      
+      if(con.parent.type == Type#Input or con.parent.type == Type#Output) {
+        connectors.add(con);
+        con.parent.title.println();
+      } else {
+        queue.add(con.connectedTo);
+      
+        if(not (con.parent.type == Type#Board)) {
+          for(c in con.parent.connectors) {
+            queue.add(c);
+          }
+        }
+      }
+    }
+  }
+  
+  return connectors;
+}

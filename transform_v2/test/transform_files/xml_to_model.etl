@@ -1,0 +1,118 @@
+pre {
+  "Starting Transformation".println();
+  
+  delete OUT!Circuit.all; // Solve issues with successive transformations
+  delete OUT!Connector.all;
+  delete OUT!Part.all;
+  
+  var constructedPartIds : Sequence;
+  
+  var allParts = CONFIG!t_part.all;
+
+  var outputParts = allParts.select(p | p.a_type == "OUTPUT").collect(p | p.a_title).asSet();
+  var inputParts = allParts.select(p | p.a_type == "INPUT").collect(p | p.a_title).asSet();
+  var boards = allParts.select(p | p.a_type == "BOARD").collect(p | p.a_title).asSet();
+}
+
+rule xmlPart2Board
+  transform x : XML!t_part
+  to p : OUT!Part {
+  
+  guard { 
+    if(not constructedPartIds.exists(id | id == x.a_id)) { // Prevent duplicates
+      constructedPartIds.add(x.a_id);
+      return true;
+    }
+    return false;
+  } 
+  
+  p.type = x.a_title.getPartType();
+
+  p.partId = x.a_id;
+  p.title = x.a_title;
+}
+  
+rule xmlNet2ModelConnectors
+  transform x : XML!t_net
+  to c : OUT!Connector {
+  
+  guard : x.children.flatten.size > 1 // Ignore empty pins
+  
+  var connectors = x.children;
+  
+  var i = 0;
+  while (i < (connectors.size - 1)) {
+    createConnectors(i, c, connectors);
+    i = i + 1;    
+  }
+  
+}
+
+/*rule netlist2Circuit
+  transform x : XML!t_netlist
+  to c : OUT!Circuit {
+  
+  c.parts.addAll(OUT!Part.all);
+  
+}*/
+
+operation createConnectors(i : Integer, c : OUT!Connector, connectors : Sequence<XML!Connector>) {
+  var con1 = connectors.get(i);
+  var con2 = connectors.get(i+1);
+    
+  var conOut1;
+  if(i == 0) {
+    conOut1 = c;
+  } else {
+    conOut1 = new OUT!Connector;
+  }
+  var conOut2 = new OUT!Connector;
+  
+  conOut1.name = con1.a_name;
+  conOut2.name = con2.a_name;
+  conOut1.connectedTo = conOut2;
+  conOut2.connectedTo = conOut1;
+  
+  var part1 = getPartById(con1.children.first.a_id);
+  part1.connectors.add(conOut1);
+  var part2 = getPartById(con2.children.first.a_id);
+  part2.connectors.add(conOut2);
+}
+
+operation getPartById(id : String) : OUT!Part {
+  var allParts = OUT!Part.all;
+  return allParts.selectOne(p | p.partId == id);
+}
+
+operation String getPartType() : Any { // Use Any because of https://bugs.eclipse.org/bugs/show_bug.cgi?id=286412  
+  if(self.checkContainsOneOfSet(boards)) {
+    return OUT!Type#Board;
+  }
+  
+  if(self.checkContainsOneOfSet(inputParts)) {
+   return OUT!Type#Input;
+  }
+  
+  if(self.checkContainsOneOfSet(outputParts)) {
+   return OUT!Type#Output;
+  }
+  
+  return OUT!Type#Other;
+}
+
+operation String checkContainsOneOfSet(strings : Set<String>) : Boolean {
+  for(str in strings) {
+    if(str.isSubstringOf(self.toLowerCase())) {
+      return true; 
+    }
+  }
+  return false;
+}
+
+post {
+  // Put parts under a root Circuit element
+  var circuit : new OUT!Circuit;  
+  circuit.parts.addAll(OUT!Part.all);
+  
+  "Transformation Finished".println();
+}

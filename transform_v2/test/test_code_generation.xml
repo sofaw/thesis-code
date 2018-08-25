@@ -23,12 +23,17 @@
 			transformfile="case_study.model" transformmodel="CASE_STUDY_OUT"
 			targetfile="case_study.cpp" configFile="CONFIG"/>
 		
+		<runGen srcfile="One_Pin_Diff.xml" srcmodel="ONE_PIN_XML"
+			transformfile="one_pin.model" transformmodel="ONE_PIN_OUT"
+			targetfile="one_pin.cpp" configFile="CONFIG"/>
+		
 		<epsilon.eunit src="test_code_generation.eunit">
 			<model ref="LED_OUT"/>
 			<model ref="BUTTON_OUT"/>
 			<model ref="PA_OUT"/>
 			<model ref="7_OUT"/>
 			<model ref="CASE_STUDY_OUT"/>
+			<model ref="ONE_PIN_XML"/>
 			<model ref="CONFIG" as="X"/>
 		</epsilon.eunit>
 	</target>
@@ -50,14 +55,14 @@
 					read="false" store="true" />
 
 				<!-- Apply transformation -->
-				<epsilon.etl src="../xml_to_model.etl">
+				<epsilon.etl src="transform_files/xml_to_model.etl">
 					<model ref="@{srcmodel}" as="XML" />
 					<model ref="@{transformmodel}" as="OUT" />
 					<model ref="@{configFile}"/>
 				</epsilon.etl>
 
 				<!-- Generate code -->
-				<epsilon.egl src="../generate_skeleton.egl" target="code_generation_output/@{targetfile}">
+				<epsilon.egl src="transform_files/generate_skeleton.egl" target="code_generation_output/@{targetfile}">
 					<model ref="@{transformmodel}" />
 					<model ref="@{configFile}" as="X"/>
 				</epsilon.egl>

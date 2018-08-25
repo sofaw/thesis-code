@@ -1,4 +1,4 @@
-import "../code_generation_queries.eol";
+import "transform_files/pin_generation_queries.eol";
 
 $onlyWith Map {"" = "LED_OUT"}
 @test
@@ -78,17 +78,4 @@ operation testCorrectPinsIdentifiedCaseStudy() {
   expectedPins.add(10);
   assertTrue(pins.includesAll(expectedPins));
   assertTrue(pins.size() == expectedPins.size());
-}
-
-$onlyWith Map {"" = "X"}
-@test
-operation testCorrectLibrarySuggested() {
-  var suggestedLibs = suggestLibraries("Humidity and Temperature Sensor RHT03").println();
-  assertTrue(suggestedLibs.contains("DHT.h"));
-}
-
-$onlyWith Map {"" = "X"}
-@test
-operation testPartNotInConfigThrowsError() {
-  assertError(suggestLibraries("123456789"));
 }
