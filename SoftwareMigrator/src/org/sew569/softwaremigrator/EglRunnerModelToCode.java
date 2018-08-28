@@ -35,7 +35,9 @@ public class EglRunnerModelToCode extends EpsilonRunner {
 		List<Variable> params = new ArrayList<Variable>();
 		// Only want last part of projectFolder path
 		String[] projectFolderSplit = projectFolder.split("/");	
-		Variable projectVar = new Variable("project", projectFolderSplit[projectFolderSplit.length - 1], EolPrimitiveType.String);
+		this.projectFolder = projectFolderSplit[projectFolderSplit.length - 1];
+		System.out.println("Project folder: " + this.projectFolder);
+		Variable projectVar = new Variable("project", this.projectFolder, EolPrimitiveType.String);
 		Variable parallaxLibsVar = new Variable("libs", parallaxLibs, EolPrimitiveType.String);
 		// Only want filename of mainFile path
 		String[] mainFileSplit = mainFile.split("/");
@@ -63,7 +65,7 @@ public class EglRunnerModelToCode extends EpsilonRunner {
 		List<IModel> models = new ArrayList<IModel>();
 		models.add(createEmfModel("M", "resources/transform_output/out.model", "resources/metamodel/metamodel_v2.ecore",
 				true, false));
-		models.add(createCdtModel("Source", "S", "case_study_parallax", true, true, false)); // TODO: update to use value from wizard
+		models.add(createCdtModel("Source", "S", projectFolder, true, true, false)); // TODO: update to use value from wizard
 
 		return models;
 	}

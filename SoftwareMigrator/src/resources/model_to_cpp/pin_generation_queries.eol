@@ -101,6 +101,7 @@ operation bfsSensors(start : Connector) : Set<Connector> {
       
       if(con.parent.type == Type#Input or con.parent.type == Type#Output) {
         connectors.add(con);
+        con.parent.title.println();
       } else {
         queue.add(con.connectedTo);
       
