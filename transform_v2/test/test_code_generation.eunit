@@ -79,3 +79,10 @@ operation testCorrectPinsIdentifiedCaseStudy() {
   assertTrue(pins.includesAll(expectedPins));
   assertTrue(pins.size() == expectedPins.size());
 }
+
+@onlyWith Map {"" = "ONE_PIN_OUT"}
+@test
+operation testCorrectPinsIdentifiedOnePin() {
+	var pins = generatePinVariables().values();
+	pins.type().println();
+}

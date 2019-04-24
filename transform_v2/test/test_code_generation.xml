@@ -23,7 +23,7 @@
 			transformfile="case_study.model" transformmodel="CASE_STUDY_OUT"
 			targetfile="case_study.cpp" configFile="CONFIG"/>
 		
-		<runGen srcfile="One_Pin_Diff.xml" srcmodel="ONE_PIN_XML"
+		<runGen srcfile="One_Pin.xml" srcmodel="ONE_PIN_XML"
 			transformfile="one_pin.model" transformmodel="ONE_PIN_OUT"
 			targetfile="one_pin.cpp" configFile="CONFIG"/>
 		

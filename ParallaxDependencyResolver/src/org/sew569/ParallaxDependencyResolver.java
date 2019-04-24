@@ -113,7 +113,7 @@ public class ParallaxDependencyResolver extends ASTVisitor {
 		return PROCESS_CONTINUE;
 	}*/
 
-	@Override
+	/*@Override
 	public int visit(IASTDeclaration decl) {
 		if (!(decl instanceof IASTSimpleDeclaration))
 			return PROCESS_CONTINUE;
@@ -132,7 +132,7 @@ public class ParallaxDependencyResolver extends ASTVisitor {
 			e.printStackTrace();
 		}
 		return PROCESS_CONTINUE;
-	}
+	}*/
 	
 	private void checkIsPlatformDependent(IASTName name, int indexFlags, String libPath) throws InterruptedException, CoreException {
 		IBinding binding = name.resolveBinding();

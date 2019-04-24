@@ -1,5 +1,5 @@
 #include <Servo.h>                           // Include servo library
-//#include <Wire.h>
+#include <Wire.h>
 //#include "Adafruit_HTU21DF.h"
 #include "DHT.h"
 
@@ -33,12 +33,16 @@ void setup()                                 // Built-in initialization block
 
 void loop()                                  // Main loop auto-repeats
 {
-    printHumidityAndTemp();
+    //printHumidityAndTemp();
     //indicateAboveTemp(25);
 	indicateAboveHumidity(25.0);
 
 	int irLeft = irDetect(9, 10, 38000);       // Check for object on left
 	int irRight = irDetect(2, 3, 38000);       // Check for object on right
+
+	delay(100);
+	Serial.print(irLeft);
+	Serial.println(irRight);
 
 	if ((irLeft == 0) && (irRight == 0))        // If both sides detect
 			{
